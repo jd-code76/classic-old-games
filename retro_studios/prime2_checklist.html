@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metroid Prime 2: Echoes 100% Checklist</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+    <style>
+        /* Echoes-specific Dark Theme */
+        :root {
+            --dark-bg: #0a1218;
+            --darker-bg: #050a0f;
+            --mid-bg: #141e28;
+            --light-bg: #1c2936;
+            --accent: #0066cc;
+            --accent-glow: #3388ff;
+            --accent-dark: #004499;
+            --text: #e0e8f0;
+            --text-muted: #8899aa;
+            --border: #445566;
+            --highlight: #223344;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Tahoma', 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--dark-bg);
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* CRT monitor effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0,0,0,0.15),
+                rgba(0,0,0,0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(to bottom, var(--mid-bg), var(--darker-bg));
+            border-radius: 0;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border: 2px solid var(--border);
+            position: relative;
+        }
+
+        /* Scan lines overlay */
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0%,
+                rgba(0,0,0,0.1) 50%,
+                transparent 100%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 28px;
+            text-shadow: 0 0 10px var(--accent-glow);
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            background: var(--light-bg);
+            color: var(--text);
+            font-size: 14px;
+            flex-grow: 1;
+            min-width: 200px;
+        }
+
+        .search-results {
+            color: var(--text-muted);
+            font-size: 14px;
+            align-self: center;
+        }
+
+        select, button {
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            background: var(--light-bg);
+            color: var(--text);
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        button {
+            background: linear-gradient(to bottom, var(--accent), var(--accent-dark));
+            color: #fff;
+            border: none;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            background: linear-gradient(to bottom, var(--accent-glow), var(--accent));
+            box-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-box {
+            background: var(--darker-bg);
+            border: 1px solid var(--border);
+            padding: 10px 15px;
+            text-align: center;
+            min-width: 130px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-shadow: 0 0 5px var(--accent-glow);
+        }
+
+        .checklist {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-header {
+            grid-column: 1 / -1;
+            background: linear-gradient(to right, var(--accent-dark), var(--accent));
+            color: #fff;
+            padding: 10px 15px;
+            margin-top: 20px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            border: 1px solid var(--accent-dark);
+        }
+
+        .subsection-header {
+            grid-column: 1 / -1;
+            background: linear-gradient(to right, #003366, #0066aa);
+            color: #fff;
+            padding: 8px 15px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            border: 1px solid #003366;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: var(--light-bg);
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+            cursor: pointer;
+            will-change: transform;
+            transform: translateZ(0);
+            min-height: 60px;
+        }
+
+        .checklist-item:hover {
+            background: var(--highlight);
+            transform: translateY(-1px);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.3);
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+
+        .checklist-item label {
+            cursor: pointer;
+            flex-grow: 1;
+            display: block;
+        }
+
+        .checklist-item label br {
+            display: none;
+        }
+
+        .category-badge {
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            margin-left: 8px;
+            text-transform: uppercase;
+            font-weight: bold;
+            white-space: nowrap;
+            display: inline-block;
+        }
+
+        .category-badge[data-category="Dark Temple Keys"],
+        .category-badge[data-category="Sky Temple Keys"] {
+            background: #ff7700;
+        }
+
+        .category-badge[data-category="Energy Tanks"],
+        .category-badge[data-category="Missile Expansions"],
+        .category-badge[data-category="Power Bomb Expansions"],
+        .category-badge[data-category="Beam Ammo Expansions"] {
+            background: #00cc66;
+        }
+
+        .category-badge[data-category="Suit Upgrades"] {
+            background: #44aaff;
+        }
+
+        .category-badge[data-category="Creatures"],
+        .category-badge[data-category="Research"],
+        .category-badge[data-category="Lore"] {
+            background: var(--accent-dark);
+        }
+
+        .location-detail {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 2px;
+            font-style: italic;
+        }
+
+        .checklist-item.completed {
+            background: rgba(0, 100, 0, 0.2);
+            opacity: 0.7;
+            text-decoration: line-through;
+        }
+
+        .toggle-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 15px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .toggle-slider {
+            position: relative;
+            width: 40px;
+            height: 20px;
+            background: var(--light-bg);
+            border-radius: 20px;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .toggle-slider:before {
+            content: "";
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            background: var(--text);
+            transition: all 0.3s;
+        }
+
+        #gameOrderToggle,
+        #hideCompletedToggle {
+            display: none;
+        }
+
+        #gameOrderToggle:checked + .toggle-slider,
+        #hideCompletedToggle:checked + .toggle-slider {
+            background: var(--accent);
+        }
+
+        #gameOrderToggle:checked + .toggle-slider:before,
+        #hideCompletedToggle:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+
+        .missable-marker {
+            color: #ffaa00;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+
+        /* Controls layout for responsive design */
+        .controls-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .controls-toggle-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .reset-container {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            position: relative;
+            z-index: 2;
+        }
+
+        .reset-container button {
+            padding: 12px 24px;
+            font-size: 16px;
+            background: linear-gradient(to bottom, #004499, #003366);
+        }
+
+        .reset-container button:hover {
+            background: linear-gradient(to bottom, #0066cc, #004499);
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        /* Early 2000s scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker-bg);
+            border-left: 1px solid var(--border);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 0;
+        }
+
+        /* For scrolling back to the top */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, #0066cc, #004499);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px var(--accent-glow);
+            background: linear-gradient(to bottom, #3388ff, #0066cc);
+        }
+
+        body.scrolling::before,
+        .container.scrolling::before {
+            opacity: 0.2;
+            transition: opacity 0.3s;
+        }
+
+        /* Performance mode styles */
+        .performance-mode body::before,
+        .performance-mode .container::before {
+            opacity: 0.05 !important;
+        }
+
+        .performance-mode .checklist-item:hover {
+            transform: none !important;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .controls-left {
+                width: 100%;
+                justify-content: center;
+                margin-top: 10px;
+            }
+
+            .controls-toggle-group {
+                width: 100%;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .checklist {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                gap: 10px;
+            }
+
+            .stat-value {
+                font-size: 1.3rem;
+            }
+
+            .reset-container {
+                margin-top: 20px;
+                padding-top: 15px;
+            }
+            
+            .reset-container button {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .controls-toggle-group {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .toggle-label {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+
+            .toggle-slider {
+                width: 35px;
+                height: 18px;
+            }
+
+            .toggle-slider:before {
+                width: 14px;
+                height: 14px;
+                top: 2px;
+                left: 2px;
+            }
+
+            #gameOrderToggle:checked + .toggle-slider:before,
+            #hideCompletedToggle:checked + .toggle-slider:before {
+                transform: translateX(17px);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .controls-left {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .checklist-item label {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+            
+            .category-badge {
+                margin-left: 0;
+                align-self: flex-start;
+            }
+            
+            .location-detail {
+                order: 3;
+            }
+
+            .reset-container button {
+                max-width: 100%;
+            }
+        }
+
+        /* Disable hover effects on touch devices */
+        @media (hover: none) {
+            .checklist-item:hover {
+                transform: none;
+                background: var(--light-bg);
+            }
+        }
+
+        /* Loading indicator */
+        .loading-indicator {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align: center; margin: 5px 0;">
+        <a href="../retro_studios/metroid_prime2.html" style="color: #0066cc; text-decoration: none; padding: 5px 10px; transition: all 0.2s;" onmouseover="this.style.color='#3388ff';this.style.textShadow='0 0 8px #3388ff'" onmouseout="this.style.color='#0066cc';this.style.textShadow='none'">Prime 2 Info</a>  
+        <a href="../index.html" style="color: #0066cc; text-decoration: none; padding: 5px 10px; transition: all 0.2s;" onmouseover="this.style.color='#3388ff';this.style.textShadow='0 0 8px #3388ff'" onmouseout="this.style.color='#0066cc';this.style.textShadow='none'">COG Home</a>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>Metroid Prime 2: Echoes Checklist</h1>
+            <p class="subtitle">Track your progress toward 100% completion (* = missable scan)</p>
+        </header>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search by name or location...">
+            <button id="clearSearch" class="clear-search-btn" style="display: none;">✕</button>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+
+        <div class="controls">
+            <div class="controls-left">
+                <div class="controls-toggle-group">
+                    <div>
+                        <label for="sortSelect">Sort by: </label>
+                        <select id="sortSelect">
+                            <option value="category">Category</option>
+                            <option value="location">Location</option>
+                            <option value="name">Name</option>
+                        </select>
+                    </div>
+                    <label for="gameOrderToggle" class="toggle-label">
+                        <input type="checkbox" id="gameOrderToggle">
+                        <span class="toggle-slider"></span>
+                        Alphabetical Sort
+                    </label>
+                    <label for="hideCompletedToggle" class="toggle-label">
+                        <input type="checkbox" id="hideCompletedToggle">
+                        <span class="toggle-slider"></span>
+                        Hide Completed
+                    </label>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button id="exportBtn">Export Data</button>
+                    <button id="importBtn">Import Data</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-label">Scan Logs</div>
+                <div class="stat-value" id="scanProgress">0/210</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Scan Progress</div>
+                <div class="stat-value" id="scanPercentage">0%</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Items</div>
+                <div class="stat-value" id="itemProgress">0/118</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Item Progress</div>
+                <div class="stat-value" id="itemPercentage">0%</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Dark Temple Keys</div>
+                <div class="stat-value" id="darkTempleKeyProgress">0/9</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Sky Temple Keys</div>
+                <div class="stat-value" id="skyTempleKeyProgress">0/9</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Total Progress</div>
+                <div class="stat-value" id="totalProgress">0%</div>
+            </div>
+        </div>
+
+        <div class="checklist" id="checklist">
+            <div class="loading-indicator">Loading items...</div>
+        </div>
+    </div>
+
+    <button class="scroll-top" aria-label="Scroll to top">
+        ↑
+    </button>
+    
+    <div class="reset-container">
+        <button id="resetBtn">Reset All Progress</button>
+    </div>
+
+    <script>
+        // Data structure for the checklist - Based on Metroid Recon (metroid.retropixel.net) and Omega Metroid (omegametroid.com) sources
+        const checklistData = [
+            // ===== CREATURES (98 total) =====
+            
+            // Offworld - Pirates (5 scans)
+            { id: "scan-creature-pirate-01", name: "Pirate Aerotrooper", location: "Temple Grounds, Agon Wastes, Torvus Bog, Sanctuary Fortress", category: "Creatures", subcategory: "Offworld - Pirates", missable: false },
+            { id: "scan-creature-pirate-02", name: "Pirate Commando", location: "Torvus Bog, Sanctuary Fortress", category: "Creatures", subcategory: "Offworld - Pirates", missable: true },
+            { id: "scan-creature-pirate-03", name: "Pirate Grenadier", location: "Agon Wastes, Temple Grounds", category: "Creatures", subcategory: "Offworld - Pirates", missable: false },
+            { id: "scan-creature-pirate-04", name: "Pirate Trooper", location: "Agon Wastes, Torvus Bog", category: "Creatures", subcategory: "Offworld - Pirates", missable: true },
+            { id: "scan-creature-pirate-05", name: "Preed", location: "Torvus Bog", category: "Creatures", subcategory: "Offworld - Pirates", missable: false },
+
+            // Offworld - Metroids (2 scans)
+            { id: "scan-creature-metroid-01", name: "Infant Tallon Metroid", location: "Agon Wastes", category: "Creatures", subcategory: "Offworld - Metroids", missable: false },
+            { id: "scan-creature-metroid-02", name: "Tallon Metroid", location: "Agon Wastes", category: "Creatures", subcategory: "Offworld - Metroids", missable: false },
+
+            // Offworld - Dark Samus (4 scans)
+            { id: "scan-creature-dark-samus-01", name: "Dark Samus 1", location: "Agon Wastes - Main Reactor", category: "Creatures", subcategory: "Offworld - Dark Samus", missable: true },
+            { id: "scan-creature-dark-samus-02", name: "Dark Samus 2", location: "Sanctuary Fortress - Aerie Transport Station/Aerie Access/Aerie", category: "Creatures", subcategory: "Offworld - Dark Samus", missable: true },
+            { id: "scan-creature-dark-samus-03", name: "Dark Samus 3", location: "Sky Temple Grounds - Sky Temple Gateway", category: "Creatures", subcategory: "Offworld - Dark Samus", missable: true },
+            { id: "scan-creature-dark-samus-04", name: "Dark Samus 4", location: "Sky Temple Grounds - Sky Temple Gateway", category: "Creatures", subcategory: "Offworld - Dark Samus", missable: true },
+
+            // Aether - Flying - Small Flyers (4 scans)
+            { id: "scan-creature-flying-01", name: "Lightflyer", location: "Great Temple, Agon Wastes", category: "Creatures", subcategory: "Aether - Flying - Small Flyers", missable: false },
+            { id: "scan-creature-flying-02", name: "Lumite", location: "Agon Wastes", category: "Creatures", subcategory: "Aether - Flying - Small Flyers", missable: false },
+            { id: "scan-creature-flying-03", name: "Sandbats", location: "Temple Grounds, Great Temple, Agon Wastes", category: "Creatures", subcategory: "Aether - Flying - Small Flyers", missable: false },
+            { id: "scan-creature-flying-04", name: "War Wasp", location: "Temple Grounds", category: "Creatures", subcategory: "Aether - Flying - Small Flyers", missable: false },
+
+            // Aether - Flying - Large Flyers (3 scans)
+            { id: "scan-creature-large-flying-01", name: "Shredder", location: "Torvus Bog", category: "Creatures", subcategory: "Aether - Flying - Large Flyers", missable: true },
+            { id: "scan-creature-large-flying-02", name: "Shriekbat", location: "Agon Wastes, Torvus Bog", category: "Creatures", subcategory: "Aether - Flying - Large Flyers", missable: false },
+            { id: "scan-creature-large-flying-03", name: "Shrieker", location: "Torvus Bog", category: "Creatures", subcategory: "Aether - Flying - Large Flyers", missable: false },
+
+            // Aether - Ground - Surface Prowlers (6 scans)
+            { id: "scan-creature-ground-01", name: "Brizgee", location: "Agon Wastes, Torvus Bog", category: "Creatures", subcategory: "Aether - Ground - Surface Prowlers", missable: false },
+            { id: "scan-creature-ground-02", name: "Green Kralee", location: "Temple Grounds", category: "Creatures", subcategory: "Aether - Ground - Surface Prowlers", missable: false },
+            { id: "scan-creature-ground-03", name: "Kralee", location: "Agon Wastes", category: "Creatures", subcategory: "Aether - Ground - Surface Prowlers", missable: false },
+            { id: "scan-creature-ground-04", name: "Krocuss", location: "Torvus Bog", category: "Creatures", subcategory: "Aether - Ground - Surface Prowlers", missable: false },
+            { id: "scan-creature-ground-05", name: "Lightbringer", location: "Dark Agon Wastes - Duelling Range", category: "Creatures", subcategory: "Aether - Ground - Surface Prowlers", missable: true },
+            { id: "scan-creature-ground-06", name: "Seedburster", location: "Torvus Bog", category: "Creatures", subcategory: "Aether - Ground - Surface Prowlers", missable: false },
+
+            // Aether - Ground - Tunnel Prowlers (2 scans)
+            { id: "scan-creature-tunnel-01", name: "Pillbug", location: "Agon Wastes - Portal Terminal, Sanctuary Fortress - Dynamo Works", category: "Creatures", subcategory: "Aether - Ground - Tunnel Prowlers", missable: false },
+            { id: "scan-creature-tunnel-02", name: "Worker Splinter", location: "Temple Grounds", category: "Creatures", subcategory: "Aether - Ground - Tunnel Prowlers", missable: false },
+
+            // Aether - Ground - Predators (6 scans)
+            { id: "scan-creature-predator-01", name: "Alpha Sandigger", location: "Agon Wastes - Agon Temple", category: "Creatures", subcategory: "Aether - Ground - Predators", missable: true },
+            { id: "scan-creature-predator-02", name: "Alpha Splinter", location: "Temple Grounds", category: "Creatures", subcategory: "Aether - Ground - Predators", missable: true },
+            { id: "scan-creature-predator-03", name: "Grenchler", location: "Torvus Bog", category: "Creatures", subcategory: "Aether - Ground - Predators", missable: false },
+            { id: "scan-creature-predator-04", name: "Sandigger", location: "Agon Wastes", category: "Creatures", subcategory: "Aether - Ground - Predators", missable: false },
+            { id: "scan-creature-predator-05", name: "Splinter", location: "Temple Grounds", category: "Creatures", subcategory: "Aether - Ground - Predators", missable: false },
+            { id: "scan-creature-predator-06", name: "Sporb", location: "Torvus Bog", category: "Creatures", subcategory: "Aether - Ground - Predators", missable: false },
+
+            // Aether - Aquatic - Small Aquatic (2 scans)
+            { id: "scan-creature-aquatic-01", name: "Bloggling", location: "Torvus Bog", category: "Creatures", subcategory: "Aether - Aquatic - Small Aquatic", missable: false },
+            { id: "scan-creature-aquatic-02", name: "Hydling", location: "Torvus Bog", category: "Creatures", subcategory: "Aether - Aquatic - Small Aquatic", missable: false },
+
+            // Aether - Aquatic - Large Aquatic (2 scans)
+            { id: "scan-creature-large-aquatic-01", name: "Alpha Blogg", location: "Torvus Bog - Hydrodynamo Shaft/Main Hydrochamber", category: "Creatures", subcategory: "Aether - Aquatic - Large Aquatic", missable: true },
+            { id: "scan-creature-large-aquatic-02", name: "Blogg", location: "Torvus Bog", category: "Creatures", subcategory: "Aether - Aquatic - Large Aquatic", missable: false },
+
+            // Aether - Mechanoids - Small (6 scans)
+            { id: "scan-creature-mech-small-01", name: "Harmony Class Drone", location: "Great Temple, Sanctuary Fortress", category: "Creatures", subcategory: "Aether - Mechanoids - Small", missable: false },
+            { id: "scan-creature-mech-small-02", name: "Diligence Class Drone", location: "Sanctuary Fortress", category: "Creatures", subcategory: "Aether - Mechanoids - Small", missable: false },
+            { id: "scan-creature-mech-small-03", name: "Mechlops", location: "Sanctuary Fortress", category: "Creatures", subcategory: "Aether - Mechanoids - Small", missable: false },
+            { id: "scan-creature-mech-small-04", name: "Octopede", location: "Sanctuary Fortress", category: "Creatures", subcategory: "Aether - Mechanoids - Small", missable: false },
+            { id: "scan-creature-mech-small-05", name: "Rezbit", location: "Sanctuary Fortress", category: "Creatures", subcategory: "Aether - Mechanoids - Small", missable: false },
+            { id: "scan-creature-mech-small-06", name: "Serenity Class Drone", location: "Sanctuary Fortress", category: "Creatures", subcategory: "Aether - Mechanoids - Small", missable: false },
+
+            // Aether - Mechanoids - Large (4 scans)
+            { id: "scan-creature-mech-large-01", name: "Ingsmasher", location: "Sanctuary Fortress", category: "Creatures", subcategory: "Aether - Mechanoids - Large", missable: true },
+            { id: "scan-creature-mech-large-02", name: "Quad CM", location: "Sanctuary Fortress", category: "Creatures", subcategory: "Aether - Mechanoids - Large", missable: false },
+            { id: "scan-creature-mech-large-03", name: "Quad MB", location: "Sanctuary Fortress", category: "Creatures", subcategory: "Aether - Mechanoids - Large", missable: false },
+            { id: "scan-creature-mech-large-04", name: "Mekenobite", location: "Sanctuary Fortress", category: "Creatures", subcategory: "Aether - Mechanoids - Large", missable: false },
+            { id: "scan-creature-mech-large-05", name: "Watchdrone", location: "Dark Torvus Bog", category: "Creatures", subcategory: "Aether - Mechanoids - Large", missable: false },
+
+            // Aether - Mechanoids - Stationary (5 scans)
+            { id: "scan-creature-mech-stat-01", name: "Caretaker Class Drone", location: "Sanctuary Fortress - Main Research", category: "Creatures", subcategory: "Aether - Stationary Mechanoids", missable: true },
+            { id: "scan-creature-mech-stat-02", name: "Growler Class Turret", location: "Temple Grounds - Trooper Security Station", category: "Creatures", subcategory: "Aether - Stationary Mechanoids", missable: true },
+            { id: "scan-creature-mech-stat-03", name: "Humility Class Turret", location: "Agon Wastes", category: "Creatures", subcategory: "Aether - Stationary Mechanoids", missable: false },
+            { id: "scan-creature-mech-stat-04", name: "Luminoth Turret", location: "Temple Grounds, Sanctuary Fortress", category: "Creatures", subcategory: "Aether - Stationary Mechanoids", missable: false },
+            { id: "scan-creature-mech-stat-05", name: "Vigilance Class Turret", location: "Agon Wastes - Central Mining Station", category: "Creatures", subcategory: "Aether - Stationary Mechanoids", missable: true },
+
+            // Dark Aether - Darklings - Darkling Ground (3 scans)
+            { id: "scan-creature-darkling-ground-01", name: "Dark Alpha Splinter", location: "Agon Wastes - Temple Sanctuary", category: "Creatures", subcategory: "Dark Aether - Darklings - Darkling Ground", missable: true },
+            { id: "scan-creature-darkling-ground-02", name: "Dark Grenchler", location: "Dark Torvus Bog", category: "Creatures", subcategory: "Dark Aether - Darklings - Darkling Ground", missable: false },
+            { id: "scan-creature-darkling-ground-03", name: "Dark Splinter", location: "Temple Grounds, Dark Agon Wastes", category: "Creatures", subcategory: "Dark Aether - Darklings - Darkling Ground", missable: false },
+
+            // Dark Aether - Darklings - Darkling Aquatic (2 scans)
+            { id: "scan-creature-darkling-aquatic-01", name: "Dark Blogg", location: "Torvus Bog", category: "Creatures", subcategory: "Dark Aether - Darklings - Darkling Aquatic", missable: false },
+            { id: "scan-creature-darkling-aquatic-02", name: "Phlogus", location: "Dark Torvus Bog", category: "Creatures", subcategory: "Dark Aether - Darklings - Darkling Aquatic", missable: false },
+
+            // Dark Aether - Darklings - Darkling Flyers (3 scans)
+            { id: "scan-creature-darkling-flyer-01", name: "Dark Shredder", location: "Dark Torvus Bog - Dark Torvus Temple", category: "Creatures", subcategory: "Dark Aether - Darklings - Darkling Flyers", missable: true },
+            { id: "scan-creature-darkling-flyer-02", name: "Dark War Wasp", location: "Temple Grounds, Ing Hive", category: "Creatures", subcategory: "Dark Aether - Darklings - Darkling Flyers", missable: false },
+            { id: "scan-creature-darkling-flyer-03", name: "Nightbarb", location: "Dark Agon Wastes, Sky Temple Grounds, Ing Hive, Sky Temple", category: "Creatures", subcategory: "Dark Aether - Darklings - Darkling Flyers", missable: false },
+
+            // Dark Aether - Darklings - Darkling Mechanoids (5 scans)
+            { id: "scan-creature-darkling-mech-01", name: "Corrupted Sentreye", location: "Sky Temple Grounds", category: "Creatures", subcategory: "Dark Aether - Darklings - Darkling Mechanoids", missable: false },
+            { id: "scan-creature-darkling-mech-02", name: "Dark Diligence Drone", location: "Ing Hive", category: "Creatures", subcategory: "Dark Aether - Darklings - Darkling Mechanoids", missable: false },
+            { id: "scan-creature-darkling-mech-03", name: "Dark Ingsmasher", location: "Ing Hive", category: "Creatures", subcategory: "Dark Aether - Darklings - Darkling Mechanoids", missable: true },
+            { id: "scan-creature-darkling-mech-04", name: "Dark Quad CM", location: "Sanctuary Fortress - Sanctuary Temple, Ing Hive - Hive Temple", category: "Creatures", subcategory: "Dark Aether - Darklings - Darkling Mechanoids", missable: true },
+            { id: "scan-creature-darkling-mech-05", name: "Dark Quad MB", location: "Sanctuary Fortress - Sanctuary Temple, Ing Hive - Hive Temple", category: "Creatures", subcategory: "Dark Aether - Darklings - Darkling Mechanoids", missable: true },
+
+            // Dark Aether - Darklings - Darkling Offworld (6 scans)
+            { id: "scan-creature-darkling-offworld-01", name: "Dark Missile Trooper", location: "Temple Grounds - Hive Chamber A", category: "Creatures", subcategory: "Dark Aether - Darklings - Darkling Offworld", missable: true },
+            { id: "scan-creature-darkling-offworld-02", name: "Dark Pirate Commando", location: "Torvus Bog, Ing Hive", category: "Creatures", subcategory: "Dark Aether - Darklings - Darkling Offworld", missable: false },
+            { id: "scan-creature-darkling-offworld-03", name: "Dark Pirate Trooper ", location: "Agon Wastes, Torvus Bog, Temple Grounds", category: "Creatures", subcategory: "Dark Aether - Darklings - Darkling Offworld", missable: true },
+            { id: "scan-creature-darkling-offworld-04", name: "Dark Preed", location: "Dark Agon Wastes, Ing Hive", category: "Creatures", subcategory: "Dark Aether - Darklings - Darkling Offworld", missable: false },
+            { id: "scan-creature-darkling-offworld-05", name: "Dark Tallon Metroid", location: "Ing Hive, Sky Temple Grounds", category: "Creatures", subcategory: "Dark Aether - Darklings - Darkling Offworld", missable: false },
+            { id: "scan-creature-darkling-offworld-06", name: "Dark Trooper", location: "Temple Grounds", category: "Creatures", subcategory: "Dark Aether - Darklings - Darkling Offworld", missable: false },
+
+            // Dark Aether - Ing (6 scans)
+            { id: "scan-creature-ing-01", name: "Darkling Tentacle", location: "Dark Agon Wastes, Ing Hive, Sky Temple Grounds", category: "Creatures", subcategory: "Dark Aether - Ing", missable: false },
+            { id: "scan-creature-ing-02", name: "Hunter Ing", location: "Dark Torvus Bog", category: "Creatures", subcategory: "Dark Aether - Ing", missable: false },
+            { id: "scan-creature-ing-03", name: "Ing Larva Swarm", location: "Ing Hive", category: "Creatures", subcategory: "Dark Aether - Ing", missable: false },
+            { id: "scan-creature-ing-04", name: "Inglet", location: "Dark Agon Wastes, Dark Torvus Bog, Ing Hive", category: "Creatures", subcategory: "Dark Aether - Ing", missable: false },
+            { id: "scan-creature-ing-05", name: "Ingstorm", location: "Dark Agon Wastes, Ing Hive, Sky Temple Grounds", category: "Creatures", subcategory: "Dark Aether - Ing", missable: false },
+            { id: "scan-creature-ing-06", name: "Warrior Ing", location: "Dark Agon Wastes, Ing Hive, Sky Temple Grounds", category: "Creatures", subcategory: "Dark Aether - Ing", missable: false },
+
+            // Dark Aether - Guardians - Amorbis (2 scans)
+            { id: "scan-creature-guardian-amorbis-01", name: "Amorbis", location: "Dark Agon Wastes - Dark Agon Temple", category: "Creatures", subcategory: "Dark Aether - Guardians - Amorbis", missable: true },
+            { id: "scan-creature-guardian-amorbis-02", name: "Dark Amorbis", location: "Dark Agon Wastes - Dark Agon Temple", category: "Creatures", subcategory: "Dark Aether - Guardians - Amorbis", missable: true },
+
+            // Dark Aether - Guardians - Chykka (4 scans)
+            { id: "scan-creature-guardian-chykka-01", name: "Chykka Larva ", location: "Dark Torvus Bog - Dark Torvus Temple", category: "Creatures", subcategory: "Dark Aether - Guardians - Chykka", missable: true },
+            { id: "scan-creature-guardian-chykka-02", name: "Chykka", location: "Dark Torvus Bog - Dark Torvus Temple", category: "Creatures", subcategory: "Dark Aether - Guardians - Chykka", missable: true },
+            { id: "scan-creature-guardian-chykka-03", name: "Dark Chykka", location: "Dark Torvus Bog - Dark Torvus Temple", category: "Creatures", subcategory: "Dark Aether - Guardians - Chykka", missable: true },
+            { id: "scan-creature-guardian-chykka-04", name: "Chyklings", location: "Dark Torvus Bog - Dark Torvus Temple", category: "Creatures", subcategory: "Dark Aether - Guardians - Chykka", missable: true },
+
+            // Dark Aether - Guardians - Quadraxis (5 scans)
+            { id: "scan-creature-guardian-quad-01", name: "Quadraxis", location: "Ing Hive - Hive Temple", category: "Creatures", subcategory: "Dark Aether - Guardians - Quadraxis", missable: true },
+            { id: "scan-creature-guardian-quad-02", name: "Damaged Quadraxis", location: "Ing Hive - Hive Temple", category: "Creatures", subcategory: "Dark Aether - Guardians - Quadraxis", missable: true },
+            { id: "scan-creature-guardian-quad-03", name: "Shielded Head Module", location: "Ing Hive - Hive Temple", category: "Creatures", subcategory: "Dark Aether - Guardians - Quadraxis", missable: true },
+            { id: "scan-creature-guardian-quad-04", name: "Stunned Head Module", location: "Ing Hive - Hive Temple", category: "Creatures", subcategory: "Dark Aether - Guardians - Quadraxis", missable: true },
+            { id: "scan-creature-guardian-quad-05", name: "Final Head Module", location: "Ing Hive - Hive Temple", category: "Creatures", subcategory: "Dark Aether - Guardians - Quadraxis", missable: true },
+
+            // Dark Aether - Guardians - Sub Guardians (6 scans)
+            { id: "scan-creature-guardian-sub-01", name: "Bomb Guardian", location: "Agon Wastes - Agon Temple", category: "Creatures", subcategory: "Dark Aether - Guardians - Sub Guardians", missable: true },
+            { id: "scan-creature-guardian-sub-02", name: "Jump Guardian", location: "Dark Agon Wastes - Judgement Pit", category: "Creatures", subcategory: "Dark Aether - Guardians - Sub Guardians", missable: true },
+            { id: "scan-creature-guardian-sub-03", name: "Boost Guardian", location: "Dark Torvus Bog - Dark Torvus Arena", category: "Creatures", subcategory: "Dark Aether - Guardians - Sub Guardians", missable: true },
+            { id: "scan-creature-guardian-sub-04", name: "Grapple Guardian", location: "Dark Torvus Bog - Sacrificial Chamber", category: "Creatures", subcategory: "Dark Aether - Guardians - Sub Guardians", missable: true },
+            { id: "scan-creature-guardian-sub-05", name: "Spider Guardian", location: "Sanctuary Fortress - Dynamo Works", category: "Creatures", subcategory: "Dark Aether - Guardians - Sub Guardians", missable: true },
+            { id: "scan-creature-guardian-sub-06", name: "Power Bomb Guardian", location: "Dark Torvus Bog - Undertemple", category: "Creatures", subcategory: "Dark Aether - Guardians - Sub Guardians", missable: true },
+
+            // Dark Aether - Emperor Ing (5 scans)
+            { id: "scan-creature-emperor-01", name: "Emperor Ing Head", location: "Sky Temple - Sanctum", category: "Creatures", subcategory: "Dark Aether - Emperor Ing", missable: true },
+            { id: "scan-creature-emperor-02", name: "Emperor Ing Body", location: "Sky Temple - Sanctum", category: "Creatures", subcategory: "Dark Aether - Emperor Ing", missable: true },
+            { id: "scan-creature-emperor-03", name: "Emperor Ing Eye", location: "Sky Temple - Sanctum", category: "Creatures", subcategory: "Dark Aether - Emperor Ing", missable: true },
+            { id: "scan-creature-emperor-04", name: "Emperor Ing Chrysalis", location: "Sky Temple - Sanctum", category: "Creatures", subcategory: "Dark Aether - Emperor Ing", missable: true },
+            { id: "scan-creature-emperor-05", name: "Mutated Emperor Ing", location: "Sky Temple - Sanctum", category: "Creatures", subcategory: "Dark Aether - Emperor Ing", missable: true },
+
+            // ===== RESEARCH (49 total) =====
+
+            // Aether Studies - Aether (4 scans)
+            { id: "scan-research-aether-01", name: "Aether", location: "Agon Wastes - Command Center", category: "Research", subcategory: "Aether Studies - Aether", missable: false },
+            { id: "scan-research-aether-02", name: "Dark Portal", location: "Agon Wastes, Torvus Bog", category: "Research", subcategory: "Aether Studies - Aether", missable: false },
+            { id: "scan-research-aether-03", name: "Energy Controller", location: "Great Temple, Agon Wastes, Torvus Bog, Sanctuary Fortress", category: "Research", subcategory: "Aether Studies - Aether", missable: false },
+            { id: "scan-research-aether-04", name: "U-Mos", location: "Great Temple - Main Energy Controller", category: "Research", subcategory: "Aether Studies - Aether", missable: false },
+            
+            // Aether Studies - Dark Aether (3 scans)
+            { id: "scan-research-dark-aether-01", name: "Dark Aether", location: "Agon Wastes - Command Center", category: "Research", subcategory: "Aether Studies - Dark Aether", missable: false },
+            { id: "scan-research-dark-aether-02", name: "Light Portal", location: "Dark Agon Wastes, Dark Torvus Bog, Ing Hive", category: "Research", subcategory: "Aether Studies - Dark Aether", missable: false },
+            { id: "scan-research-dark-aether-03", name: "Phazon", location: "Dark Agon Wastes, Sky Temple Grounds", category: "Research", subcategory: "Aether Studies - Dark Aether", missable: false },
+
+            // Biology - Plantforms (6 scans)
+            { id: "scan-research-plant-01", name: "Agon Bearerpod", location: "Agon Wastes", category: "Research", subcategory: "Biology - Plantforms", missable: false },
+            { id: "scan-research-plant-02", name: "Bloatsac", location: "Torvus Bog", category: "Research", subcategory: "Biology - Plantforms", missable: false },
+            { id: "scan-research-plant-03", name: "Blueroot Tree", location: "Agon Wastes", category: "Research", subcategory: "Biology - Plantforms", missable: false },
+            { id: "scan-research-plant-04", name: "Torvus Bearerpod", location: "Torvus Bog", category: "Research", subcategory: "Biology - Plantforms", missable: false },
+            { id: "scan-research-plant-05", name: "Torvus Hanging Pod", location: "Torvus Bog", category: "Research", subcategory: "Biology - Plantforms", missable: false },
+            { id: "scan-research-plant-06", name: "Sandgrass", location: "Agon Wastes", category: "Research", subcategory: "Biology - Plantforms", missable: false },
+
+            // Biology - Cocoons (3 scans)
+            { id: "scan-research-cocoon-01", name: "Metroid Cocoon", location: "Agon Wastes", category: "Research", subcategory: "Biology - Cocoons", missable: false },
+            { id: "scan-research-cocoon-02", name: "Splinter Cocoon", location: "Temple Grounds", category: "Research", subcategory: "Biology - Cocoons", missable: false },
+            { id: "scan-research-cocoon-03", name: "War Wasp Hive", location: "Temple Grounds", category: "Research", subcategory: "Biology - Cocoons", missable: false },
+
+            // Biology - Darklings (4 scans)
+            { id: "scan-research-darkling-01", name: "Dormant Ingclaw", location: "Sky Temple Grounds", category: "Research", subcategory: "Biology - Darklings", missable: false },
+            { id: "scan-research-darkling-02", name: "Ingclaw", location: "Dark Agon Wastes", category: "Research", subcategory: "Biology - Darklings", missable: false },
+            { id: "scan-research-darkling-03", name: "Ing Webtrap", location: "Dark Agon Wastes - Battleground", category: "Research", subcategory: "Biology - Darklings", missable: true },
+            { id: "scan-research-darkling-04", name: "Webling", location: "Dark Agon Wastes - Feeding Pit Access", category: "Research", subcategory: "Biology - Darklings", missable: true },
+
+            // Biology - Ing Storage (4 scans)
+            { id: "scan-research-ing-storage-01", name: "Bladepod", location: "Dark Agon Wastes", category: "Research", subcategory: "Biology - Ing Storage", missable: false },
+            { id: "scan-research-ing-storage-02", name: "Flying Ing Cache", location: "Sky Temple Grounds, Dark Agon Wastes, Dark Torvus Bog, Ing Hive", category: "Research", subcategory: "Biology - Ing Storage", missable: true },
+            { id: "scan-research-ing-storage-03", name: "Ingsphere Cache", location: "Dark Torvus Bog", category: "Research", subcategory: "Biology - Ing Storage", missable: false },
+            { id: "scan-research-ing-storage-04", name: "Ingworm Cache", location: "Ing Hive, Sky Temple", category: "Research", subcategory: "Biology - Ing Storage", missable: false },
+
+            // Luminoth Technology - Light Beacons (4 scans)
+            { id: "scan-research-beacon-01", name: "Light Beacon", location: "Sky Temple Grounds, Dark Agon Wastes, Dark Torvus Bog, Ing Hive", category: "Research", subcategory: "Luminoth Technology - Light Beacons", missable: false },
+            { id: "scan-research-beacon-02", name: "Energized Beacon", location: "Sky Temple Grounds, Dark Agon Wastes, Dark Torvus Bog, Ing Hive", category: "Research", subcategory: "Luminoth Technology - Light Beacons", missable: false },
+            { id: "scan-research-beacon-03", name: "Nullified Beacon", location: "Sky Temple Grounds, Dark Agon Wastes, Dark Torvus Bog, Ing Hive", category: "Research", subcategory: "Luminoth Technology - Light Beacons", missable: false },
+            { id: "scan-research-beacon-04", name: "Super Beacon", location: "Sky Temple Grounds, Dark Agon Wastes, Dark Torvus Bog, Ing Hive", category: "Research", subcategory: "Luminoth Technology - Light Beacons", missable: false },
+
+            // Luminoth Technology - Light Crystals (4 scans)
+            { id: "scan-research-crystal-01", name: "Light Crystals", location: "Sky Temple Grounds, Dark Agon Wastes, Dark Torvus Bog, Ing Hive", category: "Research", subcategory: "Luminoth Technology - Light Crystals", missable: false },
+            { id: "scan-research-crystal-02", name: "Energized Crystals", location: "Sky Temple Grounds, Dark Agon Wastes, Dark Torvus Bog, Ing Hive", category: "Research", subcategory: "Luminoth Technology - Light Crystals", missable: false },
+            { id: "scan-research-crystal-03", name: "Nullified Crystals", location: "Sky Temple Grounds, Dark Agon Wastes, Dark Torvus Bog, Ing Hive", category: "Research", subcategory: "Luminoth Technology - Light Crystals", missable: false },
+            { id: "scan-research-crystal-04", name: "Super Crystals", location: "Sky Temple Grounds, Dark Agon Wastes, Dark Torvus Bog, Ing Hive", category: "Research", subcategory: "Luminoth Technology - Light Crystals", missable: false },
+
+            // Luminoth Technology - Lift Crystals (3 scans)
+            { id: "scan-research-lift-01", name: "Dark Lift Crystal", location: "Dark Agon Wastes", category: "Research", subcategory: "Luminoth Technology - Lift Crystals", missable: false },
+            { id: "scan-research-lift-02", name: "Liftvine Crystal", location: "Dark Torvus Bog", category: "Research", subcategory: "Luminoth Technology - Lift Crystals", missable: false },
+            { id: "scan-research-lift-03", name: "Light Lift Crystal", location: "Dark Agon Wastes", category: "Research", subcategory: "Luminoth Technology - Lift Crystals", missable: false },
+
+            // Luminoth Technology - Utility Crystals (2 scans)
+            { id: "scan-research-utility-01", name: "Dark Sentinel Crystal", location: "Dark Torvus Bog", category: "Research", subcategory: "Luminoth Technology - Utility Crystals", missable: false },
+            { id: "scan-research-utility-02", name: "Sentinel Crystal", location: "Torvus Bog", category: "Research", subcategory: "Luminoth Technology - Utility Crystals", missable: false },
+
+            // Mechanisms - GF Security (3 scans)
+            { id: "scan-research-gf-01", name: "GF Bridge", location: "Temple Grounds", category: "Research", subcategory: "Mechanisms - GF Security", missable: false },
+            { id: "scan-research-gf-02", name: "GF Mk VI Gate", location: "Temple Grounds", category: "Research", subcategory: "Mechanisms - GF Security", missable: true },
+            { id: "scan-research-gf-03", name: "GF Mk VII Defense Gate", location: "Temple Grounds", category: "Research", subcategory: "Mechanisms - GF Security", missable: true },
+
+            // Mechanisms - Vehicles (3 scans)
+            { id: "scan-research-vehicle-01", name: "GFS Tyr", location: "Temple Grounds - GFMC Compound", category: "Research", subcategory: "Mechanisms - Vehicles", missable: false },
+            { id: "scan-research-vehicle-02", name: "Pirate Skiff", location: "Agon Wastes, Torvus Bog", category: "Research", subcategory: "Mechanisms - Vehicles", missable: false },
+            { id: "scan-research-vehicle-03", name: "Samus' Gunship", location: "Temple Grounds - Landing Site", category: "Research", subcategory: "Mechanisms - Vehicles", missable: true },
+
+            // Mechanisms - Systems (6 scans)
+            { id: "scan-research-system-01", name: "Bomb Slot", location: "Most areas", category: "Research", subcategory: "Mechanisms - Systems", missable: true },
+            { id: "scan-research-system-02", name: "Grapple Point", location: "Most areas", category: "Research", subcategory: "Mechanisms - Systems", missable: false },
+            { id: "scan-research-system-03", name: "Kinetic Orb Cannon", location: "Most areas", category: "Research", subcategory: "Mechanisms - Systems", missable: true },
+            { id: "scan-research-system-04", name: "Spider Ball Track", location: "Most areas", category: "Research", subcategory: "Mechanisms - Systems", missable: false },
+            { id: "scan-research-system-05", name: "Spinner", location: "Most areas", category: "Research", subcategory: "Mechanisms - Systems", missable: true },
+            { id: "scan-research-system-06", name: "Wall Jump Surface", location: "Most areas", category: "Research", subcategory: "Mechanisms - Systems", missable: false },
+
+            // ===== LORE (63 total) =====
+
+            // Lore - Trooper Logs - Force One (6 scans)
+            { id: "scan-lore-trooper-f1-01", name: "CAPT A. Exeter", location: "Temple Grounds - GFMC Compound", category: "Lore", subcategory: "Trooper Logs - Force One", missable: false },
+            { id: "scan-lore-trooper-f1-02", name: "LCPL J. Brode", location: "Temple Grounds - GFMC Compound", category: "Lore", subcategory: "Trooper Logs - Force One", missable: false },
+            { id: "scan-lore-trooper-f1-03", name: "PFC G. Haley", location: "Temple Grounds - GFMC Compound", category: "Lore", subcategory: "Trooper Logs - Force One", missable: false },
+            { id: "scan-lore-trooper-f1-04", name: "PFC I. Crany", location: "Temple Grounds - GFMC Compound", category: "Lore", subcategory: "Trooper Logs - Force One", missable: false },
+            { id: "scan-lore-trooper-f1-05", name: "PFC S. Milligan", location: "Temple Grounds - GFMC Compound", category: "Lore", subcategory: "Trooper Logs - Force One", missable: false },
+            { id: "scan-lore-trooper-f1-06", name: "SPC F. Triplette", location: "Temple Grounds - GFMC Compound", category: "Lore", subcategory: "Trooper Logs - Force One", missable: false },
+
+            // Lore - Trooper Logs - Force Two (6 scans)
+            { id: "scan-lore-trooper-f2-01", name: "GSGT C. Benet", location: "Temple Grounds - Command Chamber", category: "Lore", subcategory: "Trooper Logs - Force Two", missable: false },
+            { id: "scan-lore-trooper-f2-02", name: "PFC E. Denys", location: "Temple Grounds - Sacred Bridge", category: "Lore", subcategory: "Trooper Logs - Force Two", missable: false },
+            { id: "scan-lore-trooper-f2-03", name: "PFC L. Brouda", location: "Temple Grounds - Communications Area", category: "Lore", subcategory: "Trooper Logs - Force Two", missable: false },
+            { id: "scan-lore-trooper-f2-04", name: "PFC M. Veroni", location: "Temple Grounds - Collapsed Tunnel", category: "Lore", subcategory: "Trooper Logs - Force Two", missable: false },
+            { id: "scan-lore-trooper-f2-05", name: "SPC B. Reevs", location: "Temple Grounds - Command Chamber", category: "Lore", subcategory: "Trooper Logs - Force Two", missable: false },
+            { id: "scan-lore-trooper-f2-06", name: "SPC M. Angseth", location: "Temple Grounds - Trooper Security Station", category: "Lore", subcategory: "Trooper Logs - Force Two", missable: false },
+
+            // Lore - Luminoth Lore - History - Golden Age (6 scans)
+            { id: "scan-lore-luminoth-hist-01", name: "Light of Aether", location: "Agon Wastes - Portal Terminal", category: "Lore", subcategory: "Luminoth Lore - History - Golden Age", missable: false },
+            { id: "scan-lore-luminoth-hist-02", name: "Origins", location: "Great Temple - Main Energy Controller", category: "Lore", subcategory: "Luminoth Lore - History - Golden Age", missable: false },
+            { id: "scan-lore-luminoth-hist-03", name: "Our Heritage", location: "Temple Grounds - Transport to Agon Wastes", category: "Lore", subcategory: "Luminoth Lore - History - Golden Age", missable: false },
+            { id: "scan-lore-luminoth-hist-04", name: "Paradise", location: "Agon Wastes - Agon Energy Controller", category: "Lore", subcategory: "Luminoth Lore - History - Golden Age", missable: false },
+            { id: "scan-lore-luminoth-hist-05", name: "Saving Aether", location: "Agon Wastes - Mining Plaza", category: "Lore", subcategory: "Luminoth Lore - History - Golden Age", missable: false },
+            { id: "scan-lore-luminoth-hist-06", name: "The Stellar Object", location: "Agon Wastes - Mining Station A", category: "Lore", subcategory: "Luminoth Lore - History - Golden Age", missable: false },
+
+            // Luminoth Lore - History - Dark Age (4 scans)
+            { id: "scan-lore-luminoth-hist-07", name: "Age of Anxiety", location: "Temple Grounds - Path of Eyes", category: "Lore", subcategory: "Luminoth Lore - History - Dark Age", missable: false },
+            { id: "scan-lore-luminoth-hist-08", name: "Cataclysm", location: "Temple Grounds - Meeting Grounds", category: "Lore", subcategory: "Luminoth Lore - History - Dark Age", missable: false },
+            { id: "scan-lore-luminoth-hist-09", name: "The Ing Attack", location: "Torvus Bog - Underground Tunnel", category: "Lore", subcategory: "Luminoth Lore - History - Dark Age", missable: false },
+            { id: "scan-lore-luminoth-hist-10", name: "The World Warped", location: "Torvus Bog - Torvus Energy Controller", category: "Lore", subcategory: "Luminoth Lore - History - Dark Age", missable: false },
+
+            // Luminoth Lore - Conflict - First Phase (5 scans)
+            { id: "scan-lore-luminoth-conflict-01", name: "Dark Aether", location: "Torvus Bog - Path of Roots", category: "Lore", subcategory: "Luminoth Lore - Conflict - First Phase", missable: false },
+            { id: "scan-lore-luminoth-conflict-02", name: "New Weapons", location: "Agon Wastes - Mining Station B", category: "Lore", subcategory: "Luminoth Lore - Conflict - First Phase", missable: false },
+            { id: "scan-lore-luminoth-conflict-03", name: "Our War Begins", location: "Torvus Bog - Training Chamber", category: "Lore", subcategory: "Luminoth Lore - Conflict - First Phase", missable: false },
+            { id: "scan-lore-luminoth-conflict-04", name: "Recovering Energy", location: "Torvus Bog - Catacombs", category: "Lore", subcategory: "Luminoth Lore - Conflict - First Phase", missable: false },
+            { id: "scan-lore-luminoth-conflict-05", name: "The New Terror", location: "Torvus Bog - Gathering Hall", category: "Lore", subcategory: "Luminoth Lore - Conflict - First Phase", missable: false },
+
+            // Luminoth Lore - Conflict - Second Phase (5 scans)
+            { id: "scan-lore-luminoth-conflict-06", name: "Agon Falls", location: "Sanctuary Fortress - Main Gyro Chamber", category: "Lore", subcategory: "Luminoth Lore - Conflict - Second Phase", missable: false },
+            { id: "scan-lore-luminoth-conflict-07", name: "Shattered Hope", location: "Sanctuary Fortress - Hall of Combat Mastery", category: "Lore", subcategory: "Luminoth Lore - Conflict - Second Phase", missable: false },
+            { id: "scan-lore-luminoth-conflict-08", name: "The Final Crusade", location: "Sanctuary Fortress - Sanctuary Energy Controller", category: "Lore", subcategory: "Luminoth Lore - Conflict - Second Phase", missable: false },
+            { id: "scan-lore-luminoth-conflict-09", name: "The Sky Temple", location: "Temple Grounds - Fortress Transport Access", category: "Lore", subcategory: "Luminoth Lore - Conflict - Second Phase", missable: false },
+            { id: "scan-lore-luminoth-conflict-10", name: "Torvus Falls", location: "Sanctuary Fortress - Sanctuary Entrance", category: "Lore", subcategory: "Luminoth Lore - Conflict - Second Phase", missable: false },
+
+            // Luminoth Lore - Conflict - Final Phase (2 scans)
+            { id: "scan-lore-luminoth-conflict-11", name: "Sanctuary Falls", location: "Sanctuary Fortress - Main Research", category: "Lore", subcategory: "Luminoth Lore - Conflict - Final Phase", missable: false },
+            { id: "scan-lore-luminoth-conflict-12", name: "Twilight", location: "Sanctuary Fortress - Watch Station", category: "Lore", subcategory: "Luminoth Lore - Conflict - Final Phase", missable: false },
+
+            // Lore - Luminoth Lore - A-Kul's Clues - Cadre 1 Clues (4 scans)
+            { id: "scan-lore-akul-01", name: "B-Stl's Key", location: "Sky Temple Grounds - Sky Temple Gateway", category: "Lore", subcategory: "Luminoth Lore - A-Kul's Clues - Cadre 1 Clues", missable: true },
+            { id: "scan-lore-akul-02", name: "G-Sch's Key", location: "Sky Temple Grounds - Sky Temple Gateway", category: "Lore", subcategory: "Luminoth Lore - A-Kul's Clues - Cadre 1 Clues", missable: true },
+            { id: "scan-lore-akul-03", name: "J-Stl's Key", location: "Sky Temple Grounds - Sky Temple Gateway", category: "Lore", subcategory: "Luminoth Lore - A-Kul's Clues - Cadre 1 Clues", missable: true },
+            { id: "scan-lore-akul-04", name: "S-Dly's Key", location: "Sky Temple Grounds - Sky Temple Gateway", category: "Lore", subcategory: "Luminoth Lore - A-Kul's Clues - Cadre 1 Clues", missable: true },
+
+            // Lore - Luminoth Lore - A-Kul's Clues - Cadre 2 Clues (5 scans)
+            { id: "scan-lore-akul-05", name: "C-Rch's Key", location: "Sky Temple Grounds - Sky Temple Gateway", category: "Lore", subcategory: "Luminoth Lore - A-Kul's Clues - Cadre 2 Clues", missable: true },
+            { id: "scan-lore-akul-06", name: "D-Isl's Key", location: "Sky Temple Grounds - Sky Temple Gateway", category: "Lore", subcategory: "Luminoth Lore - A-Kul's Clues - Cadre 2 Clues", missable: true },
+            { id: "scan-lore-akul-07", name: "J-Fme's Key", location: "Sky Temple Grounds - Sky Temple Gateway", category: "Lore", subcategory: "Luminoth Lore - A-Kul's Clues - Cadre 2 Clues", missable: true },
+            { id: "scan-lore-akul-08", name: "M-Dhe's Key", location: "Sky Temple Grounds - Sky Temple Gateway", category: "Lore", subcategory: "Luminoth Lore - A-Kul's Clues - Cadre 2 Clues", missable: true },
+            { id: "scan-lore-akul-09", name: "S-Jsr's Key", location: "Sky Temple Grounds - Sky Temple Gateway", category: "Lore", subcategory: "Luminoth Lore - A-Kul's Clues - Cadre 2 Clues", missable: true },
+
+            // Lore - Luminoth Lore - Keybearer Lore - Cadre 1 (5 scans)
+            { id: "scan-lore-keybearer-01", name: "A-Kul's Testament", location: "Sky Temple Grounds - Sky Temple Gateway", category: "Lore", subcategory: "Luminoth Lore - Keybearer Lore - Cadre 1", missable: false },
+            { id: "scan-lore-keybearer-02", name: "B-Stl's Testament", location: "Agon Wastes - Main Reactor", category: "Lore", subcategory: "Luminoth Lore - Keybearer Lore - Cadre 1", missable: false },
+            { id: "scan-lore-keybearer-03", name: "G-Sch's Testament", location: "Torvus Bog - Catacombs", category: "Lore", subcategory: "Luminoth Lore - Keybearer Lore - Cadre 1", missable: false },
+            { id: "scan-lore-keybearer-04", name: "J-Stl's Testament", location: "Agon Wastes - Central Mining Station", category: "Lore", subcategory: "Luminoth Lore - Keybearer Lore - Cadre 1", missable: false },
+            { id: "scan-lore-keybearer-05", name: "S-Dly's Testament", location: "Torvus Bog - Torvus Lagoon", category: "Lore", subcategory: "Luminoth Lore - Keybearer Lore - Cadre 1", missable: false },
+
+            // Lore - Luminoth Lore - Keybearer Lore - Cadre 2 (5 scans)
+            { id: "scan-lore-keybearer-06", name: "C-Rch's Testament", location: "Sanctuary Fortress - Dynamo Works", category: "Lore", subcategory: "Luminoth Lore - Keybearer Lore - Cadre 2", missable: false },
+            { id: "scan-lore-keybearer-07", name: "D-Isl's Testament", location: "Temple Grounds - Storage Cavern A", category: "Lore", subcategory: "Luminoth Lore - Keybearer Lore - Cadre 2", missable: false },
+            { id: "scan-lore-keybearer-08", name: "J-Fme's Testament", location: "Temple Grounds - Industrial Site", category: "Lore", subcategory: "Luminoth Lore - Keybearer Lore - Cadre 2", missable: false },
+            { id: "scan-lore-keybearer-09", name: "M-Dhe's Testament", location: "Temple Grounds - Landing Site", category: "Lore", subcategory: "Luminoth Lore - Keybearer Lore - Cadre 2", missable: false },
+            { id: "scan-lore-keybearer-10", name: "S-Jsr's Testament", location: "Sanctuary Fortress - Sanctuary Entrance", category: "Lore", subcategory: "Luminoth Lore - Keybearer Lore - Cadre 2", missable: false },
+
+            // Lore - Space Pirate Logs - Cycle 4 (2 scans)
+            { id: "scan-lore-pirate-c4-01", name: "Log 44681 (Phazon Operations)", location: "Agon Wastes - Command Center", category: "Lore", subcategory: "Space Pirate Logs - Cycle 4", missable: false },
+            { id: "scan-lore-pirate-c4-02", name: "Log 48853 (Local Conflict)", location: "Agon Wastes - Command Center", category: "Lore", subcategory: "Space Pirate Logs - Cycle 4", missable: false },
+
+            // Pirate Logs - Cycle 5 (2 scans)
+            { id: "scan-lore-pirate-c5-01", name: "Log 50086 (Great Discoveries)", location: "Agon Wastes - Command Center", category: "Lore", subcategory: "Space Pirate Logs - Cycle 5", missable: false },
+            { id: "scan-lore-pirate-c5-02", name: "Log 54421 (Rift Portal)", location: "Agon Wastes - Command Center", category: "Lore", subcategory: "Space Pirate Logs - Cycle 5", missable: false },
+
+            // Pirate Logs - Cycle 6 (4 scans)
+            { id: "scan-lore-pirate-c6-01", name: "Log 62217 (Phazon Raids)", location: "Agon Wastes - Command Center", category: "Lore", subcategory: "Space Pirate Logs - Cycle 6", missable: false },
+            { id: "scan-lore-pirate-c6-02", name: "Log 63622 (The Hunter)", location: "Agon Wastes - Biostorage Station", category: "Lore", subcategory: "Space Pirate Logs - Cycle 6", missable: false },
+            { id: "scan-lore-pirate-c6-03", name: "Log 67135 (Security Breach)", location: "Agon Wastes - Save Station B", category: "Lore", subcategory: "Space Pirate Logs - Cycle 6", missable: false },
+            { id: "scan-lore-pirate-c6-04", name: "Log 69898 (Shadow War)", location: "Agon Wastes - Storage D", category: "Lore", subcategory: "Space Pirate Logs - Cycle 6", missable: false },
+
+            // Pirate Logs - Cycle 7 (2 scans)
+            { id: "scan-lore-pirate-c7-01", name: "Log 70136 (Federation Attack)", location: "Agon Wastes - Security Station B", category: "Lore", subcategory: "Space Pirate Logs - Cycle 7", missable: false },
+            { id: "scan-lore-pirate-c7-02", name: "Log 71599 (Two Hunters)", location: "Agon Wastes - Central Mining Station", category: "Lore", subcategory: "Space Pirate Logs - Cycle 7", missable: false },
+
+            // ===== DARK TEMPLE KEYS (9 total) =====
+            { id: "dark-temple-key-01", name: "Dark Agon Key 1", location: "Dark Agon Wastes - Trial Tunnel", category: "Dark Temple Keys", subcategory: "Dark Agon Keys", missable: false },
+            { id: "dark-temple-key-02", name: "Dark Agon Key 2", location: "Dark Agon Wastes - Doomed Entry", category: "Dark Temple Keys", subcategory: "Dark Agon Keys", missable: false },
+            { id: "dark-temple-key-03", name: "Dark Agon Key 3", location: "Dark Agon Wastes - Battleground", category: "Dark Temple Keys", subcategory: "Dark Agon Keys", missable: false },
+            { id: "dark-temple-key-04", name: "Dark Torvus Key 1", location: "Dark Torvus Bog - Torvus Arena", category: "Dark Temple Keys", subcategory: "Dark Torvus Keys", missable: false },
+            { id: "dark-temple-key-05", name: "Dark Torvus Key 2", location: "Dark Torvus Bog - Undertemple Access", category: "Dark Temple Keys", subcategory: "Dark Torvus Keys", missable: false },
+            { id: "dark-temple-key-06", name: "Dark Torvus Key 3", location: "Dark Torvus Bog - Venomous Pond", category: "Dark Temple Keys", subcategory: "Dark Torvus Keys", missable: false },
+            { id: "dark-temple-key-07", name: "Ing Hive Key 1", location: "Ing Hive - Culling Chamber", category: "Dark Temple Keys", subcategory: "Ing Hive Keys", missable: false },
+            { id: "dark-temple-key-08", name: "Ing Hive Key 2", location: "Ing Hive - Hive Gyro Chamber", category: "Dark Temple Keys", subcategory: "Ing Hive Keys", missable: false },
+            { id: "dark-temple-key-09", name: "Ing Hive Key 3", location: "Ing Hive - Aerial Training Site", category: "Dark Temple Keys", subcategory: "Ing Hive Keys", missable: false },
+
+            // ===== SKY TEMPLE KEYS (9 total) =====
+            { id: "sky-temple-key-01", name: "Sky Temple Key 1", location: "Dark Agon Wastes - Battleground", category: "Sky Temple Keys", subcategory: "Sky Temple Keys - Dark Agon", missable: false },
+            { id: "sky-temple-key-02", name: "Sky Temple Key 2", location: "Dark Agon Wastes - Dark Oasis", category: "Sky Temple Keys", subcategory: "Sky Temple Keys - Dark Agon", missable: false },
+            { id: "sky-temple-key-03", name: "Sky Temple Key 3", location: "Dark Torvus Bog - Poisoned Bog", category: "Sky Temple Keys", subcategory: "Sky Temple Keys - Dark Torvus", missable: false },
+            { id: "sky-temple-key-04", name: "Sky Temple Key 4", location: "Dark Torvus Bog - Dungeon", category: "Sky Temple Keys", subcategory: "Sky Temple Keys - Dark Torvus", missable: false },
+            { id: "sky-temple-key-05", name: "Sky Temple Key 5", location: "Ing Hive - Hive Entrance", category: "Sky Temple Keys", subcategory: "Sky Temple Keys - Ing Hive", missable: false },
+            { id: "sky-temple-key-06", name: "Sky Temple Key 6", location: "Ing Hive - Hive Dynamo Works", category: "Sky Temple Keys", subcategory: "Sky Temple Keys - Ing Hive", missable: false },
+            { id: "sky-temple-key-07", name: "Sky Temple Key 7", location: "Sky Temple Grounds - Ing Reliquary", category: "Sky Temple Keys", subcategory: "Sky Temple Keys - Sky Temple Grounds", missable: false },
+            { id: "sky-temple-key-08", name: "Sky Temple Key 8", location: "Sky Temple Grounds - Defiled Shrine", category: "Sky Temple Keys", subcategory: "Sky Temple Keys - Sky Temple Grounds", missable: false },
+            { id: "sky-temple-key-09", name: "Sky Temple Key 9", location: "Sky Temple Grounds - Accursed Lake", category: "Sky Temple Keys", subcategory: "Sky Temple Keys - Sky Temple Grounds", missable: false },
+
+            // ===== SUIT UPGRADES (25 total) =====
+            { id: "suit-missile-launcher", name: "Missile Launcher", location: "Temple Grounds - GFMC Compound", category: "Suit Upgrades", missable: false },
+            { id: "suit-morph-ball-bomb", name: "Morph Ball Bomb", location: "Agon Wastes - Agon Temple", category: "Suit Upgrades", missable: false },
+            { id: "suit-space-jump-boots", name: "Space Jump Boots", location: "Dark Agon Wastes - Judgement Pit", category: "Suit Upgrades", missable: false },
+            { id: "suit-dark-beam", name: "Dark Beam", location: "Agon Wastes - Storage D", category: "Suit Upgrades", missable: false },
+            { id: "suit-light-beam", name: "Light Beam", location: "Dark Agon Wastes - Ing Cache 1", category: "Suit Upgrades", missable: false },
+            { id: "suit-dark-suit", name: "Dark Suit", location: "Dark Agon Wastes - Dark Agon Temple", category: "Suit Upgrades", missable: false },
+            { id: "suit-super-missile", name: "Super Missile", location: "Torvus Bog - Torvus Temple", category: "Suit Upgrades", missable: false },
+            { id: "suit-boost-ball", name: "Boost Ball", location: "Dark Torvus Bog - Dark Torvus Arena", category: "Suit Upgrades", missable: false },
+            { id: "suit-seeker-launcher", name: "Seeker Launcher", location: "Temple Grounds - Hall of Honored Dead", category: "Suit Upgrades", missable: false },
+            { id: "suit-gravity-boost", name: "Gravity Boost", location: "Torvus Bog - Hydrochamber Storage", category: "Suit Upgrades", missable: false },
+            { id: "suit-grapple-beam", name: "Grapple Beam", location: "Dark Torvus Bog - Sacrificial Chamber", category: "Suit Upgrades", missable: false },
+            { id: "suit-dark-visor", name: "Dark Visor", location: "Dark Torvus Bog - Dark Torvus Temple", category: "Suit Upgrades", missable: false },
+            { id: "suit-spider-ball", name: "Spider Ball", location: "Sanctuary Fortress - Dynamo Works", category: "Suit Upgrades", missable: false },
+            { id: "suit-power-bomb", name: "Power Bomb", location: "Dark Torvus Bog - Undertemple", category: "Suit Upgrades", missable: false },
+            { id: "suit-darkburst", name: "Darkburst", location: "Agon Wastes - Mining Station B", category: "Suit Upgrades", missable: false },
+            { id: "suit-sunburst", name: "Sunburst", location: "Temple Grounds - Grand Windchamber", category: "Suit Upgrades", missable: false },
+            { id: "suit-echo-visor", name: "Echo Visor", location: "Sanctuary Fortress - Aerie", category: "Suit Upgrades", missable: false },
+            { id: "suit-screw-attack", name: "Screw Attack", location: "Sanctuary Fortress - Vault", category: "Suit Upgrades", missable: false },
+            { id: "suit-annihilator-beam", name: "Annihilator Beam", location: "Ing Hive - Hive Temple", category: "Suit Upgrades", missable: false },
+            { id: "suit-light-suit", name: "Light Suit", location: "Great Temple - Main Energy Controller", category: "Suit Upgrades", missable: false },
+            { id: "suit-sonic-boom", name: "Sonic Boom", location: "Dark Agon Wastes - Ing Cache 2", category: "Suit Upgrades", missable: false },
+            { id: "suit-violet-translator", name: "Violet Translator", location: "Temple Grounds - U-Mos' Chamber", category: "Suit Upgrades", missable: false },
+            { id: "suit-amber-translator", name: "Amber Translator", location: "Agon Wastes - Meeting Grounds", category: "Suit Upgrades", missable: false },
+            { id: "suit-emerald-translator", name: "Emerald Translator", location: "Torvus Bog - Torvus Plaza", category: "Suit Upgrades", missable: false },
+            { id: "suit-cobalt-translator", name: "Cobalt Translator", location: "Sanctuary Fortress - Hall of Combat Mastery", category: "Suit Upgrades", missable: false },
+
+            // ===== MISSILE EXPANSIONS (49 total) =====
+            { id: "missile-01", name: "Missile Expansion", location: "Temple Grounds - Transport to Agon Wastes", category: "Missile Expansions", missable: false },
+            { id: "missile-02", name: "Missile Expansion", location: "Temple Grounds - Hive Chamber A", category: "Missile Expansions", missable: false },
+            { id: "missile-03", name: "Missile Expansion", location: "Temple Grounds - Hive Chamber B", category: "Missile Expansions", missable: false },
+            { id: "missile-04", name: "Missile Expansion", location: "Sky Temple Grounds - Plain of Dark Worship", category: "Missile Expansions", missable: false },
+            { id: "missile-05", name: "Missile Expansion", location: "Temple Grounds - Temple Assembly Site", category: "Missile Expansions", missable: false },
+            { id: "missile-06", name: "Missile Expansion", location: "Temple Grounds - Communication Area", category: "Missile Expansions", missable: false },
+            { id: "missile-07", name: "Missile Expansion", location: "Temple Grounds - GFMC Compound", category: "Missile Expansions", missable: false },
+            { id: "missile-08", name: "Missile Expansion", location: "Sky Temple Grounds - War Ritual Grounds", category: "Missile Expansions", missable: false },
+            { id: "missile-09", name: "Missile Expansion", location: "Sky Temple Grounds - Phazon Grounds", category: "Missile Expansions", missable: false },
+            { id: "missile-10", name: "Missile Expansion", location: "Great Temple - Transport B Access", category: "Missile Expansions", missable: false },
+            { id: "missile-11", name: "Missile Expansion", location: "Great Temple - Transport A Access", category: "Missile Expansions", missable: false },
+            { id: "missile-12", name: "Missile Expansion", location: "Agon Wastes - Sand Cache", category: "Missile Expansions", missable: false },
+            { id: "missile-13", name: "Missile Expansion", location: "Agon Wastes - Portal Access", category: "Missile Expansions", missable: false },
+            { id: "missile-14", name: "Missile Expansion", location: "Agon Wastes - Transport Center", category: "Missile Expansions", missable: false },
+            { id: "missile-15", name: "Missile Expansion", location: "Agon Wastes - Command Center", category: "Missile Expansions", missable: false },
+            { id: "missile-16", name: "Missile Expansion", location: "Agon Wastes - Storage B", category: "Missile Expansions", missable: false },
+            { id: "missile-17", name: "Missile Expansion", location: "Dark Agon Wastes - Ing Cache 4", category: "Missile Expansions", missable: false },
+            { id: "missile-18", name: "Missile Expansion", location: "Dark Agon Wastes - Crossroads", category: "Missile Expansions", missable: false },
+            { id: "missile-19", name: "Missile Expansion", location: "Agon Wastes - Ventilation Area A", category: "Missile Expansions", missable: false },
+            { id: "missile-20", name: "Missile Expansion", location: "Agon Wastes - Main Reactor", category: "Missile Expansions", missable: false },
+            { id: "missile-21", name: "Missile Expansion", location: "Agon Wastes - Sand Processing", category: "Missile Expansions", missable: false },
+            { id: "missile-22", name: "Missile Expansion", location: "Agon Wastes - Storage C", category: "Missile Expansions", missable: false },
+            { id: "missile-23", name: "Missile Expansion", location: "Agon Wastes - Storage A", category: "Missile Expansions", missable: false },
+            { id: "missile-24", name: "Missile Expansion", location: "Agon Wastes - Mining Station A", category: "Missile Expansions", missable: false },
+            { id: "missile-25", name: "Missile Expansion", location: "Dark Agon Wastes - Junction Site", category: "Missile Expansions", missable: false },
+            { id: "missile-26", name: "Missile Expansion", location: "Dark Agon Wastes - Warrior's Walk", category: "Missile Expansions", missable: false },
+            { id: "missile-27", name: "Missile Expansion", location: "Torvus Bog - Forgotten Bridge", category: "Missile Expansions", missable: false },
+            { id: "missile-28", name: "Missile Expansion", location: "Torvus Bog - Hydrodynamo Station", category: "Missile Expansions", missable: false },
+            { id: "missile-29", name: "Missile Expansion", location: "Torvus Bog - Underground Tunnel", category: "Missile Expansions", missable: false },
+            { id: "missile-30", name: "Missile Expansion", location: "Torvus Bog - Plaza Access", category: "Missile Expansions", missable: false },
+            { id: "missile-31", name: "Missile Expansion", location: "Torvus Bog - Portal Chamber", category: "Missile Expansions", missable: false },
+            { id: "missile-32", name: "Missile Expansion", location: "Dark Torvus Bog - Undertransit One", category: "Missile Expansions", missable: false },
+            { id: "missile-33", name: "Missile Expansion", location: "Torvus Bog - Abandoned Worksite", category: "Missile Expansions", missable: false },
+            { id: "missile-34", name: "Missile Expansion", location: "Torvus Bog - Path of Roots", category: "Missile Expansions", missable: false },
+            { id: "missile-35", name: "Missile Expansion", location: "Torvus Bog - Torvus Lagoon", category: "Missile Expansions", missable: false },
+            { id: "missile-36", name: "Missile Expansion", location: "Torvus Bog - Gathering Hall", category: "Missile Expansions", missable: false },
+            { id: "missile-37", name: "Missile Expansion", location: "Torvus Bog - Training Chamber", category: "Missile Expansions", missable: false },
+            { id: "missile-38", name: "Missile Expansion", location: "Torvus Bog - Torvus Grove", category: "Missile Expansions", missable: false },
+            { id: "missile-39", name: "Missile Expansion", location: "Torvus Bog - Transit Tunnel South", category: "Missile Expansions", missable: false },
+            { id: "missile-40", name: "Missile Expansion", location: "Dark Torvus Bog - Undertemple", category: "Missile Expansions", missable: false },
+            { id: "missile-41", name: "Missile Expansion", location: "Ing Hive - Hazing Cliff", category: "Missile Expansions", missable: false },
+            { id: "missile-42", name: "Missile Expansion", location: "Sanctuary Fortress - Dynamo Works", category: "Missile Expansions", missable: false },
+            { id: "missile-43", name: "Missile Expansion", location: "Sanctuary Fortress - Hall of Combat Mastery", category: "Missile Expansions", missable: false },
+            { id: "missile-44", name: "Missile Expansion", location: "Sanctuary Fortress - Main Research", category: "Missile Expansions", missable: false },
+            { id: "missile-45", name: "Missile Expansion", location: "Sanctuary Fortress - Central Area Transport West", category: "Missile Expansions", missable: false },
+            { id: "missile-46", name: "Missile Expansion", location: "Ing Hive - Aerial Training Site", category: "Missile Expansions", missable: false },
+            { id: "missile-47", name: "Missile Expansion", location: "Sanctuary Fortress - Temple Access", category: "Missile Expansions", missable: false },
+            { id: "missile-48", name: "Missile Expansion", location: "Sanctuary Fortress - Sentinel's Path", category: "Missile Expansions", missable: false },
+            { id: "missile-49", name: "Missile Expansion", location: "Sanctuary Fortress - Sanctuary Map Station", category: "Missile Expansions", missable: false },
+
+            // ===== ENERGY TANKS (14 total) =====
+            { id: "energy-01", name: "Energy Tank", location: "Temple Grounds - Storage Cavern B", category: "Energy Tanks", missable: false },
+            { id: "energy-02", name: "Energy Tank", location: "Temple Grounds - Windchamber Gateway", category: "Energy Tanks", missable: false },
+            { id: "energy-03", name: "Energy Tank", location: "Temple Grounds - Fortress Transport Access", category: "Energy Tanks", missable: false },
+            { id: "energy-04", name: "Energy Tank", location: "Agon Wastes - Mining Station Access", category: "Energy Tanks", missable: false },
+            { id: "energy-05", name: "Energy Tank", location: "Agon Wastes - Bioenergy Production", category: "Energy Tanks", missable: false },
+            { id: "energy-06", name: "Energy Tank", location: "Agon Wastes - Mine Shaft", category: "Energy Tanks", missable: false },
+            { id: "energy-07", name: "Energy Tank", location: "Agon Wastes - Mining Plaza", category: "Energy Tanks", missable: false },
+            { id: "energy-08", name: "Energy Tank", location: "Torvus Bog - Temple Access", category: "Energy Tanks", missable: false },
+            { id: "energy-09", name: "Energy Tank", location: "Dark Torvus Bog - Cache B", category: "Energy Tanks", missable: false },
+            { id: "energy-10", name: "Energy Tank", location: "Torvus Bog - Torvus Plaza", category: "Energy Tanks", missable: false },
+            { id: "energy-11", name: "Energy Tank", location: "Torvus Bog - Meditation Vista", category: "Energy Tanks", missable: false },
+            { id: "energy-12", name: "Energy Tank", location: "Torvus Bog - Transit Tunnel East", category: "Energy Tanks", missable: false },
+            { id: "energy-13", name: "Energy Tank", location: "Sanctuary Fortress - Reactor Core", category: "Energy Tanks", missable: false },
+            { id: "energy-14", name: "Energy Tank", location: "Sanctuary Fortress - Watch Station Access", category: "Energy Tanks", missable: false },
+
+            // ===== POWER BOMB EXPANSIONS (8 total) =====
+            { id: "powerbomb-1", name: "Power Bomb Expansion", location: "Temple Grounds - Dynamo Chamber", category: "Power Bomb Expansions", missable: false },
+            { id: "powerbomb-2", name: "Power Bomb Expansion", location: "Agon Wastes - Sandcanyon", category: "Power Bomb Expansions", missable: false },
+            { id: "powerbomb-3", name: "Power Bomb Expansion", location: "Dark Agon Wastes - Feeding Pit", category: "Power Bomb Expansions", missable: false },
+            { id: "powerbomb-4", name: "Power Bomb Expansion", location: "Dark Torvus Bog - Putrid Alcove", category: "Power Bomb Expansions", missable: false },
+            { id: "powerbomb-5", name: "Power Bomb Expansion", location: "Torvus Bog - Great Bridge", category: "Power Bomb Expansions", missable: false },
+            { id: "powerbomb-6", name: "Power Bomb Expansion", location: "Sanctuary Fortress - Transit Station", category: "Power Bomb Expansions", missable: false },
+            { id: "powerbomb-7", name: "Power Bomb Expansion", location: "Sanctuary Fortress - Sanctuary Entrance", category: "Power Bomb Expansions", missable: false },
+            { id: "powerbomb-8", name: "Power Bomb Expansion", location: "Sanctuary Fortress - Main Gyro Chamber", category: "Power Bomb Expansions", missable: false },
+
+            // ===== BEAM AMMO EXPANSIONS (4 total) =====
+            { id: "beam-ammo-01", name: "Beam Ammo Expansion", location: "Sky Temple Grounds - Profane Path", category: "Beam Ammo Expansions", missable: false },
+            { id: "beam-ammo-02", name: "Beam Ammo Expansion", location: "Agon Wastes - Central Mining Station", category: "Beam Ammo Expansions", missable: false },
+            { id: "beam-ammo-03", name: "Beam Ammo Expansion", location: "Dark Torvus Bog - Cache A", category: "Beam Ammo Expansions", missable: false },
+            { id: "beam-ammo-04", name: "Beam Ammo Expansion", location: "Sanctuary Fortress - Watch Station", category: "Beam Ammo Expansions", missable: false },
+        ];
+
+        // Category counts for progress tracking
+        const categoryCounts = {
+            scans: 210,
+            items: 118,
+            darkTempleKeys: 9,
+            skyTempleKeys: 9
+        };
+
+        let scrollTimeout;
+
+        // Initialize the checklist
+        document.addEventListener('DOMContentLoaded', function() {
+            setupListeners();
+            initializeChecklist();
+            updateProgress();
+            toggleScrollButton();
+            enablePerformanceModeIfNeeded();
+        });
+
+        // Set up event listeners
+        function setupListeners() {
+            // Export/Import buttons
+            document.getElementById('exportBtn').addEventListener('click', exportChecklistData);
+            
+            const importFileInput = setupImportHandler();
+            document.getElementById('importBtn').addEventListener('click', () => importFileInput.click());
+
+            // Alphabetical sort toggle
+            document.getElementById('gameOrderToggle').addEventListener('change', function() {
+                localStorage.setItem('metroidPrime2AlphabeticalSort', this.checked.toString());
+                updateDisplay();
+            });
+
+            // Hide completed toggle
+            document.getElementById('hideCompletedToggle').addEventListener('change', function() {
+                localStorage.setItem('metroidPrime2HideCompleted', this.checked.toString());
+                updateDisplay();
+            });
+
+            // Sorting
+            document.getElementById('sortSelect').addEventListener('change', function() {
+                localStorage.setItem('metroidPrime2SortOption', this.value);
+                updateDisplay();
+            });
+
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', debounce(function() {
+                filterChecklist(this.value);
+                document.getElementById('clearSearch').style.display = this.value ? 'block' : 'none';
+            }, 300));
+            
+            document.getElementById('clearSearch').addEventListener('click', function() {
+                searchInput.value = '';
+                filterChecklist('');
+                this.style.display = 'none';
+            });
+
+            // Reset button
+            document.getElementById('resetBtn').addEventListener('click', resetAllProgress);
+
+            // Click handler for checklist items
+            document.addEventListener('click', function(e) {
+                const checklistItem = e.target.closest('.checklist-item');
+                
+                if (checklistItem) {
+                    const checkbox = checklistItem.querySelector('input[type="checkbox"]');
+                    
+                    if (checkbox) {
+                        checkbox.checked = !checkbox.checked;
+                        
+                        if (isValidKey(checkbox.id)) {
+                            localStorage.setItem(checkbox.id, checkbox.checked.toString());
+                        }
+
+                        if (checkbox.checked) {
+                            checklistItem.classList.add('completed');
+                        } else {
+                            checklistItem.classList.remove('completed');
+                        }
+
+                        updateProgress();
+                        
+                        // If hide completed is enabled, refresh display
+                        if (localStorage.getItem('metroidPrime2HideCompleted') === 'true') {
+                            updateDisplay();
+                        }
+                    }
+                }
+            });
+
+            // Scroll detection for visual effects
+            window.addEventListener('scroll', function() {
+                document.body.classList.add('scrolling');
+                
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(function() {
+                    document.body.classList.remove('scrolling');
+                }, 150);
+            });
+
+            // Add keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Ctrl+F or Cmd+F to focus search
+                if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+                    e.preventDefault();
+                    document.getElementById('searchInput').focus();
+                }
+                
+                // Escape to clear search
+                if (e.key === 'Escape') {
+                    const searchInput = document.getElementById('searchInput');
+                    if (searchInput.value) {
+                        searchInput.value = '';
+                        filterChecklist('');
+                        document.getElementById('clearSearch').style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // Initialize the checklist
+        function initializeChecklist() {
+            // Load saved settings
+            const savedSort = localStorage.getItem('metroidPrime2SortOption') || 'category';
+            const savedAlphabeticalSort = localStorage.getItem('metroidPrime2AlphabeticalSort') === 'true';
+            const savedHideCompleted = localStorage.getItem('metroidPrime2HideCompleted') === 'true';
+            
+            document.getElementById('sortSelect').value = savedSort;
+            document.getElementById('gameOrderToggle').checked = savedAlphabeticalSort;
+            document.getElementById('hideCompletedToggle').checked = savedHideCompleted;
+            
+            updateDisplay();
+            updateProgress();
+        }
+
+        // Update display based on current settings
+        function updateDisplay() {
+            const sortBy = localStorage.getItem('metroidPrime2SortOption') || 'category';
+            updateChecklistOrder(sortBy);
+        }
+
+        // Update checklist order
+        function updateChecklistOrder(sortBy) {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const hideCompleted = localStorage.getItem('metroidPrime2HideCompleted') === 'true';
+            
+            // Filter items
+            let filteredItems = checklistData;
+            
+            if (searchTerm) {
+                filteredItems = filteredItems.filter(item =>
+                    item.name.toLowerCase().includes(searchTerm) ||
+                    item.location.toLowerCase().includes(searchTerm) ||
+                    (item.subcategory && item.subcategory.toLowerCase().includes(searchTerm))
+                );
+            }
+            
+            if (hideCompleted) {
+                filteredItems = filteredItems.filter(item => 
+                    localStorage.getItem(item.id) !== 'true'
+                );
+            }
+            
+            // Sort items
+            const sortedItems = sortItems(filteredItems, sortBy);
+            
+            // Render all items
+            renderAllItems(sortedItems, sortBy);
+            
+            updateSearchResults();
+        }
+
+        // Sort items based on criteria
+        function sortItems(items, sortBy) {
+            const alphabeticalSortMode = document.getElementById('gameOrderToggle').checked;
+            
+            if (alphabeticalSortMode) {
+                return [...items].sort((a, b) => {
+                    const nameA = a.name.replace('*', '').toLowerCase();
+                    const nameB = b.name.replace('*', '').toLowerCase();
+                    
+                    switch(sortBy) {
+                        case 'name':
+                            return nameA.localeCompare(nameB);
+                        case 'category':
+                            const catA = a.subcategory || a.category || 'General';
+                            const catB = b.subcategory || b.category || 'General';
+                            return catA.localeCompare(catB) || nameA.localeCompare(nameB);
+                        case 'location':
+                        default:
+                            const locA = getPrimaryLocation(a.location);
+                            const locB = getPrimaryLocation(b.location);
+                            return locA.localeCompare(locB) || nameA.localeCompare(nameB);
+                    }
+                });
+            } else {
+                return [...items];
+            }
+        }
+
+        // Render all items
+        function renderAllItems(items, sortBy) {
+            const checklist = document.getElementById('checklist');
+            
+            if (items.length === 0) {
+                checklist.innerHTML = '<div class="checklist-item"><label>No items found</label></div>';
+                return;
+            }
+
+            let html = '';
+
+            if (sortBy === 'location') {
+                const locations = [...new Set(items.map(item => getPrimaryLocation(item.location)))];
+
+                locations.forEach(location => {
+                    const locationItems = items.filter(item => getPrimaryLocation(item.location) === location);
+
+                    if (locationItems.length > 0) {
+                        html += `<div class="section-header" data-category="${location}">${location}</div>`;
+
+                        locationItems.forEach(item => {
+                            const isChecked = localStorage.getItem(item.id) === 'true';
+                            html += createChecklistItemHTML(item, isChecked);
+                        });
+                    }
+                });
+            }
+            else if (sortBy === 'category') {
+                const categories = [...new Set(items.map(item => item.category || 'General'))];
+
+                categories.forEach(category => {
+                    const categoryItems = items.filter(item => (item.category || 'General') === category);
+
+                    if (categoryItems.length > 0) {
+                        html += `<div class="section-header" data-category="${category}">${category}</div>`;
+                        
+                        // Group by subcategory
+                        const subcategories = [...new Set(categoryItems.map(item => item.subcategory || 'Other'))];
+                        
+                        subcategories.forEach(subcategory => {
+                            const subcategoryItems = categoryItems.filter(item => (item.subcategory || 'Other') === subcategory);
+                            
+                            if (subcategoryItems.length > 0 && subcategory !== 'Other') {
+                                html += `<div class="subsection-header" data-subcategory="${subcategory}">${subcategory}</div>`;
+                            }
+                            
+                            subcategoryItems.forEach(item => {
+                                const isChecked = localStorage.getItem(item.id) === 'true';
+                                html += createChecklistItemHTML(item, isChecked);
+                            });
+                        });
+                    }
+                });
+            }
+            else {
+                items.forEach(item => {
+                    const isChecked = localStorage.getItem(item.id) === 'true';
+                    html += createChecklistItemHTML(item, isChecked);
+                });
+            }
+
+            checklist.innerHTML = html;
+        }
+
+        // Create HTML for a single checklist item
+        function createChecklistItemHTML(item, isChecked) {
+            const category = item.category || 'General';
+            const roomName = getRoomName(item.location);
+            const roomInfo = roomName ? `<div class="location-detail">Room: ${escapeHTML(roomName)}</div>` : '';
+            const missableMarker = item.missable ? '<span class="missable-marker">*</span>' : '';
+
+            const badgeMap = {
+                'Dark Temple Keys': 'Dark Temple Keys',
+                'Sky Temple Keys': 'Sky Temple Keys',
+                'Lore': 'Lore',
+                'Energy Tanks': 'Energy Tanks',
+                'Missile Expansions': 'Missile Expansions',
+                'Power Bomb Expansions': 'Power Bomb Expansions',
+                'Beam Ammo Expansions': 'Beam Ammo Expansions',
+                'Suit Upgrades': 'Suit Upgrades',
+                'Creatures': 'Creatures',
+                'Research': 'Research'
+            };
+
+            const badgeCategory = badgeMap[category] || category;
+            const categoryBadge = category !== 'General' ? `<span class="category-badge" data-category="${badgeCategory}">${category}</span>` : '';
+
+            return `
+                <div class="checklist-item ${isChecked ? 'completed' : ''}">
+                    <input type="checkbox" id="${escapeHTML(item.id)}" ${isChecked ? 'checked' : ''}>
+                    <label for="${escapeHTML(item.id)}">
+                        ${missableMarker}${escapeHTML(item.name.replace('*', ''))}
+                        ${categoryBadge}
+                        ${roomInfo}
+                    </label>
+                </div>
+            `;
+        }
+
+        // Extract primary location from location string
+        function getPrimaryLocation(location) {
+            return location.includes('-') ? location.split('-')[0].trim() : location;
+        }
+
+        // Extract room name from location string
+        function getRoomName(location) {
+            return location.includes('-') ? location.split('-').slice(1).join('-').trim() : '';
+        }
+
+        // Filter checklist based on search term
+        function filterChecklist(searchTerm) {
+            updateDisplay();
+        }
+
+        // Update search results counter
+        function updateSearchResults() {
+            const searchTerm = document.getElementById('searchInput').value;
+            const list = document.getElementById('checklist');
+            const visibleItems = list.querySelectorAll('.checklist-item').length;
+
+            if (searchTerm) {
+                document.getElementById('searchResults').textContent =
+                    `Showing ${visibleItems} of ${checklistData.length} items`;
+            } else {
+                document.getElementById('searchResults').textContent = '';
+            }
+        }
+
+        // Update progress statistics
+        function updateProgress() {
+            const scanCount = checklistData.filter(item => 
+                ['Creatures', 'Research', 'Lore'].includes(item.category)
+            ).filter(item => localStorage.getItem(item.id) === 'true').length;
+            
+            // Count ALL items, including temple keys
+            const itemCount = checklistData.filter(item => 
+                ['Suit Upgrades', 'Missile Expansions', 'Energy Tanks', 'Power Bomb Expansions', 'Beam Ammo Expansions', 
+                'Dark Temple Keys', 'Sky Temple Keys'].includes(item.category)
+            ).filter(item => localStorage.getItem(item.id) === 'true').length;
+            
+            const darkTempleKeyCount = checklistData.filter(item => 
+                item.category === 'Dark Temple Keys'
+            ).filter(item => localStorage.getItem(item.id) === 'true').length;
+
+            const skyTempleKeyCount = checklistData.filter(item => 
+                item.category === 'Sky Temple Keys'
+            ).filter(item => localStorage.getItem(item.id) === 'true').length;
+
+            const scanPercentage = Math.round((scanCount / categoryCounts.scans) * 100);
+            const itemPercentage = Math.round((itemCount / categoryCounts.items) * 100);
+            
+            document.getElementById('scanProgress').textContent = `${scanCount}/${categoryCounts.scans}`;
+            document.getElementById('scanPercentage').textContent = `${scanPercentage}%`;
+            document.getElementById('itemProgress').textContent = `${itemCount}/${categoryCounts.items}`;
+            document.getElementById('itemPercentage').textContent = `${itemPercentage}%`;
+            document.getElementById('darkTempleKeyProgress').textContent = `${darkTempleKeyCount}/${categoryCounts.darkTempleKeys}`;
+            document.getElementById('skyTempleKeyProgress').textContent = `${skyTempleKeyCount}/${categoryCounts.skyTempleKeys}`;
+
+            const totalItems = categoryCounts.scans + categoryCounts.items;
+            const totalCompleted = scanCount + itemCount;
+            const totalPercentage = Math.round((totalCompleted / totalItems) * 100);
+
+            document.getElementById('totalProgress').textContent = `${totalPercentage}%`;
+        }
+
+        // Reset all progress
+        function resetAllProgress() {
+            if (confirm('Are you sure you want to reset ALL progress? This will completely erase all checklist data.')) {
+                checklistData.forEach(item => {
+                    localStorage.removeItem(item.id);
+                });
+                
+                localStorage.removeItem('metroidPrime2SortOption');
+                localStorage.removeItem('metroidPrime2AlphabeticalSort');
+                localStorage.removeItem('metroidPrime2HideCompleted');
+                
+                document.getElementById('searchInput').value = '';
+                document.getElementById('clearSearch').style.display = 'none';
+                
+                document.getElementById('sortSelect').value = 'category';
+                document.getElementById('gameOrderToggle').checked = false;
+                document.getElementById('hideCompletedToggle').checked = false;
+                
+                updateProgress();
+                updateDisplay();
+                
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Debounce function for performance
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func.apply(this, args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Export checklist data as JSON file
+        function exportChecklistData() {
+            const exportData = {};
+            
+            exportData.progress = {};
+            checklistData.forEach(item => {
+                const storedValue = localStorage.getItem(item.id);
+                if (storedValue !== null) {
+                    exportData.progress[item.id] = storedValue === 'true';
+                }
+            });
+            
+            exportData.settings = {
+                sortOption: localStorage.getItem('metroidPrime2SortOption') || 'category',
+                alphabeticalSort: localStorage.getItem('metroidPrime2AlphabeticalSort') === 'true',
+                hideCompleted: localStorage.getItem('metroidPrime2HideCompleted') === 'true'
+            };
+            
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `metroid-prime-2-checklist-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        // Import checklist data from JSON file
+        function importChecklistData(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importData = JSON.parse(e.target.result);
+                    
+                    if (typeof importData !== 'object') {
+                        throw new Error('Invalid file format');
+                    }
+                    
+                    if (!confirm('This will overwrite your current progress. Continue?')) {
+                        return;
+                    }
+                    
+                    if (importData.progress) {
+                        for (const itemId in importData.progress) {
+                            const isValidItem = checklistData.some(item => item.id === itemId);
+                            if (isValidItem) {
+                                localStorage.setItem(itemId, importData.progress[itemId].toString());
+                            }
+                        }
+                    }
+                    
+                    if (importData.settings) {
+                        if (importData.settings.sortOption) {
+                            localStorage.setItem('metroidPrime2SortOption', importData.settings.sortOption);
+                        }
+                        if (importData.settings.alphabeticalSort !== undefined) {
+                            localStorage.setItem('metroidPrime2AlphabeticalSort', importData.settings.alphabeticalSort.toString());
+                        }
+                        if (importData.settings.hideCompleted !== undefined) {
+                            localStorage.setItem('metroidPrime2HideCompleted', importData.settings.hideCompleted.toString());
+                        }
+                    }
+                    
+                    initializeChecklist();
+                    updateProgress();
+                    alert('Checklist data imported successfully!');
+                    
+                } catch (error) {
+                    alert('Error importing file: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Handle file input for import
+        function setupImportHandler() {
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = '.json';
+            fileInput.style.display = 'none';
+            document.body.appendChild(fileInput);
+            
+            fileInput.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    importChecklistData(this.files[0]);
+                    this.value = '';
+                }
+            });
+            
+            return fileInput;
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHTML(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // Validation for localStorage keys
+        function isValidKey(key) {
+            return /^[a-zA-Z0-9_-]+$/.test(key);
+        }
+
+        // Scroll to top button functionality
+        function toggleScrollButton() {
+            const scrollButton = document.querySelector('.scroll-top');
+            if (!scrollButton) return;
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollButton.classList.add('show');
+                } else {
+                    scrollButton.classList.remove('show');
+                }
+            });
+
+            scrollButton.addEventListener('click', scrollToTop);
+        }
+
+        // Scroll to top of page
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Performance optimization: enable performance mode on low-end devices
+        function enablePerformanceModeIfNeeded() {
+            if (navigator.deviceMemory && navigator.deviceMemory < 4) {
+                document.body.classList.add('performance-mode');
+            }
+            
+            if (navigator.connection && navigator.connection.saveData) {
+                document.body.classList.add('performance-mode');
+            }
+        }
+
+        // Check if browser supports localStorage
+        if (typeof Storage === 'undefined') {
+            alert('Your browser does not support localStorage. Checklist progress cannot be saved.');
+        }
+    </script>
+</body>
+</html>

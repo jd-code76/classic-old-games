@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Classic Old Games</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .search-results {
+            margin-top: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #00ff00;
+            padding: 20px;
+            display: none;
+        }
+        .search-result-item {
+            padding: 10px;
+            border-bottom: 1px solid #ff00ff;
+            cursor: pointer;
+        }
+        .search-result-item:hover {
+            background: rgba(255, 0, 255, 0.1);
+        }
+
+        .search-only-item {
+            display: none; /* Hidden from main games grid; meant for pages like guides and checklists */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Classic Old Games</h1>
+        </div>
+
+        <p style="text-align: center;">
+            Use the buttons below to change the behavior of the site; simply click on the developer names to collapse/expand games.
+            <a href="about.html">Click here for more info</a> or <a href="all_games.html">Click here for a complete list of games</a>.
+        </p>
+
+        <div class="search-container">
+            <div class="search-box-wrapper">
+                <input type="text" id="gameSearch" class="search-box" placeholder="Search for a game..." autocomplete="off">
+                <button id="clearSearch" class="clear-search" type="button">X</button>
+            </div>
+            <div id="searchResults" class="search-results"></div>
+        </div>
+        <!-- BioWare Games -->
+        <div class="accordion">
+            <div class="accordion-header">BioWare</div>
+            <div id="bioware" class="accordion-content active">
+                <div class="games-grid">
+                    <div class="game-item" data-game="Baldur's Gate">
+                        <a href="bioware/baldurs_gate.html">
+                            <img src="bioware/images/baldurs_gate_cover.jpg" alt="Baldur's Gate">
+                            <div class="game-title">Baldur's Gate</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Baldur's Gate 2: Shadows of Amn">
+                        <a href="bioware/baldurs_gate2.html">
+                            <img src="bioware/images/baldurs_gate2_cover.jpg" alt="Baldur's Gate 2">
+                            <div class="game-title">Baldur's Gate 2: Shadows of Amn</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Neverwinter Nights">
+                        <a href="bioware/neverwinter_nights.html">
+                            <img src="bioware/images/neverwinter_nights_cover.jpg" alt="Neverwinter Nights">
+                            <div class="game-title">Neverwinter Nights</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Star Wars: Knights of the Old Republic">
+                        <a href="bioware/kotor.html">
+                            <img src="bioware/images/kotor_cover.jpg" alt="Knights of the Old Republic">
+                            <div class="game-title">Star Wars: Knights of the Old Republic</div>
+                        </a>
+                    </div>
+                    <div class="search-only-item" data-game="Star Wars: Knights of the Old Republic Mod Guide">
+                        <a href="bioware/kotor_mod_guide.html"></a>
+                    </div>
+                    <div class="game-item" data-game="Mass Effect">
+                        <a href="bioware/mass_effect.html">
+                            <img src="bioware/images/mass_effect_cover.jpg" alt="Mass Effect">
+                            <div class="game-title">Mass Effect</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Dragon Age: Origins">
+                        <a href="bioware/dragon_age.html">
+                            <img src="bioware/images/dragon_age_cover.jpg" alt="Dragon Age">
+                            <div class="game-title">Dragon Age: Origins</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Mass Effect 2">
+                        <a href="bioware/mass_effect2.html">
+                            <img src="bioware/images/mass_effect2_cover.jpg" alt="Mass Effect 2">
+                            <div class="game-title">Mass Effect 2</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Mass Effect 3">
+                        <a href="bioware/mass_effect3.html">
+                            <img src="bioware/images/mass_effect3_cover.jpg" alt="Mass Effect 3">
+                            <div class="game-title">Mass Effect 3</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- Bungie Games -->
+        <div class="accordion">
+            <div class="accordion-header">Bungie</div>
+            <div id="bungie" class="accordion-content active">
+                <div class="games-grid">
+                    <div class="game-item" data-game="Marathon">
+                        <a href="bungie/marathon.html">
+                            <img src="bungie/images/marathon_cover.jpg" alt="Marathon">
+                            <div class="game-title">Marathon</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Marathon: Durandal">
+                        <a href="bungie/marathon_durandal.html">
+                            <img src="bungie/images/marathon_durandal_cover.jpg" alt="Marathon Durandal">
+                            <div class="game-title">Marathon: Durandal</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Marathon: Infinity">
+                        <a href="bungie/marathon_infinity.html">
+                            <img src="bungie/images/marathon_infinity_cover.jpg" alt="Marathon Infinity">
+                            <div class="game-title">Marathon: Infinity</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Myth: The Fallen Lords">
+                        <a href="bungie/myth_tfl.html">
+                            <img src="bungie/images/myth_tfl_cover.jpg" alt="Myth The Fallen Lords">
+                            <div class="game-title">Myth: The Fallen Lords</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Myth II: Soulblighter">
+                        <a href="bungie/myth2_soulblighter.html">
+                            <img src="bungie/images/myth2_cover.jpg" alt="Myth 2 Soulblighter">
+                            <div class="game-title">Myth II: Soulblighter</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Oni">
+                        <a href="bungie/oni.html">
+                            <img src="bungie/images/oni_cover.jpg" alt="Oni">
+                            <div class="game-title">Oni</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Halo: Combat Evolved">
+                        <a href="bungie/halo.html">
+                            <img src="bungie/images/halo_cover.jpg" alt="Halo">
+                            <div class="game-title">Halo: Combat Evolved</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Halo 2">
+                        <a href="bungie/halo2.html">
+                            <img src="bungie/images/halo2_cover.jpg" alt="Halo 2">
+                            <div class="game-title">Halo 2</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Halo 3">
+                        <a href="bungie/halo3.html">
+                            <img src="bungie/images/halo3_cover.jpg" alt="Halo 3">
+                            <div class="game-title">Halo 3</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Halo 3: ODST">
+                        <a href="bungie/odst.html">
+                            <img src="bungie/images/odst_cover.jpg" alt="Halo ODST">
+                            <div class="game-title">Halo 3: ODST</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Halo Reach">
+                        <a href="bungie/reach.html">
+                            <img src="bungie/images/reach_cover.jpg" alt="Halo Reach">
+                            <div class="game-title">Halo Reach</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- EA Los Angeles -->
+        <div class="accordion">
+            <div class="accordion-header">EA Los Angeles</div>
+            <div id="ea_la" class="accordion-content active">
+                <div class="games-grid">
+                    <div class="game-item" data-game="Lord of the Rings: Battle for Middle Earth">
+                        <a href="ea_la/lotr_bfme.html">
+                            <img src="ea_la/images/lotr_bfme_cover.jpg" alt="LOTR Battle for Middle Earth">
+                            <div class="game-title">Lord of the Rings: Battle for Middle Earth</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Lord of the Rings: Battle for Middle Earth 2">
+                        <a href="ea_la/lotr_bfmeii.html">
+                            <img src="ea_la/images/lotr_bfmeii_cover.jpg" alt="LOTR Battle for Middle Earth 2">
+                            <div class="game-title">Lord of the Rings: Battle for Middle Earth 2</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Lord of the Rings: Rise of the Witch King">
+                        <a href="ea_la/lotr_rotwk.html">
+                            <img src="ea_la/images/lotr_rotwk_cover.jpg" alt="LOTR Rise of the Witch King">
+                            <div class="game-title">Lord of the Rings: Rise of the Witch King</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- FromSoftware -->
+        <div class="accordion">
+            <div class="accordion-header">FromSoftware</div>
+            <div id="from_software" class="accordion-content active">
+                <div class="games-grid">
+                    <div class="game-item" data-game="Armored Core">
+                        <a href="from_software/armored_core.html">
+                            <img src="from_software/images/armored_core_cover.jpg" alt="Armored Core">
+                            <div class="game-title">Armored Core</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Armored Core: Project Phantasma">
+                        <a href="from_software/armored_core_pp.html">
+                            <img src="from_software/images/armored_core_pp_cover.jpg" alt="Armored Core Project Phantasma">
+                            <div class="game-title">Armored Core: Project Phantasma</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Armored Core: Master of Arena">
+                        <a href="from_software/armored_core_moa.html">
+                            <img src="from_software/images/armored_core_moa_cover.jpg" alt="Armored Core Master of Arena">
+                            <div class="game-title">Armored Core: Master of Arena</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Armored Core 2">
+                        <a href="from_software/armored_core2.html">
+                            <img src="from_software/images/armored_core2_cover.jpg" alt="Armored Core 2">
+                            <div class="game-title">Armored Core 2</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Armored Core 2: Another Age">
+                        <a href="from_software/armored_core2_aa.html">
+                            <img src="from_software/images/armored_core2_aa_cover.jpg" alt="Armored Core 2 Another Age">
+                            <div class="game-title">Armored Core 2: Another Age</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- id Software -->
+        <div class="accordion">
+            <div class="accordion-header">id Software</div>
+            <div id="id_software" class="accordion-content active">
+                <div class="games-grid">
+                    <div class="game-item" data-game="Wolfenstein 3D">
+                        <a href="id_software/wolf3d.html">
+                            <img src="id_software/images/wolf3d_cover.jpg" alt="Wolfenstein 3D">
+                            <div class="game-title">Wolfenstein 3D</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="DOOM">
+                        <a href="id_software/doom.html">
+                            <img src="id_software/images/doom_cover.jpg" alt="DOOM">
+                            <div class="game-title">DOOM</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="DOOM 2">
+                        <a href="id_software/doom2.html">
+                            <img src="id_software/images/doom2_cover.jpg" alt="DOOM 2">
+                            <div class="game-title">DOOM 2</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Final DOOM">
+                        <a href="id_software/final_doom.html">
+                            <img src="id_software/images/finaldoom_cover.jpg" alt="Final DOOM">
+                            <div class="game-title">Final DOOM</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Quake">
+                        <a href="id_software/quake.html">
+                            <img src="id_software/images/quake_cover.jpg" alt="Quake">
+                            <div class="game-title">Quake</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Quake 2">
+                        <a href="id_software/quake2.html">
+                            <img src="id_software/images/quake2_cover.jpg" alt="Quake 2">
+                            <div class="game-title">Quake 2</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Quake 3">
+                        <a href="id_software/quake3.html">
+                            <img src="id_software/images/quake3_cover.jpg" alt="Quake 3">
+                            <div class="game-title">Quake 3</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="DOOM 3">
+                        <a href="id_software/doom3.html">
+                            <img src="id_software/images/doom3_cover.jpg" alt="DOOM 3">
+                            <div class="game-title">DOOM 3</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Quake Live">
+                        <a href="id_software/quake_live.html">
+                            <img src="id_software/images/quake_live_cover.jpg" alt="Quake Live">
+                            <div class="game-title">Quake Live</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- LucasArts -->
+        <div class="accordion">
+            <div class="accordion-header">LucasArts</div>
+            <div id="lucasarts" class="accordion-content active">
+                <div class="games-grid">
+                    <div class="game-item" data-game="Star Wars: X-Wing">
+                        <a href="lucasarts/x-wing.html">
+                            <img src="lucasarts/images/x-wing_cover.jpg" alt="X-Wing">
+                            <div class="game-title">Star Wars: X-Wing</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Star Wars: TIE Fighter">
+                        <a href="lucasarts/tie_fighter.html">
+                            <img src="lucasarts/images/tie_fighter_cover.jpg" alt="TIE Fighter">
+                            <div class="game-title">Star Wars: TIE Fighter</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Star Wars: Dark Forces">
+                        <a href="lucasarts/dark_forces.html">
+                            <img src="lucasarts/images/dark_forces_cover.jpg" alt="Dark Forces">
+                            <div class="game-title">Star Wars: Dark Forces</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Star Wars: Jedi Knight: Dark Forces II">
+                        <a href="lucasarts/jedi_knight.html">
+                            <img src="lucasarts/images/jedi_knight_cover.jpg" alt="Jedi Knight">
+                            <div class="game-title">Star Wars: Jedi Knight: Dark Forces II</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Star Wars: Jedi Knight: Mysteries of the Sith">
+                        <a href="lucasarts/mysteries_sith.html">
+                            <img src="lucasarts/images/mysteries_sith_cover.jpg" alt="Mysteries of the Sith">
+                            <div class="game-title">Star Wars: Jedi Knight: Mysteries of the Sith</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Star Wars: Galactic Battlegrounds">
+                        <a href="lucasarts/battlegrounds.html">
+                            <img src="lucasarts/images/battlegrounds_cover.jpg" alt="Battlegrounds">
+                            <div class="game-title">Star Wars: Galactic Battlegrounds</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- MercurySteam -->
+        <div class="accordion">
+            <div class="accordion-header">MercurySteam</div>
+            <div id="mercurysteam" class="accordion-content active">
+                <div class="games-grid">
+                    <div class="game-item" data-game="Metroid: Samus Returns">
+                        <a href="mercurysteam/metroid_sr.html">
+                            <img src="mercurysteam/images/metroid_sr_cover.jpg" alt="Metroid Samus Returns">
+                            <div class="game-title">Metroid: Samus Returns</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Metroid Dread">
+                        <a href="mercurysteam/metroid_dread.html">
+                            <img src="mercurysteam/images/metroid_dread_cover.jpg" alt="Metroid Dread">
+                            <div class="game-title">Metroid Dread</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- Nintendo -->
+        <div class="accordion">
+            <div class="accordion-header">Nintendo</div>
+            <div id="nintendo" class="accordion-content active">
+                <div class="games-grid">
+                    <div class="game-item" data-game="Metroid II: Return of Samus">
+                        <a href="nintendo/metroid_ii.html">
+                            <img src="nintendo/images/metroid_ii_cover.jpg" alt="Metroid II">
+                            <div class="game-title">Metroid II: Return of Samus</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Super Metroid">
+                        <a href="nintendo/super_metroid.html">
+                            <img src="nintendo/images/super_metroid_cover.jpg" alt="Super Metroid">
+                            <div class="game-title">Super Metroid</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Metroid Fusion">
+                        <a href="nintendo/metroid_fusion.html">
+                            <img src="nintendo/images/metroid_fusion_cover.jpg" alt="Metroid Fusion">
+                            <div class="game-title">Metroid Fusion</div>
+                        </a>
+                    </div>
+                <div class="game-item" data-game="Metroid Zero Mission">
+                        <a href="nintendo/metroid_zm.html">
+                            <img src="nintendo/images/metroid_zm_cover.jpg" alt="Metroid Zero Mission">
+                            <div class="game-title">Metroid Zero Mission</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Metroid Prime Hunters">
+                        <a href="nintendo/metroid_ph.html">
+                            <img src="nintendo/images/metroid_ph_cover.jpg" alt="Metroid Prime Hunters">
+                            <div class="game-title">Metroid Prime Hunters</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- Pandemic -->
+        <div class="accordion">
+            <div class="accordion-header">Pandemic</div>
+            <div id="pandemic" class="accordion-content active">
+                <div class="games-grid">
+                    <div class="game-item" data-game="Army Men RTS">
+                        <a href="pandemic/army_men_rts.html">
+                            <img src="pandemic/images/army_men_rts_cover.jpg" alt="Army Men RTS">
+                            <div class="game-title">Army Men RTS</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Star Wars Clone Wars">
+                        <a href="pandemic/clone_wars.html">
+                            <img src="pandemic/images/clone_wars_cover.jpg" alt="Star Wars Clone Wars">
+                            <div class="game-title">Star Wars: Clone Wars</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Star Wars Battlefront">
+                    <a href="pandemic/battlefront.html">
+                            <img src="pandemic/images/battlefront_cover.jpg" alt="Star Wars Battlefront">
+                            <div class="game-title">Star Wars Battlefront</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Mercenaries: Playground of Destruction">
+                        <a href="pandemic/mercenaries.html">
+                            <img src="pandemic/images/mercenaries_cover.jpg" alt="Mercenaries">
+                            <div class="game-title">Mercenaries: Playground of Destruction</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Destroy All Humans">
+                        <a href="pandemic/destroy_all_humans.html">
+                            <img src="pandemic/images/destroy_all_humans_cover.jpg" alt="Destroy All Humans">
+                            <div class="game-title">Destroy All Humans</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Star Wars Battlefront 2">
+                        <a href="pandemic/battlefront2.html">
+                            <img src="pandemic/images/battlefront2_cover.jpg" alt="Star Wars Battlefront 2">
+                            <div class="game-title">Star Wars Battlefront II</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Destroy All Humans 2">
+                        <a href="pandemic/destroy_all_humans2.html">
+                            <img src="pandemic/images/destroy_all_humans2_cover.jpg" alt="Destroy All Humans 2">
+                            <div class="game-title">Destroy All Humans 2</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Mercenaries 2: World in Flames">
+                        <a href="pandemic/mercenaries2.html">
+                            <img src="pandemic/images/mercenaries2_cover.jpg" alt="Mercenaries 2">
+                            <div class="game-title">Mercenaries 2: World in Flames</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Lord of the Rings: Conquest">
+                        <a href="pandemic/lotr_conquest.html">
+                            <img src="pandemic/images/lotr_conquest_cover.jpg" alt="LOTR Conquest">
+                            <div class="game-title">Lord of the Rings: Conquest</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- Petroglyph -->
+        <div class="accordion">
+            <div class="accordion-header">Petroglyph</div>
+            <div id="petroglyph" class="accordion-content active">
+                <div class="games-grid">
+                    <div class="game-item" data-game="Star Wars: Empire at War">
+                        <a href="petroglyph/empire_at_war.html">
+                            <img src="petroglyph/images/eaw_cover.jpg" alt="Empire at War">
+                            <div class="game-title">Star Wars: Empire at War</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Universe at War">
+                        <a href="petroglyph/universe_at_war.html">
+                            <img src="petroglyph/images/uaw_cover.jpg" alt="Universe at War">
+                            <div class="game-title">Universe at War</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- Raven -->
+        <div class="accordion">
+            <div class="accordion-header">Raven</div>
+            <div id="raven" class="accordion-content active">
+                <div class="games-grid">
+                    <div class="game-item" data-game="Star Wars: Jedi Knight II: Jedi Outcast">
+                        <a href="raven/outcast.html">
+                            <img src="raven/images/outcast_cover.jpg" alt="Jedi Outcast">
+                            <div class="game-title">Star Wars: Jedi Knight II: Jedi Outcast</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Star Wars: Jedi Knight: Jedi Academy">
+                        <a href="raven/academy.html">
+                            <img src="raven/images/academy_cover.jpg" alt="Jedi Academy">
+                            <div class="game-title">Star Wars: Jedi Knight: Jedi Academy</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Quake 4">
+                        <a href="raven/quake4.html">
+                            <img src="raven/images/quake4_cover.jpg" alt="Quake 4">
+                            <div class="game-title">Quake 4</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Wolfenstein (2009)">
+                        <a href="raven/wolf2009.html">
+                            <img src="raven/images/wolf2009_cover.jpg" alt="Wolfenstein (2009)">
+                            <div class="game-title">Wolfenstein (2009)</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- Retro Studios -->
+        <div class="accordion">
+            <div class="accordion-header">Retro Studios</div>
+            <div id="retro_studios" class="accordion-content active">
+                <div class="games-grid">
+                    <div class="game-item" data-game="Metroid Prime">
+                        <a href="retro_studios/metroid_prime.html">
+                            <img src="retro_studios/images/metroid_prime_cover.jpg" alt="Metroid Prime">
+                            <div class="game-title">Metroid Prime</div>
+                        </a>
+                    </div>
+                    <div class="search-only-item" data-game="Metroid Prime 100% Checklist">
+                        <a href="retro_studios/prime1_checklist.html"></a>
+                    </div>
+                    <div class="game-item" data-game="Metroid Prime 2: Echoes">
+                        <a href="retro_studios/metroid_prime2.html">
+                            <img src="retro_studios/images/metroid_prime2_cover.jpg" alt="Metroid Prime 2">
+                            <div class="game-title">Metroid Prime 2: Echoes</div>
+                        </a>
+                    </div>
+                    <div class="search-only-item" data-game="Metroid Prime 2: Echoes 100% Checklist">
+                        <a href="retro_studios/prime2_checklist.html"></a>
+                    </div>
+                    <div class="game-item" data-game="Metroid Prime 3: Corruption">
+                        <a href="retro_studios/metroid_prime3.html">
+                            <img src="retro_studios/images/metroid_prime3_cover.jpg" alt="Metroid Prime 3">
+                            <div class="game-title">Metroid Prime 3: Corruption</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Metroid Prime 4: Beyond">
+                        <a href="retro_studios/metroid_prime4.html">
+                            <img src="retro_studios/images/metroid_prime4_cover.jpg" alt="Metroid Prime 4">
+                            <div class="game-title">Metroid Prime 4: Beyond</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- Stormfront Studios -->
+        <div class="accordion">
+            <div class="accordion-header">Stormfront Studios</div>
+            <div id="stormfront" class="accordion-content active">
+                <div class="games-grid">
+                    <div class="game-item" data-game="Lord of the Rings: Two Towers">
+                        <a href="stormfront/lotr_two_towers.html">
+                            <img src="stormfront/images/lotr_two_towers_cover.jpg" alt="LOTR Two Towers">
+                            <div class="game-title">Lord of the Rings: Two Towers</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- Visceral Games -->
+        <div class="accordion">
+            <div class="accordion-header">Visceral Games (Redwood)</div>
+            <div id="visceral" class="accordion-content active">
+                <div class="games-grid">
+                    <div class="game-item" data-game="Lord of the Rings: Return of the King">
+                        <a href="visceral/lotr_rotk.html">
+                            <img src="visceral/images/lotr_rotk_cover.jpg" alt="LOTR Return of the King">
+                            <div class="game-title">Lord of the Rings: Return of the King</div>
+                        </a>
+                    </div>
+                    <div class="game-item" data-game="Lord of the Rings: Third Age">
+                        <a href="visceral/lotr_third_age.html">
+                            <img src="visceral/images/lotr_third_age_cover.jpg" alt="LOTR Third Age">
+                            <div class="game-title">Lord of the Rings: Third Age</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Remaining developer sections would follow the same accordion pattern -->
+        
+    </div>
+
+    <footer>
+        <hr>
+        All assets copyright their respective owners.<br>
+        Last updated on 12/27/2025.<br>
+        <a href="about.html">About</a> | <a href="all_games.html">All Games</a><br>
+        <hr>
+    </footer>
+
+    <script nonce="{{nonce}}">
+        // Generate nonce and set CSP dynamically
+        const nonce = btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(16))));
+        const cspMeta = document.createElement('meta');
+        cspMeta.httpEquiv = 'Content-Security-Policy';
+        cspMeta.content = `default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'nonce-${nonce}';`;
+        document.head.appendChild(cspMeta);
+
+        // Set nonce attribute on this script
+        document.currentScript.setAttribute('nonce', nonce);
+
+        function sanitizeHTML(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // Accordion functionality with persistence
+        function toggleAccordion(sectionId) {
+            const content = document.getElementById(sectionId);
+            const isActive = content.classList.contains('active');
+
+            content.classList.toggle('active');
+
+            // Save state to localStorage
+            localStorage.setItem(`accordion_${sectionId}`, !isActive);
+        }
+
+        // Load accordion states from localStorage on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Accordion event delegation
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('accordion-header')) {
+                    const sectionId = e.target.nextElementSibling.id;
+                    toggleAccordion(sectionId);
+                }
+            });
+
+            // Scroll to top button functionality
+            const scrollButton = document.getElementById('scrollToTop');
+            if (scrollButton) {
+                window.addEventListener('scroll', function() {
+                    if (window.pageYOffset > 300) {
+                        scrollButton.style.display = 'block';
+                    } else {
+                        scrollButton.style.display = 'none';
+                    }
+                });
+
+                scrollButton.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // Clear search functionality
+            const clearButton = document.getElementById('clearSearch');
+            const searchInput = document.getElementById('gameSearch');
+
+            if (clearButton && searchInput) {
+                searchInput.addEventListener('input', function() {
+                    if (this.value.length > 0) {
+                        clearButton.style.display = 'block';
+                    } else {
+                        clearButton.style.display = 'none';
+                    }
+
+                    performSearch(this.value);
+                });
+
+                clearButton.addEventListener('click', function() {
+                    searchInput.value = '';
+                    searchInput.focus();
+                    clearButton.style.display = 'none';
+                    const searchResults = document.getElementById('searchResults');
+                    if (searchResults) {
+                        searchResults.style.display = 'none';
+                    }
+                });
+            }
+        });
+
+        // Search functionality with XSS protection
+        function performSearch(searchTerm) {
+            const term = searchTerm.toLowerCase().trim();
+            const searchResults = document.getElementById('searchResults');
+
+            if (!searchResults) return;
+
+            if (term.length === 0) {
+                searchResults.style.display = 'none';
+                return;
+            }
+
+            // Get all searchable items (both game items and search-only items)
+            const searchableItems = document.querySelectorAll('.game-item, .search-only-item');
+            const matches = [];
+
+            searchableItems.forEach(item => {
+                const gameName = item.getAttribute('data-game').toLowerCase();
+                if (gameName.includes(term)) {
+                    matches.push({
+                        name: item.getAttribute('data-game'),
+                        link: item.querySelector('a').href,
+                        element: item
+                    });
+                }
+            });
+
+            // Display results with sanitization
+            if (matches.length > 0) {
+                searchResults.innerHTML = '';
+                matches.forEach(match => {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'search-result-item';
+
+                    const safeName = sanitizeHTML(match.name);
+                    const safeLink = sanitizeHTML(match.link);
+
+                    resultItem.innerHTML = `<a href="${safeLink}" style="color: #008800;">${safeName}</a>`;
+                    resultItem.addEventListener('click', function() {
+                        window.location.href = match.link;
+                    });
+                    searchResults.appendChild(resultItem);
+                });
+                searchResults.style.display = 'block';
+            } else {
+                searchResults.textContent = '';
+                const noResults = document.createElement('div');
+                noResults.style.color = '#ff0000';
+                noResults.textContent = 'No games found';
+                searchResults.appendChild(noResults);
+                searchResults.style.display = 'block';
+            }
+        }
+
+        // Close search results when clicking outside
+        document.addEventListener('click', function(e) {
+            const searchInput = document.getElementById('gameSearch');
+            const searchResults = document.getElementById('searchResults');
+
+            if (searchInput && searchResults) {
+                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                    searchResults.style.display = 'none';
+                }
+            }
+        });
+
+        // Prevent tabnabbing on external links
+        document.addEventListener('DOMContentLoaded', function() {
+            const externalLinks = document.querySelectorAll('a[href^="http"]');
+            externalLinks.forEach(link => {
+                if (!link.getAttribute('rel')) {
+                    link.setAttribute('rel', 'noopener noreferrer');
+                }
+            });
+        });
+    </script>
+    <button id="scrollToTop" class="scroll-to-top" type="button">↑</button>
+</body>
+</html>
