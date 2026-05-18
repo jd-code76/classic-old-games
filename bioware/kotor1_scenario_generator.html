@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KOTOR 1 Scenario Generator</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    /* ─── Fonts ─────────────────────────────────────────────────────────── */
+    :root {
+      --font-header: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    header h1, .sidebar-title, .section-header h2, .btn-special {
+      font-family: var(--font-header);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 800;
+    }
+
+    /* ─── Reset & Base ───────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:        #c9a84c;
+      --gold-light:  #f0d080;
+      --gold-dark:   #7a5e1a;
+      --bg-deep:     #080a0e;
+      --bg-panel:    #0d1117;
+      --bg-card:     #111820;
+      --bg-hover:    #1a2535;
+      --border:      #1e3050;
+      --border-gold: #c9a84c55;
+      --text-main:   #ccd6e0;
+      --text-dim:    #6a8098;
+      --text-gold:   #c9a84c;
+      --red:         #c0392b;
+      --red-dark:    #7a1e14;
+      --blue-glow:   #1a6fa8;
+      --blue-light:  #4db8e8;
+      --cyan:        #00d4ff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg-deep);
+      background-image:
+        radial-gradient(ellipse at 20% 20%, #0a1a2e 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, #0a0d14 0%, transparent 50%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      color: var(--text-main);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      min-height: 100vh;
+    }
+
+    /* ─── Scrollbar ──────────────────────────────────────────────────────── */
+    ::-webkit-scrollbar              { width: 8px; }
+    ::-webkit-scrollbar-track        { background: var(--bg-panel); }
+    ::-webkit-scrollbar-thumb        { background: var(--gold-dark); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover  { background: var(--gold); }
+
+    /* ─── Header ─────────────────────────────────────────────────────────── */
+    header {
+      background: linear-gradient(180deg, #050709 0%, var(--bg-panel) 100%);
+      border-bottom: 2px solid var(--gold-dark);
+      padding: 28px 40px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, #1a3a5c33 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .header-emblem {
+      font-size: 11px;
+      letter-spacing: 6px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(20px, 4vw, 36px);
+      font-weight: 900;
+      color: var(--gold);
+      text-shadow:
+        0 0 10px #c9a84c88,
+        0 0 30px #c9a84c44,
+        0 2px 4px #000;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .header-subtitle {
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    .header-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 18px;
+      justify-content: center;
+    }
+
+    .header-line span {
+      height: 1px;
+      flex: 1;
+      max-width: 200px;
+      background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+    }
+
+    .header-line i {
+      font-style: normal;
+      color: var(--gold-dark);
+      font-size: 18px;
+    }
+
+    /* ─── Layout ─────────────────────────────────────────────────────────── */
+    .app-wrapper {
+      display: flex;
+      gap: 0;
+      min-height: calc(100vh - 130px);
+    }
+
+    /* ─── Sidebar ─────────────────────────────────────────────────────────── */
+    .sidebar {
+      width: 220px;
+      min-width: 220px;
+      background: linear-gradient(180deg, var(--bg-panel) 0%, #090c12 100%);
+      border-right: 1px solid var(--border);
+      padding: 28px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      height: calc(100vh - 130px);
+      overflow-y: auto;
+    }
+
+    .sidebar-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Special action buttons in sidebar */
+    .btn-special {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 14px 10px;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-special::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .btn-randomize {
+      background: linear-gradient(135deg, #1a3a5c 0%, #0d2240 100%);
+      color: var(--blue-light);
+      border: 1px solid var(--blue-glow);
+      box-shadow: 0 0 10px #1a6fa822, inset 0 1px 0 #ffffff11;
+    }
+
+    .btn-randomize:hover {
+      background: linear-gradient(135deg, #1e4a72 0%, #102a50 100%);
+      box-shadow: 0 0 20px #1a6fa855, 0 0 40px #1a6fa822;
+      color: var(--cyan);
+      border-color: var(--cyan);
+    }
+
+    .btn-save {
+      background: linear-gradient(135deg, #2a3a1a 0%, #1a2510 100%);
+      color: #7bc47f;
+      border: 1px solid #3a5a2a;
+      box-shadow: 0 0 10px #3a7a3022, inset 0 1px 0 #ffffff11;
+    }
+
+    .btn-save:hover {
+      background: linear-gradient(135deg, #344a20 0%, #203015 100%);
+      box-shadow: 0 0 20px #3a7a3055;
+      color: #a0e4a0;
+      border-color: #6aaa6a;
+    }
+
+    .btn-reset {
+      background: linear-gradient(135deg, #3a1a1a 0%, #250e0e 100%);
+      color: #e07070;
+      border: 1px solid var(--red-dark);
+      box-shadow: 0 0 10px #c0392b22, inset 0 1px 0 #ffffff11;
+    }
+
+    .btn-reset:hover {
+      background: linear-gradient(135deg, #4a2020 0%, #301010 100%);
+      box-shadow: 0 0 20px #c0392b55;
+      color: #ff9090;
+      border-color: var(--red);
+    }
+
+    .btn-special:active { transform: scale(0.97); }
+
+    .sidebar-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 4px 0;
+    }
+
+    .sidebar-stats {
+      font-size: 12px;
+      color: var(--text-dim);
+      text-align: center;
+      padding: 8px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: #0a0d12;
+    }
+
+    .sidebar-stats span {
+      display: block;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 18px;
+      color: var(--gold);
+      margin-top: 2px;
+    }
+
+    /* ─── Main Content ────────────────────────────────────────────────────── */
+    .main-content {
+      flex: 1;
+      padding: 28px 32px;
+      overflow-x: hidden;
+    }
+
+    /* ─── Section Headers ────────────────────────────────────────────────── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      margin-top: 32px;
+    }
+
+    .section-header:first-child { margin-top: 0; }
+
+    .section-header h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .section-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold-dark), transparent);
+    }
+
+    /* ─── Scenario Row ────────────────────────────────────────────────────── */
+    .scenario-row {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      margin-bottom: 8px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+      background: var(--bg-card);
+      transition: border-color 0.2s;
+    }
+
+    .scenario-row:hover { border-color: var(--gold-dark); }
+
+    .scenario-row.has-result { border-color: var(--gold-dark); }
+
+    /* Roll button */
+    .btn-roll {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      min-width: 260px;
+      width: 260px;
+      padding: 14px 18px;
+      background: linear-gradient(135deg, #161e2a 0%, #0e1520 100%);
+      color: var(--text-main);
+      border: none;
+      border-right: 1px solid var(--border);
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+      line-height: 1.4;
+      position: relative;
+    }
+
+    .btn-roll::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--gold-dark);
+      transition: background 0.2s;
+    }
+
+    .btn-roll:hover {
+      background: linear-gradient(135deg, var(--bg-hover) 0%, #131c28 100%);
+      color: var(--gold-light);
+    }
+
+    .btn-roll:hover::before { background: var(--gold); }
+
+    .btn-roll:active { transform: scale(0.99); }
+
+    .btn-roll .die-badge {
+      display: inline-block;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 9px;
+      letter-spacing: 1px;
+      color: var(--text-dim);
+      background: #0a0d12;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 1px 5px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* Result area */
+    .result-area {
+      flex: 1;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-height: 56px;
+    }
+
+    .roll-indicator {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 11px;
+      color: var(--text-dim);
+      white-space: nowrap;
+      min-width: 70px;
+    }
+
+    .roll-indicator.active {
+      color: var(--gold);
+    }
+
+    .roll-divider {
+      width: 1px;
+      height: 24px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    .result-text {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .result-text.active {
+      color: var(--text-main);
+      font-style: normal;
+    }
+
+    /* ─── Animations ─────────────────────────────────────────────────────── */
+    @keyframes rollFlash {
+      0%   { background-color: #1a3a5c44; }
+      50%  { background-color: #c9a84c11; }
+      100% { background-color: transparent; }
+    }
+
+    .rolling {
+      animation: rollFlash 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateX(-6px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .result-text.active {
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    /* ─── Footer ─────────────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 16px 40px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      background: var(--bg-panel);
+    }
+
+    footer a { color: var(--gold-dark); text-decoration: none; }
+    footer a:hover { color: var(--gold); }
+
+    /* ─── Save Modal ──────────────────────────────────────────────────────── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #000000cc;
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--bg-panel);
+      border: 1px solid var(--gold-dark);
+      border-radius: 4px;
+      width: min(90vw, 640px);
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 40px #000, 0 0 80px #c9a84c22;
+    }
+
+    .modal-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover { color: var(--gold); }
+
+    .modal-body {
+      padding: 20px 24px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .modal-body pre {
+      font-family: 'Rajdhani', monospace;
+      font-size: 14px;
+      color: var(--text-main);
+      white-space: pre-wrap;
+      line-height: 1.7;
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .btn-modal {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      padding: 10px 20px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+
+    .btn-modal:hover { border-color: var(--gold-dark); color: var(--gold); }
+
+    .btn-modal.primary {
+      border-color: var(--gold-dark);
+      background: linear-gradient(135deg, #2a2010 0%, #1a1508 100%);
+      color: var(--gold);
+    }
+
+    .btn-modal.primary:hover {
+      background: linear-gradient(135deg, #3a2e18 0%, #251e0c 100%);
+      box-shadow: 0 0 12px #c9a84c33;
+    }
+
+    /* ─── Responsive ─────────────────────────────────────────────────────── */
+    @media (max-width: 760px) {
+      .sidebar {
+        width: 100%;
+        min-width: unset;
+        height: auto;
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 16px;
+      }
+      .sidebar-title { width: 100%; }
+      .btn-special { width: auto; flex: 1; min-width: 100px; }
+      .app-wrapper { flex-direction: column; }
+      .main-content { padding: 16px; }
+      .btn-roll { min-width: 180px; width: 180px; font-size: 13px; }
+    }
+
+    @media (max-width: 450px) {
+      header {
+        padding: 20px 16px 16px;
+      }
+
+      .header-emblem {
+        font-size: 9px;
+        letter-spacing: 4px;
+      }
+
+      header h1 {
+        font-size: clamp(16px, 5vw, 24px);
+        letter-spacing: 2px;
+      }
+
+      .header-subtitle {
+        font-size: 11px;
+        letter-spacing: 2px;
+      }
+
+      .sidebar {
+        padding: 12px;
+        gap: 8px;
+      }
+
+      .btn-special {
+        font-size: 10px;
+        padding: 12px 8px;
+        min-width: 85px;
+        letter-spacing: 1px;
+      }
+
+      .sidebar-stats {
+        font-size: 11px;
+        padding: 6px;
+      }
+
+      .sidebar-stats span {
+        font-size: 16px;
+      }
+
+      .main-content {
+        padding: 12px 8px;
+      }
+
+      .section-header {
+        margin-top: 24px;
+        margin-bottom: 12px;
+      }
+
+      .section-header h2 {
+        font-size: 10px;
+        letter-spacing: 2px;
+      }
+
+      .scenario-row {
+        flex-direction: column;
+        margin-bottom: 12px;
+      }
+
+      .btn-roll {
+        width: 100%;
+        min-width: unset;
+        font-size: 13px;
+        padding: 12px 14px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        text-align: center;
+      }
+
+      .btn-roll::before {
+        width: 100%;
+        height: 3px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: auto;
+      }
+
+      .btn-roll .die-badge {
+        display: block;
+        margin: 6px auto 0;
+        width: fit-content;
+      }
+
+      .result-area {
+        flex-direction: column;
+        padding: 12px;
+        gap: 8px;
+        align-items: flex-start;
+      }
+
+      .roll-indicator {
+        min-width: unset;
+        width: 100%;
+        text-align: center;
+      }
+
+      .roll-divider {
+        width: 100%;
+        height: 1px;
+      }
+
+      .result-text {
+        font-size: 13px;
+        width: 100%;
+        text-align: left;
+      }
+
+      footer {
+        padding: 12px 16px;
+        font-size: 11px;
+      }
+
+      .modal {
+        width: 95vw;
+        max-height: 85vh;
+      }
+
+      .modal-header {
+        padding: 14px 16px;
+      }
+
+      .modal-header h3 {
+        font-size: 11px;
+        letter-spacing: 2px;
+      }
+
+      .modal-body {
+        padding: 16px;
+      }
+
+      .modal-body pre {
+        font-size: 12px;
+      }
+
+      .modal-footer {
+        padding: 12px 16px;
+        flex-wrap: wrap;
+      }
+
+      .btn-modal {
+        font-size: 9px;
+        padding: 8px 12px;
+        flex: 1 1 auto;
+        min-width: 90px;
+      }
+    }
+  </style>
+
+  <!-- ─── Font Awesome ─────────────────────────────────────────────────────── -->
+  <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer">
+</head>
+<body>
+
+<!-- ─── Header ─────────────────────────────────────────────────────────────── -->
+<header>
+  <div class="header-emblem">Star Wars</div>
+  <h1>Knights of the Old Republic</h1>
+  <div class="header-subtitle">Scenario Generator</div>
+  <div class="header-line">
+    <span></span>
+    <i>✦</i>
+    <span></span>
+  </div>
+</header>
+
+<!-- ─── App Wrapper ────────────────────────────────────────────────────────── -->
+<div class="app-wrapper">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-title">Actions</div>
+
+    <button class="btn-special btn-randomize" id="btn-randomize">
+      <i class="fa-duotone fas fa-dice"></i> Randomize All
+    </button>
+    <button class="btn-special btn-save" id="btn-save">
+      <i class="fas fa-download"></i> Save Results
+    </button>
+    <button class="btn-special btn-reset" id="btn-reset">
+      <i class="fas fa-arrow-rotate-left"></i></i> Reset All
+    </button>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-stats">
+      Fields Rolled
+      <span id="roll-count">0</span>
+    </div>
+    <div class="sidebar-stats">
+      of <span style="color:var(--text-main);font-size:14px">21</span> Total
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main-content" id="main-content">
+    <!-- Rows are injected by JS -->
+  </main>
+
+</div>
+
+<!-- ─── Save Modal ─────────────────────────────────────────────────────────── -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>KOTOR I Scenario — Export</h3>
+      <button class="modal-close" id="modal-close">✕</button>
+    </div>
+    <div class="modal-body">
+      <pre id="modal-content"></pre>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal" id="modal-copy">Copy to Clipboard</button>
+      <button class="btn-modal primary" id="modal-download">Download .txt</button>
+      <button class="btn-modal" id="modal-close-btn">Close</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>
+    KOTOR I Scenario Generator — Inspired by
+    <a href="https://www.reddit.com/r/kotor/comments/a33k59/scenario_generator_for_kotor/" target="_blank">DarthMessias (Reddit Post)</a>
+    and
+    <a href="https://gamerschallenge.wordpress.com/2018/11/30/knights-of-the-old-republic-scenario-generator/" target="_blank">DarthMessias' Gamerschallenge Scenario Generator</a>
+  </p>
+  <p style="margin-top: 8px; opacity: 0.9;">
+    <a href="https://www.nexusmods.com/kotor/mods/1247" target="_blank">Originally written in Java by Jordan DiPasquale</a> — Ported to web using Gab AI
+  </p>
+</footer>
+
+<!-- ─── JavaScript ─────────────────────────────────────────────────────────── -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  /* ── Dice Utilities ─────────────────────────────────────────────────────── */
+  const roll  = (sides) => Math.floor(Math.random() * sides) + 1;
+  const d4    = () => roll(4);
+  const d6    = () => roll(6);
+  const d100  = () => roll(100);
+
+  /* ── Scenario Data ──────────────────────────────────────────────────────── */
+  const ScenarioData = {
+    gender: (r) =>
+      r <= 2 ? "Male" : "Female",
+
+    startingClass: (r) =>
+      r <= 2 ? "Soldier" : r <= 4 ? "Scoundrel" : "Scout",
+
+    jediClass: (r) =>
+      r <= 2 ? "Guardian" : r <= 4 ? "Sentinel" : "Consular",
+
+    morality: (r) =>
+      r <= 2 ? "Light Side" : r <= 4 ? "Gray" : "Dark Side",
+
+    loveInterest: (r) =>
+      r <= 2 ? "Yes" : "No",
+
+    promisedLand: (r) =>
+      r <= 2
+        ? "Help Rukil find the Promised Land."
+        : "Give the maps to Igear.",
+
+    rakghoulSerum: (r) =>
+      r <= 2
+        ? "Give the Rakghoul Serum to Zelka."
+        : "Sell the Rakghoul Serum to Zax.",
+
+    swoopGangs: (r) =>
+      r <= 2
+        ? "Be loyal to the Hidden Beks."
+        : "Betray the Hidden Beks.",
+
+    familyConflict: (r) =>
+      r <= 2
+        ? "Let the children escape to the Enclave."
+        : r <= 4
+          ? "Convince the children to break up their relationship."
+          : "Make the families kill each other.",
+
+    juhaniFate: (r) =>
+      r <= 2 ? "Let Juhani live." : "Kill Juhani.",
+
+    planetAfter: (r) =>
+      ({ 1: "Go to Tatooine.", 2: "Go to Kashyyyk.", 3: "Go to Manaan.", 4: "Go to Korriban." })[r],
+
+    sandpeopleSolution: (r) =>
+      r <= 2
+        ? "Speak to and negotiate with the Sand People."
+        : "Slaughter the Sand People.",
+
+    freyaarVChuundar: (r) =>
+      r <= 2 ? "Support Freyaar." : "Support Chuundar.",
+
+    firax: (r) =>
+      r <= 2 ? "Kill the Firax." : "Save the Firax.",
+
+    trialPoison: (r) =>
+      r <= 2
+        ? "Poison Uthar."
+        : r <= 4
+          ? "Poison Yuthura."
+          : "Poison both Uthar and Yuthura.",
+
+    utharVYuthura: (r) =>
+      r <= 2
+        ? "Support Uthar."
+        : r <= 4
+          ? "Support Yuthura."
+          : "Kill both Uthar and Yuthura.",
+
+    leviathanCrew: (r) =>
+      (["Save HK-47.", "Save Jolee Bindo.", "Save Juhani.", "Save T3-M4.", "Save Mission Vao.", "Save Canderous."])[r - 1],
+
+    helpTribe: (r) =>
+      r <= 2 ? "Join The One." : "Join The Elders.",
+
+    joinDarkside: (r) =>
+      r <= 2 ? "Join Bastila." : "Refuse Bastila.",
+
+    bastilaFate: (r) =>
+      r <= 2 ? "Save Bastila." : "Kill Bastila.",
+
+    styles: (r) => {
+      const table = [
+        [2,  "Solo — Play in solo-mode as much as possible. Only use more than one character when the game forces you to."],
+        [4,  "Gunslinger — Only use ranged weapons."],
+        [6,  "Misandrist — Be nice to all female characters, but be a jerk to all male characters."],
+        [8,  "Misogynist — Be nice to all male characters, but be a jerk to all female characters."],
+        [10, "Pure Melee — Do not use ranged weapons."],
+        [12, "Fist-fighter — Use only your fists throughout the whole game."],
+        [14, "Main Quests Only — Ignore all side quests. You may only do side quests if required to progress the main story."],
+        [16, "Complete All Quests — Complete every quest in the game."],
+        [18, "Get Rich — Finish the game with as much money as possible."],
+        [20, "Low Level — Finish the game at the lowest level possible."],
+        [22, "Fewest Items — Finish the game using the fewest number of items possible."],
+        [24, "Zero Deaths — Finish the game without your main character dying or going unconscious."],
+        [26, "No Companion Falls — At no time can you or any companion go unconscious."],
+        [28, "Kill Fewest Enemies — Finish the game by killing the fewest enemies possible."],
+        [30, "Speedrun — Finish the game as fast as you can."],
+        [32, "No Armor — Finish the game without using any armor."],
+        [34, "Naked — Play through the game without ever wearing clothes or armor."],
+        [36, "Never Use the Force — You can never use Force powers, including Force Persuade. Companions may still use them."],
+        [38, "Companions Never Use the Force — Your companions can never use Force powers, but you may."],
+        [40, "Starting Weapon Only — Beat the game using only the weapons found in the chest on the Endar Spire."],
+        [42, "Starting Armor Only — Beat the game using only the armor found in the chest on the Endar Spire."],
+        [44, "Starting Weapon & Armor Only — Beat the game using only the weapons and armor found in the chest on the Endar Spire."],
+        [46, "One-handed — Beat the game using only one-handed weapons."],
+        [48, "Two-handed — Beat the game using only two-handed weapons or a weapon in each hand. Use fists until then."],
+        [50, "Double-bladed — Complete the game using only double-bladed melee weapons or lightsabers. Use fists until then."],
+        [52, "Alien Racist — Be nice to humans but rude to all aliens/non-humans."],
+        [54, "Alien Extremist — Be nice to all aliens/non-humans but rude to all humans."],
+        [56, "Shopaholic — Every time you get credits, run to the nearest shop and buy until you're broke."],
+        [58, "Jedi Party Only — Only Jedi are allowed on your team (except when the main quest requires otherwise)."],
+        [60, "Chrometophobia — Always strive to have 0 credits."],
+        [62, "Level 5 — Only level up on every 5th level."],
+        [64, "Self-love — Your party must only consist of people sharing your Character Class(es) (except when required otherwise)."],
+        [66, "Opposites Attract — Your party must only consist of people different from your Character Class(es) (except when required otherwise)."],
+        [68, "I Have the Lead Role — Don't explore companions' side quests or background stories."],
+        [71, "Non-force Wielders are Trash — Be nice to Force-users but a jerk to non-Force-users."],
+        [73, "The Force Will Always Corrupt — Be nice to non-Force-users but a jerk to Force-users."],
+        [75, "Psychopathic Killer — Kill as many people, creatures, and things as possible."],
+        [77, "Anti-social — Avoid dialogue as much as possible; exit conversations as quickly as you can."],
+        [79, "Linguistic Discriminator — Be rude to everyone who doesn't speak Galactic Basic, but nice to everyone who does."],
+        [81, "Basic is For Noobs — Be nice to everyone who doesn't speak Galactic Basic, but rude to everyone who does."],
+        [83, "The Pen is Mightier — Set Intelligence to 18 and Strength to 8 at character creation."],
+        [85, "Wisdom Over Strength — Set Wisdom to 18 and Strength to 8 at character creation."],
+        [87, "Me Strong — Set Strength to 18 and Intelligence to 8 at character creation."],
+        [89, "The Enemy Only Understands Strength — Set Strength to 18 and Wisdom to 8 at character creation."],
+        [100,"Re-roll."],
+      ];
+      for (const [max, result] of table) {
+        if (r <= max) return result;
+      }
+      return "Re-roll.";
+    },
+  };
+
+  /* ── Scenario Config ────────────────────────────────────────────────────── */
+  const SCENARIOS = [
+    { id: "gender",             label: "Gender",                                           die: "d4",   fn: "gender",             section: "Character Creation" },
+    { id: "startingClass",      label: "Starting Class",                                   die: "d6",   fn: "startingClass",      section: "Character Creation" },
+    { id: "jediClass",          label: "Jedi Class",                                       die: "d6",   fn: "jediClass",          section: "Character Creation" },
+    { id: "style",              label: "Play Style",                                       die: "d100", fn: "styles",             section: "Character Creation" },
+    { id: "morality",           label: "Morality",                                         die: "d6",   fn: "morality",           section: "Character Creation" },
+    { id: "loveInterest",       label: "Pursue Love Interest",                             die: "d4",   fn: "loveInterest",       section: "Character Creation" },
+    { id: "promisedLand",       label: "Taris: The Promised Land",                         die: "d4",   fn: "promisedLand",       section: "Taris" },
+    { id: "rakghoulSerum",      label: "Taris: The Rakghoul Serum",                        die: "d4",   fn: "rakghoulSerum",      section: "Taris" },
+    { id: "swoopGangs",         label: "Taris: Swoop Gangs",                               die: "d4",   fn: "swoopGangs",         section: "Taris" },
+    { id: "familyConflict",     label: "Dantooine: Family Conflict",                       die: "d6",   fn: "familyConflict",     section: "Dantooine" },
+    { id: "juhaniFate",         label: "Dantooine: Juhani's Fate",                         die: "d4",   fn: "juhaniFate",         section: "Dantooine" },
+    { id: "planetAfter",        label: "First Planet After Dantooine",                     die: "d4",   fn: "planetAfter",        section: "Dantooine" },
+    { id: "sandpeopleSolution", label: "Tatooine: Sand People Solution",                   die: "d4",   fn: "sandpeopleSolution", section: "Tatooine" },
+    { id: "freyaarVChuundar",   label: "Kashyyyk: Who to Support",                         die: "d4",   fn: "freyaarVChuundar",   section: "Kashyyyk" },
+    { id: "firax",              label: "Manaan: Kill or Save the Firax",                   die: "d4",   fn: "firax",              section: "Manaan" },
+    { id: "trialPoison",        label: "Korriban: Who to Poison for the Final Trials",     die: "d6",   fn: "trialPoison",        section: "Korriban" },
+    { id: "utharVYuthura",      label: "Korriban: Who to Join",                            die: "d6",   fn: "utharVYuthura",      section: "Korriban" },
+    { id: "leviathanCrew",      label: "The Leviathan: Who to Save",                       die: "d6",   fn: "leviathanCrew",      section: "The Leviathan" },
+    { id: "helpTribe",          label: "Unknown World: Which Tribe to Help",               die: "d4",   fn: "helpTribe",          section: "Unknown World" },
+    { id: "joinDarkside",       label: "Unknown World: Join the Dark Side with Bastila",   die: "d4",   fn: "joinDarkside",       section: "Unknown World" },
+    { id: "bastilaFate",        label: "The Star Forge: Save or Kill Bastila",             die: "d4",   fn: "bastilaFate",        section: "The Star Forge" },
+  ];
+
+  /* ── State ──────────────────────────────────────────────────────────────── */
+  const state = {};
+
+  /* ── DOM Builder ────────────────────────────────────────────────────────── */
+  function buildUI() {
+    const container = document.getElementById("main-content");
+    let currentSection = null;
+
+    SCENARIOS.forEach((scenario) => {
+      if (scenario.section !== currentSection) {
+        currentSection = scenario.section;
+        const hdr = document.createElement("div");
+        hdr.className = "section-header";
+        hdr.innerHTML = `<h2>${currentSection}</h2>`;
+        container.appendChild(hdr);
+      }
+
+      const row = document.createElement("div");
+      row.className = "scenario-row";
+      row.id = `row-${scenario.id}`;
+      row.innerHTML = `
+        <button class="btn-roll" data-id="${scenario.id}">
+          ${scenario.label}
+          <span class="die-badge">${scenario.die}</span>
+        </button>
+        <div class="result-area">
+          <div class="roll-indicator" id="indicator-${scenario.id}">—</div>
+          <div class="roll-divider"></div>
+          <div class="result-text" id="result-${scenario.id}">Click to roll</div>
+        </div>
+      `;
+      container.appendChild(row);
+    });
+
+    container.addEventListener("click", (e) => {
+      const btn = e.target.closest(".btn-roll");
+      if (!btn) return;
+      const id = btn.dataset.id;
+      const scenario = SCENARIOS.find((s) => s.id === id);
+      if (scenario) performRoll(scenario);
+    });
+  }
+
+  /* ── Roll Logic ─────────────────────────────────────────────────────────── */
+  function getDieResult(scenario) {
+    const n = scenario.die === "d4" ? d4() : scenario.die === "d6" ? d6() : d100();
+    return { n, result: ScenarioData[scenario.fn](n) };
+  }
+
+  function performRoll(scenario, value = null) {
+    const { n, result } = value ?? getDieResult(scenario);
+    const roll = value ? value.n : n;
+    const res  = value ? value.result : result;
+
+    state[scenario.id] = { roll, result: res };
+
+    const indicator = document.getElementById(`indicator-${scenario.id}`);
+    const resultEl  = document.getElementById(`result-${scenario.id}`);
+    const row       = document.getElementById(`row-${scenario.id}`);
+
+    indicator.textContent = `Roll: ${roll}`;
+    indicator.classList.add("active");
+
+    resultEl.classList.remove("active");
+    resultEl.textContent = res;
+    void resultEl.offsetWidth;
+    resultEl.classList.add("active");
+
+    row.classList.add("has-result", "rolling");
+    row.addEventListener("animationend", () => row.classList.remove("rolling"), { once: true });
+
+    updateRollCount();
+  }
+
+  function updateRollCount() {
+    document.getElementById("roll-count").textContent = Object.keys(state).length;
+  }
+
+  /* ── Special Buttons ────────────────────────────────────────────────────── */
+  document.getElementById("btn-randomize").addEventListener("click", () => {
+    SCENARIOS.forEach((s) => performRoll(s));
+  });
+
+  document.getElementById("btn-reset").addEventListener("click", () => {
+    SCENARIOS.forEach((s) => {
+      delete state[s.id];
+      const indicator = document.getElementById(`indicator-${s.id}`);
+      const resultEl  = document.getElementById(`result-${s.id}`);
+      const row       = document.getElementById(`row-${s.id}`);
+      indicator.textContent = "—";
+      indicator.classList.remove("active");
+      resultEl.textContent = "Click to roll";
+      resultEl.classList.remove("active");
+      row.classList.remove("has-result");
+    });
+    updateRollCount();
+  });
+
+  /* ── Save / Export ──────────────────────────────────────────────────────── */
+  function buildExportText() {
+    const divider = "=".repeat(40);
+    let lines = [`${divider}\n  KOTOR I SCENARIO\n${divider}\n`];
+    SCENARIOS.forEach((s, i) => {
+      const entry = state[s.id];
+      const value = entry ? `${entry.result}  [rolled: ${entry.roll}]` : "(not rolled)";
+      lines.push(`${String(i + 1).padStart(2, "0")}. ${s.label}\n    → ${value}\n`);
+    });
+    lines.push(divider);
+    return lines.join("\n");
+  }
+
+  document.getElementById("btn-save").addEventListener("click", () => {
+    const text = buildExportText();
+    document.getElementById("modal-content").textContent = text;
+    document.getElementById("modal-overlay").classList.add("open");
+  });
+
+  ["modal-close", "modal-close-btn"].forEach((id) =>
+    document.getElementById(id).addEventListener("click", () =>
+      document.getElementById("modal-overlay").classList.remove("open")
+    )
+  );
+
+  document.getElementById("modal-overlay").addEventListener("click", (e) => {
+    if (e.target === e.currentTarget)
+      document.getElementById("modal-overlay").classList.remove("open");
+  });
+
+  document.getElementById("modal-copy").addEventListener("click", () => {
+    const text = document.getElementById("modal-content").textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById("modal-copy");
+      const orig = btn.textContent;
+      btn.textContent = "Copied!";
+      setTimeout(() => (btn.textContent = orig), 1800);
+    });
+  });
+
+  document.getElementById("modal-download").addEventListener("click", () => {
+    const text = buildExportText();
+    const blob = new Blob([text], { type: "text/plain" });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement("a");
+    a.href     = url;
+    a.download = "kotor1_scenario.txt";
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  /* ── Init ───────────────────────────────────────────────────────────────── */
+  buildUI();
+});
+</script>
+</body>
+</html>

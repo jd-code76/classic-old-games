@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Star Wars: KotOR Mod Guide</title>
+    <title>Star Wars: KOTOR Mod Guide</title>
     <link rel="stylesheet" href="../styles.css">
     <style>
         .guide-container {
@@ -87,157 +87,212 @@
         <a href="../index.html">Home</a>
     </div>
     
-    <div class="guide-container">
+    <div class="container guide-container">
         <div class="guide-header">
-            <h1>Star Wars: KotOR Mod Guide</h1>
-            <p><em>This guide is current as of 03/12/2022</em></p>
+            <h1>Star Wars: KOTOR Mod Guide</h1>
+            <p><em>Last updated 05/16/2026</em></p>
         </div>
         
         <div class="warning">
             <p><strong>ATTENTION:</strong>
-                This guide involves my own personal methods for installing and using mods with KotOR.
+                This guide involves my own personal methods for installing and using mods with KOTOR.
                 Like all modding, you are responsible for doing your own research to determine the best methods for modding your game.
                 I provide no warranty and take no liability or responsibility for any issues that arise due to the contents of this guide.
-                Please also note that if you choose to install mods outside the scope of this guide, the steps and content in this guide may differ slightly.</p>
+                Please note that this guide is written with the Steam release in mind, though it may also work with the GOG or CD-ROM releases.
+            </p>
         </div>
-        
-        <p>Note: Careful attention must be paid to any mods with .tpc files. 
-            Especially for the big texture packs, the mod authors give you the option of using .tga (higher quality, bigger file size) OR .tpc (lower quality than .tga, smaller file size). 
-            See the <a href="files/unneeded_tpcs.txt" target="_blank" rel="noopener noreferrer">"unused_tpcs.txt"</a> file for a comprehensive list of .tpc files you do NOT need to install. 
-            This guide is written with the Steam release in mind, but should still work for both the GOG release and the original CD-ROM release.</p>
         
         <div class="toc">
             <h2>Table of Contents</h2>
             <a href="#widescreen">Widescreen Mods</a><br>
-            <a href="#essential">Essential Mods</a><br>
-            <a href="#override">Override Mods</a><br>
-            <a href="#tsl">TSL Patcher Mods</a><br>
+            <a href="#texture">Texture Mods</a><br>
             <a href="#conclusion">Conclusion</a>
         </div>
         
         <div class="guide-section">
             <h1 id="widescreen">Widescreen Mods</h1>
             <ol>
-                <li>After you perform a fresh install of the game, run it once to generate the necessary files that you will need to make changes to. Afterwards, make a backup of your existing "swkotor.exe" file (rename it to "swkotor.exe.bak").</li>
-                <li>Downloads and extract <a href="https://deadlystream.com/files/file/1320-kotor-editable-executable/" target="_blank" rel="noopener noreferrer">KotOR Editable Executable</a> into your game's install folder (example: "E:\Steam\SteamApps\common\swkotor"). This new "swkotor.exe" is what you will use in future steps. You need this file because the Steam release is encrypted and cannot be patched.</li>
+                <li>After you perform a fresh install of the game, run it once to generate the necessary files that you will need to make changes to. Afterwards, make a backup of your existing "swkotor.exe" file (rename it to "swkotor.exe.original.bak").</li>
+                
+                <li>Download and extract <a href="https://deadlystream.com/files/file/1320-KOTOR-editable-executable/" target="_blank" rel="noopener noreferrer">KOTOR Editable Executable</a> into your game's install folder (example: "E:\Steam\SteamApps\common\swkotor"). This new "swkotor.exe" is what you will use in future steps. You need this file because the Steam release is encrypted and cannot be patched.</li>
+                
                 <li>Download and extract <a href="https://www.wsgf.org/article/star-wars-knights-old-republic" target="_blank" rel="noopener noreferrer">Universal Widescreen</a> into your game's install folder.
-                    <ul><li>Carefully read and follow the instructions on the page above up to the end of the "Widescreen Resolutions" section (you will come back to this page in step 5).</li>
-                    <li>The most important steps are to ensure you selected 1024x768 within "uniws.exe" (you have to select your game's install <i>folder/location</i> (see step 2), you are NOT looking for the .exe file within this program). Also, do NOT click the "Find it for me..." button as it takes a long time. Additionally, this program creates a backup of your editable .exe so you will be able to reference that if you have any issues.</li>
-                    <li>Next, ensure your preferred resolution is above 1440x900 (you can select a lower resolution, but there are additional steps you have to follow that are shown on the page above).</li>
-                    <img src="images/guide_uniws_example.jpg"/>
-                        <li>Edit the "swkotor.ini" file (located in your game's install folder) and make the following changes (you can add the lines if they are not in the file).</li>
-                            <ul><li>Set "Width" to your monitor's width.</li>
-                            <li>Set "Height" to your monitor's height.</li>
-                            <li>Set "Frame Buffer = 1" to 0.</li>
-                            <li>Make sure "Disable Vertex Buffer Objects" is set to 1.</li>
-                            <li>Set or add "RefreshRate=60".</li>
-                            <li>Save the file when done.</li>
-                            <img src="images/guide_ini_example.jpg"/></ul>
+                    <ul>
+                        <li>Carefully read and follow the instructions at the URL above!</li>
+                        <li>The most important steps are to ensure you selected 1024x768 within "uniws.exe" (you have to select your game's install folder/location (see step 2), you are NOT looking for the .exe file within this program). <strong>Also, do NOT click the "Find it for me..." button as it takes a long time.</strong> Additionally, this program creates a backup of your editable .exe so you will be able to reference that if you have any issues.</li>
+                        <li>Next, ensure your new resolution is above 1440x900 (you can select a lower resolution, but there are additional steps you have to follow that are shown on the page above).</li>
+                    </ul>
+                    <img src="images/guide_uniws_example.jpg">
                 </li>
-                <li class="warning"><strong>STOP AND TEST THE GAME! DO NOT MOVE ON UNTIL YOU HAVE CHECKED YOUR RESOLUTION IN GAME AND CONFIRMED THAT IT IS CORRECT!</strong></li>
+                
+                <li>Edit the "swkotor.ini" file (located in your game's install folder) and make the following changes (add the lines if they are not in the file). Feel free to modify the other settings too, to match what is shown in the screenshot.
+                    <ul>
+                        <li>Set "Width" to your monitor's width.</li>
+                        <li>Set "Height" to your monitor's height.</li>
+                        <li>Set "Frame Buffer = 1" to 0.</li>
+                        <li>Make sure "Disable Vertex Buffer Objects" is set to 1.</li>
+                        <li>Set or add "RefreshRate=60".</li>
+                        <li>Save the file when done.</li>
+                    </ul>
+                    <img src="images/guide_ini_example.jpg">
+                </li>
+                
+                <li>Download and extract the 4GB patch into your game's install folder (example: "E:\Steam\SteamApps\common\swkotor") then run it to patch your swkotor.exe executable.</li>
+                
+                <li class="warning"><strong>STOP AND TEST THE GAME! Do not move on until you have checked your resolution in game and confirmed that it is correct!</strong><br><br>
+                    <strong>MOST IMPORTANTLY, make sure to limit/cap the framerate to 60 FPS. Otherwise, you will experience the "stuck after combat" bug and other potential issues!</strong>
+                </li>
+                
+                <li>Next, install Ultimate Character Overhaul (UCO) and the Community Patch.
+                    <ul>
+                        <li>First, download and extract <a href="https://www.nexusmods.com/kotor/mods/1282" target="_blank" rel="noopener noreferrer">Ultimate Character Overhaul -REDUX-</a> to your "Override" folder (create one if it doesn't exist).
+                            <ul>
+                                <li>Example: "E:\Steam\SteamApps\common\swkotor\Override". <strong>Note: There should NOT be any folders within the "Override" folder.</strong> All files must be "loose" and yes, it gets ugly once you've installed a bunch of mods.</li>
+                            </ul>
+
+                            <img src="images/guide_override_example.jpg">
+                        </li>
+                        <li>Next, download and install <a href="https://deadlystream.com/files/file/1258-KOTOR-1-community-patch/" target="_blank" rel="noopener noreferrer">KOTOR 1 Community Patch 1.10.1</a>.
+                            <ul>
+                                <li>This uses an installer called HoloPatcher. Simply run the installer and select your game's install folder (see step 5 for example). Note that this will take a while to complete (10-15 mins). Also note that the installer creates a backup folder in the same location it was run. So if something goes wrong and you need to restart, you can use that folder to replace your original files as needed.</li>
+                            </ul>
+                        </li>
+                        <li>Now download the <a href="https://www.nexusmods.com/kotor/mods/1282?tab=files&file_id=1976" target="_blank" rel="noopener noreferrer">UCO compatibility patch for the K1 Community Patch</a> and extract to your override folder.
+                            <ul>
+                                <li>Per the instructions, install order: UCO -> K1CP -> Compatibility patch (overwrite if asked); the compatibility patch must be installed after installing both UCO and K1CP.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                
                 <li>Download and extract <a href="https://community.pcgamingwiki.com/files/file/2044-star-wars-knights-of-the-old-republic-hud-corrections/" target="_blank" rel="noopener noreferrer">HUD Corrections</a> into your game's install folder.
-                    <ul><li>Extract the folder that corresponds to the resolution you patched earlier (example: If you entered 2560x1440 in the uniws.exe patcher, you must pick 2560x1440 as the folder in this step).</li>
-                    <li>Move all the extracted files within the folder you chose into the "Override" folder (create one if it doesn't exist).</li>
-                        <ul><li>Example: "E:\Steam\SteamApps\common\swkotor\Override". Note: There should NOT be any folders within the "Override" folder. All files must be "loose" and yes, it gets ugly once you've installed a bunch of mods. </li>
-                        <img src="images/guide_override_example.jpg"/></ul>
+                    <ul>
+                        <li>Extract the folder that corresponds to the resolution you patched earlier (example: If you entered 2560x1440 in the uniws.exe patcher, you must pick 2560x1440 as the folder in this step).</li>
+                        <li>Move all the extracted files within the folder you chose into the override folder.</li>
+                    </ul>
                 </li>
-                <li>Download and extract <a href="https://deadlystream.com/files/file/1159-kotor-high-resolution-menus/" target="_blank" rel="noopener noreferrer">KotOR High Resolution Menus 1.5</a> into your game's install folder.</li>
-                    <ul><li>Find your monitor's aspect ratio and move the corresponding GUI files from the folder you just extracted into your "Override" folder. Example: If your monitor's aspect ratio is 16x9, you must open that folder, find the folder that contains your monitor's resolution (2560x1440, as an example) and move the files within that folder into your "Override" folder. There should be 81 files total. Overwrite any files if asked.</li>
-                    <img src="images/guide_hiresmenus_example.jpg"/>
-                    <li>Move the patcher files ("hires_patcher.bat", hires_patcher.exe", and "hires_patcher.pl") into your install folder and run "hires_patcher.bat", then follow the prompts. Consult the readme if you have any questions or issues.</li>
-                    <img src="images/guide_hiresmenus_patcher_example.jpg"/>
-                    <li>You may now delete the "k1hrm-1.5" folder containing the other aspect ratios and GUI files you do not need.</li></ul>
+                
+                <li>Download and extract <a href="https://deadlystream.com/files/file/1159-KOTOR-high-resolution-menus/" target="_blank" rel="noopener noreferrer">K1 High Resolution Menus 1.5</a> into your game's install folder.
+                    <ul>
+                        <li>Find your monitor's aspect ratio and move the corresponding GUI files from the folder you just extracted into your "Override" folder. Example: If your monitor's aspect ratio is 16x9, you must open that folder, find the folder that contains your monitor's resolution (2560x1440, as an example) and move the files within that folder into your "Override" folder. Overwrite any files if asked.</li>
+                        <img src="images/guide_hiresmenus_example.jpg">
+                        <li>Move the patcher files ("hires_patcher.bat", "hires_patcher.exe", and "hires_patcher.pl") into your install folder and run "hires_patcher.bat", then follow the prompts. Consult the readme if you have any questions or issues.</li>
+                        <img src="images/guide_hiresmenus_patcher_example.jpg">
+                    </ul>
+                </li>
+                
                 <li class="warning"><strong>STOP AND TEST THE GAME! DO NOT MOVE ON UNTIL YOU HAVE CHECKED YOUR RESOLUTION IN GAME AND CONFIRMED THAT IT IS CORRECT!</strong></li>
-                <li>Download and extract <a href="https://deadlystream.com/files/file/1226-hd-ui-menu-pack/" target="_blank" rel="noopener noreferrer">KotOR HD UI Menu Pack 1.1</a> into your "Override" folder. Note: This mod has it's own Override folder, so you can simply drag-and-drop that folder into your game's install folder to merge the new files into your existing Override folder.</li>
-                <li>Download and extract <a href="https://www.nexusmods.com/kotor/mods/1211" target="_blank" rel="noopener noreferrer">Widescreen Cockpit and Racing Track on Manaan</a> into your game's "Override" folder.</li>
+                
+                <li>Download and extract <a href="https://deadlystream.com/files/file/1226-hd-ui-menu-pack/" target="_blank" rel="noopener noreferrer">HD UI Menu Pack 1.1</a> into your "Override" folder.</li>
+                
+                <li>Download and extract <a href="https://www.nexusmods.com/kotor/mods/1211" target="_blank" rel="noopener noreferrer">Widescreen Cockpit and Racing Track on Manaan 0.22</a> into your game's "Override" folder. Overwrite any files if asked.</li>
+                
+                <li>Download and extract <a href="https://deadlystream.com/files/file/1792-kotor-widescreen-fade-fix/" target="_blank" rel="noopener noreferrer">KOTOR 1 Widescreen Fade Fix 1.0.2</a>. Find the file in the folder that matches your chosen resolution (similar to step 8), put it into your game's "Override" folder and overwrite any files if asked.</li>
+                
+                <li>Download and extract <a href="https://deadlystream.com/files/file/1173-k1-main-menu-widescreen-fix/" target="_blank" rel="noopener noreferrer">K1 Main Menu Widescreen Fix 1.2</a>. Put the files in the "For Override" folder into your game's "Override" folder. Additionally, you may pick ONE of the optional logos and put that into your "Override" folder too.</li>
+                
+                <li>Download and extract <a href="https://deadlystream.com/files/file/1457-hd-menus-and-ui-assets/" target="_blank" rel="noopener noreferrer">HD Menu and UI Assets 1.0</a> into your "Override" folder and overwrite any files when asked.</li>
+                
                 <li><strong>Done! Launch the game and test to make sure everything is working up to this point.</strong></li>
             </ol>
         </div>
         
         <div class="guide-section">
-            <h1 id="essential">Essential Mods</h1>
+            <h1 id="texture">Texture Mods</h1>
             <ol>
-                <li>Download and extract <a href="https://deadlystream.com/files/file/1258-kotor-1-community-patch/" target="_blank" rel="noopener noreferrer">KotOR 1 Community Patch 1.8.1</a> to a new folder on your desktop. Once extracted, open the folder and run the "INSTALL.exe" file, paying attention to the prompts. Note: Installing this mod can take several minutes.</li>
-                <li class="warning"><strong>STOP AND TEST THE GAME! DO NOT MOVE ON UNTIL YOU ENSURE THAT THE GAME LAUNCHES WITHOUT ANY ERRORS!</strong></li>
-                <li>Download and extract <a href="https://deadlystream.com/files/file/558-kotor-1-restoration/" target="_blank" rel="noopener noreferrer">KotOR 1 Restoration 1.2</a> to a new folder on your desktop.</li>
-                    <ul><li>Once extracted, open the folder and run the "K1R_1.2_Installer.exe" file.</li>
-                        <ul><li>Leave the dropdown on "Main K1E 1.2 Installation".</li></ul>
-                        <li>Follow the prompts. Note: This mod also takes a couple of minutes to install.</li>
-                        <li>If you encounter any warnings, you can ignore them.</li></ul>
-                <li class="warning"><strong>STOP AND TEST THE GAME! DO NOT MOVE ON UNTIL YOU ENSURE THAT THE GAME LAUNCHES WITHOUT ANY ERRORS!</strong></li>
-                <li>Mods 1-11 can be installed simply by downloading and extracting them into your game's "Override" folder.</li>
-                    <ol><li><a href="https://www.nexusmods.com/kotor/mods/1302" target="_blank" rel="noopener noreferrer">Selphadur's KotOR Texture Redux</a> - Make sure to download the main file, the 1.1 update file, and the K1RPatch optional file. Also make sure to delete "PLC_FrcDist01.tga" after updating.</li>
-                    <li><a href="https://www.nexusmods.com/kotor/mods/1282" target="_blank" rel="noopener noreferrer">Ultimate Character Overhaul -Redux-</a> - You can download whichever version you like, just make sure to only install one. I recommend the full TPC version since the visual difference is minimal and the download size is much smaller.</li>
-                    <li><a href="https://www.nexusmods.com/kotor/mods/1370" target="_blank" rel="noopener noreferrer">Ultimate Endar Spire, Star Forge, and Yavin Station High Resolution HD Upscale</a> - For mods 3-10, I recommend the TPC version for the same reason as stated above.</li>
-                    <li><a href="https://www.nexusmods.com/kotor/mods/1360" target="_blank" rel="noopener noreferrer">Ultimate Taris High Resolution HD Upscale</a></li>
-                    <li><a href="https://www.nexusmods.com/kotor/mods/1368" target="_blank" rel="noopener noreferrer">Ultimate Dantooine High Resolution HD Upscale</a></li>
-                    <li><a href="https://www.nexusmods.com/kotor/mods/1364" target="_blank" rel="noopener noreferrer">Ultimate Tatooine High Resolution HD Upscale</a></li>
-                    <li><a href="https://www.nexusmods.com/kotor/mods/1365" target="_blank" rel="noopener noreferrer">Ultimate Kashyyyk High Resolution HD Upscale</a></li>
-                    <li><a href="https://www.nexusmods.com/kotor/mods/1366" target="_blank" rel="noopener noreferrer">Ultimate Manaan High Resolution HD Upscale</a></li>
-                    <li><a href="https://www.nexusmods.com/kotor/mods/1367" target="_blank" rel="noopener noreferrer">Ultimate Korriban High Resolution HD Upscale</a></li>
-                    <li><a href="https://www.nexusmods.com/kotor/mods/1369" target="_blank" rel="noopener noreferrer">Ultimate Unknown World High Resolution HD Upscale</a></li>
-                    <li><a href="https://deadlystream.com/files/file/916-loadscreens-in-color/" target="_blank" rel="noopener noreferrer">Loadscreens in Color</a></li>
-                    <li><a href="https://www.nexusmods.com/kotor/mods/1306" target="_blank" rel="noopener noreferrer">KotOR 1 Remastered (AI Upscaled) Cutscenes</a> - I recommend downloading the version that corresponds to your monitor's resolution. Follow the readme on the mod page for install instructions. This mod does NOT go in your Override folder!</li></ol>
-                <li><strong>Done! I recommend testing the game again, but since most of the mods in step 5 are textures, the game should be fine.</strong></li>
-            </ol>
-        </div>
-
-        <div class="guide-section">
-            <h1 id="override">Override Mods</h1>
-			<ol>
-				<li>For these next set of mods, simply download and extract the files for the mods you want into your "Override" folder.</li>
-					<ol><li><a href="https://deadlystream.com/files/file/491-kotor-high-quality-starfields-and-nebulas/" target="_blank" rel="noopener noreferrer">High Quality Starfields and Nebulas 1.2</a></li>
-					<li><a href="https://deadlystream.com/files/file/1129-animated-cantina-sign-for-kotor-1/" target="_blank" rel="noopener noreferrer">Animated Cantina Sign for KotOR 1</a></li>
-					<li><a href="https://deadlystream.com/files/file/1190-emperor-turnips-hd-gizka/" target="_blank" rel="noopener noreferrer">Emperor Turnip's HD Gizka</a></li>
-					<li><a href="https://deadlystream.com/files/file/1187-emperor-turnips-hd-rakghouls/" target="_blank" rel="noopener noreferrer">Emperor Turnip's HD Rakghouls</a></li>
-					<li><a href="https://www.nexusmods.com/kotor/mods/1109" target="_blank" rel="noopener noreferrer">Higher Resolution FX Effects</a></li>
-					<li><a href="https://deadlystream.com/files/file/455-hd-fire-and-ice-whee/" target="_blank" rel="noopener noreferrer">HD Fire and Ice</a></li>
-					<li><a href="https://deadlystream.com/files/file/1262-star-map-revamp/" target="_blank" rel="noopener noreferrer">Star Map Revamp</a></li>
-					<li><a href="https://deadlystream.com/files/file/938-high-quality-cockpit-skyboxes/" target="_blank" rel="noopener noreferrer">High Quality Cockpit Skyboxes</a></li>
-					<li><a href="https://www.nexusmods.com/kotor/mods/1127" target="_blank" rel="noopener noreferrer">Ebon Hawk High Resolution</a></li>
-					<li><a href="https://www.nexusmods.com/kotor/mods/1296" target="_blank" rel="noopener noreferrer">Ebon Hawk's Animated Screen HD</a></li>
-					<li><a href="https://deadlystream.com/files/file/848-animated-ebon-hawk-monitors-not-including-galaxy-map/" target="_blank" rel="noopener noreferrer">Animated Ebon Hawk Monitors (not including Galaxy Map)</a></li>
-					<li><a href="https://www.nexusmods.com/kotor/mods/69/" target="_blank" rel="noopener noreferrer">High Quality Skyboxes II</a></li>
-					<li><a href="https://deadlystream.com/files/file/1271-jcs-blaster-visual-effects-for-k1/" target="_blank" rel="noopener noreferrer">JC's Blaster Visual Effects for K1</a></li>
-					<li><a href="https://deadlystream.com/files/file/1270-balanced-pazaak/" target="_blank" rel="noopener noreferrer">Balanced Pazaak</a></li>
-					<li><a href="https://deadlystream.com/files/file/827-ebon-hawk-camera-replacement/" target="_blank" rel="noopener noreferrer">Ebon Hawk Camera Replacement</a></li>
-					<li><a href="https://deadlystream.com/files/file/880-bendak-bounty-non-dark-side-option/" target="_blank" rel="noopener noreferrer">Bendak Bounty Non Dark Side Option</a></li>
-					<li><a href="https://deadlystream.com/files/file/1361-hd-pazaak-cards/" target="_blank" rel="noopener noreferrer">HD Pazaak Cards</a></li>
-					<li><a href="https://deadlystream.com/files/file/260-k1-hi-res-beam-effects/" target="_blank" rel="noopener noreferrer">[K1] Hi-Res Beam Effects 2.0</a></li>
-					<li><a href="https://deadlystream.com/files/file/375-korriban-academy-workbench/" target="_blank" rel="noopener noreferrer">Korriban Academy Workbench 2.0</a></li>
-					<li><a href="https://www.nexusmods.com/kotor/mods/51/" target="_blank" rel="noopener noreferrer">Sandpeople Disguise Drop Fix</a></li>
-					<li><a href="https://deadlystream.com/files/file/1032-kotor1-canon-animated-galaxy-map/" target="_blank" rel="noopener noreferrer">KotOR 1 Canon Animated Galaxy Map 1.1</a></li>
-					<li><a href="https://deadlystream.com/files/file/1925-terminal-texture/" target="_blank" rel="noopener noreferrer">Terminal Texture (Animated)</a></li></ol>
-				<li><b>Done! I recommend testing the game again, but since most of the mods are textures/models, the game should be fine.</b></li>
+                <li>After you perform a fresh install of the game or are continuing after having installed widescreen mods, the following mods may be downloaded and installed by extracting the files into your game's "Override" folder.
+                    <ul>
+                        <li><a href="https://deadlystream.com/files/file/1815-pretty-good-icons-for-kotor/" target="_blank" rel="noopener noreferrer">Pretty Good! Icons for KOTOR 1.0</a> - The TPC version is recommended.</li>
+                        <li><a href="https://deadlystream.com/files/file/938-high-quality-cockpit-skyboxes/" target="_blank" rel="noopener noreferrer">High Quality Cockpit Skyboxes 1.0</a> - The XL version is recommended.</li>
+                        <li><a href="https://www.nexusmods.com/kotor/mods/69/" target="_blank" rel="noopener noreferrer">High Quality Skyboxes II</a></li>
+                        <li><a href="https://deadlystream.com/files/file/2193-animated-energy-shields/" target="_blank" rel="noopener noreferrer">Animated Energy Shields 1.0.0</a></li>
+                        <li><a href="https://deadlystream.com/files/file/491-KOTOR-high-quality-starfields-and-nebulas/" target="_blank" rel="noopener noreferrer">High Quality Stars and Nebulas 1.2</a></li>
+                        <li><a href="https://deadlystream.com/files/file/260-k1-hi-res-beam-effects/" target="_blank" rel="noopener noreferrer">Hi-res Beam Effects 2.0</a></li>
+                        <li><a href="https://deadlystream.com/files/file/455-hd-fire-and-ice-whee/" target="_blank" rel="noopener noreferrer">HD Fire and Ice 2.1</a></li>
+                        <li><a href="https://deadlystream.com/files/file/1925-terminal-texture/" target="_blank" rel="noopener noreferrer">Terminal Texture 1.0.0</a></li>
+                        <li><a href="https://deadlystream.com/files/file/2025-upscaled-computer/" target="_blank" rel="noopener noreferrer">Upscaled Computer 1.0.0</a></li>
+                        <li><a href="https://deadlystream.com/files/file/1361-hd-pazaak-cards/" target="_blank" rel="noopener noreferrer">HD Pazaak Cards 1.0.0</a></li>
+                        <li><a href="https://deadlystream.com/files/file/2222-reptab-hd/" target="_blank" rel="noopener noreferrer">RepTab (workbench) HD 1.0.0</a></li>
+                        <li><a href="https://deadlystream.com/files/file/916-loadscreens-in-color/" target="_blank" rel="noopener noreferrer">Loadscreens in Color</a></li>
+                        <li><a href="https://deadlystream.com/files/file/2380-k1-cutscenes-rescaled/" target="_blank" rel="noopener noreferrer">K1 Cutscenes Rescaled 1.5.1</a>
+                            <ul>
+                                <li>This mod does NOT go into the override folder, it goes into the "movies" folder instead. Overwrite when prompted. You may choose alternative versions from the "alts" folder if you desire.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li>The following are complete texture improvements (hi-res) for each of the game's locations. Make sure to download only the .tpc versions. Overwrite any files if asked.
+                    <ul>
+                        <li><a href="https://www.nexusmods.com/kotor/mods/1370" target="_blank" rel="noopener noreferrer">Ultimate Endar Spire-Star Forge-Yavin Station</a></li>
+                        <li><a href="https://www.nexusmods.com/kotor/mods/1360" target="_blank" rel="noopener noreferrer">Ultimate Taris</a></li>
+                        <li><a href="https://www.nexusmods.com/kotor/mods/1368" target="_blank" rel="noopener noreferrer">Ultimate Dantooine</a></li>
+                        <li><a href="https://www.nexusmods.com/kotor/mods/1364" target="_blank" rel="noopener noreferrer">Ultimate Tatooine</a></li>
+                        <li><a href="https://www.nexusmods.com/kotor/mods/1365" target="_blank" rel="noopener noreferrer">Ultimate Kashyyyk</a></li>
+                        <li><a href="https://www.nexusmods.com/kotor/mods/1366" target="_blank" rel="noopener noreferrer">Ultimate Manaan</a></li>
+                        <li><a href="https://www.nexusmods.com/kotor/mods/1367" target="_blank" rel="noopener noreferrer">Ultimate Korriban</a></li>
+                        <li><a href="https://www.nexusmods.com/kotor/mods/1369" target="_blank" rel="noopener noreferrer">Ultimate Unknown World</a></li>
+                    </ul>
+                </li>
+                
+                <li>Next are mods specific to the Ebon Hawk. Effectively, an improved texture mod and an animated galaxy map screen.
+                    <ul>
+                        <li><a href="https://deadlystream.com/files/file/2036-ultimate-ebon-hawk-repairs-for-k1/" target="_blank" rel="noopener noreferrer">Ultimate Ebon Hawk Repairs 2.0.0</a>
+                            <ul>
+                                <li>Make sure to move the main files over first then move the animated monitors content and overwrite when prompted.</li>
+                            </ul>
+                        </li>
+                        <li><a href="https://deadlystream.com/files/file/2055-k1s-ebon-hawk-animated-texture/" target="_blank" rel="noopener noreferrer">K1's Ebon Hawk Animated texture 1.0.0</a></li>
+                    </ul>
+                </li>
+                
+                <li>These next couple of mods increase the resolution of the portraits.
+                    <ul>
+                        <li><a href="https://deadlystream.com/files/file/1547-hd-pc-portraits/" target="_blank" rel="noopener noreferrer">HD PC Portraits 1.0</a></li>
+                        <li><a href="https://deadlystream.com/files/file/1213-hd-npc-portraits/" target="_blank" rel="noopener noreferrer">HD NPC Portraits 2.0</a></li>
+                    </ul>
+                </li>
+                
+                <li>Download and install <a href="https://deadlystream.com/files/file/861-high-quality-blasters/" target="_blank" rel="noopener noreferrer">High Quality Blasters 1.1</a>. Note that it does NOT use the override method, it uses the TSLPatcher which requires you to select the install location, for example: C:\Games\swkotor.</li>
+                
+                <li>These last few mods add some much needed QoL and general improvements without ruining the intended experience.
+                    <ul>
+                        <li><a href="https://deadlystream.com/files/file/2008-logical-datapads/" target="_blank" rel="noopener noreferrer">Logical Datapads 1.0.0</a>
+                            <ul>
+                                <li>This mod utilizes the TSLPatcher method. It's okay if you receive warnings.</li>
+                            </ul>
+                        </li>
+                        <li><a href="https://deadlystream.com/files/file/1068-k1-galaxy-map-fix-pack/" target="_blank" rel="noopener noreferrer">K1 Galaxy Map Fix Pack 1.1</a> (also download the HR Menu Patch)
+                            <ul>
+                                <li>Same as above, this uses the TSLPatcher. Select the vanilla version (default).</li>
+                                <li>When installing the HR Menu Patch, select the folder that corresponds to your monitor's aspect ratio then select the resolution that matches your monitor.</li>
+                            </ul>
+                        </li>
+                        <li><a href="https://deadlystream.com/files/file/1439-jcs-security-spikes-for-k1" target="_blank" rel="noopener noreferrer">JC's Security Spikes for K1 1.2.2</a>
+                            <ul>
+                                <li>Uses TSLPatcher. Install whichever version you desire.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li>Download and copy the <a href="https://www.nexusmods.com/kotor/mods/1384" target="_blank" rel="noopener noreferrer">DelDuplicateTGA-TPC.bat script</a> to your game install folder and run it to remove any duplicate TPC files.</li>
+                
+                <li><strong>Done! Launch the game and enjoy one of the best Star Wars games ever made.</strong></li>
             </ol>
         </div>
         
-        <div class="guide-section">
-            <h1 id="tsl">TSL Patcher Mods</h1>
-			<ol>
-				<li>For this next section of mods, simply download and extract the mods to a new folder on your desktop, then run the respective TSL Patcher .exe file from within the newly extracted folder. Follow the prompts to complete the installation.</li>
-					<ol><li><a href="https://www.nexusmods.com/kotor/mods/101" target="_blank" rel="noopener noreferrer">Super Skip Taris and Endar Spire</a></li>
-					<li><a href="https://deadlystream.com/files/file/1648-darth333s-manaan-force-choke-mod/" target="_blank" rel="noopener noreferrer">Darth333's Manaan Force Choke Mod</a></li>
-					<li><a href="https://deadlystream.com/files/file/1101-dodonna%E2%80%99s-transmission/" target="_blank" rel="noopener noreferrer">Dodonna's Transmission</a></li>
-					<li><a href="https://deadlystream.com/files/file/861-high-quality-blasters/" target="_blank" rel="noopener noreferrer">High Quality Blasters 1.1</a></li>
-					<li><a href="https://deadlystream.com/files/file/617-male-head-pack-by-inyri-forge/" target="_blank" rel="noopener noreferrer">Male Head Pack by Inyri Forge</a></li>
-					<li><a href="https://deadlystream.com/files/file/1068-k1-galaxy-map-fix-pack/" target="_blank" rel="noopener noreferrer">K1 Galaxy Map Fix Pack 1.1</a></li>
-					<li><a href="https://deadlystream.com/files/file/704-dantooine-training-lightsabers/" target="_blank" rel="noopener noreferrer">Dantooine Training Lightsabers</a></li>
-					<li><a href="https://deadlystream.com/files/file/735-realistic-visual-effects/" target="_blank" rel="noopener noreferrer">Real Visual Effects</a></li></ol>
-				<li><b>Done! I recommend testing the game again, but since most of the mods are textures/models, the game should be fine.</b></li>
-			</ol>
-        </div>
-        
-
         <div class="guide-section">
             <h1 id="conclusion">Conclusion</h1>
-			<p>
-                The last step before you can enjoy your newly modded SWKotOR experience is to delete all unneeded .tpc files. 
-                A list of those files can be downloaded <a href="files/unneeded_tpcs.txt" target="_blank" rel="noopener noreferrer">here</a> (right-click > "Save link as..."). 
-                The fastest way to delete these files is to download and run <a href="files/kotor_del_unneeded_tpcs.ps1" target="_blank" rel="noopener noreferrer">this PowerShell script</a> I wrote. 
-                If you do not want to download the script, you can simply copy/paste the commands into a PowerShell terminal on your system. 
-                Note that if you do choose to run the script, you will have to allow PowerShell to run unsigned scripts. 
-                More info about that can be found <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.2" target="_blank" rel="noopener noreferrer">here</a>. 
+            <p>
+                For additional mods beyond this guide, follow the mod build guides at the KOTOR Community Portal:
+            </p>
+            <ul>
+                <li><a href="https://kotor.neocities.org/modding/mod_builds/k1/spoiler-free" target="_blank" rel="noopener noreferrer">Spoiler free mod build</a></li>
+                <li><a href="https://kotor.neocities.org/modding/mod_builds/k1/full" target="_blank" rel="noopener noreferrer">Full mod build</a></li>
+            </ul>
+            <p>
+                These comprehensive build guides provide additional options for expanding your modded KOTOR experience.
             </p>
         </div>
     </div>
@@ -245,7 +300,7 @@
     <footer>
         <hr>
         All assets copyright their respective owners.<br>
-        Last updated on 12/19/2025.<br>
+        Last updated on 05/18/2026.<br>
         <a href="../about.html">About</a> | <a href="../all_games.html">All Games</a><br>
         <hr>
     </footer>
