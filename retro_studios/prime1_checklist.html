@@ -1,9 +1,23 @@
+<!--
+// Classic Old Games
+// Copyright (C) 2026 Jordan DiPasquale
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License version 3 as 
+// published by the Free Software Foundation.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metroid Prime 100% Checklist</title>
+    <link rel="icon" type="image/svg+xml" href="images/prime1_favicon.svg">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
     <style>
         /* Early 2000s Dark Theme */
@@ -455,6 +469,7 @@
             .controls-left {
                 width: 100%;
                 justify-content: center;
+                margin-top: 10px;
             }
 
             .controls-toggle-group {
@@ -515,21 +530,6 @@
                 width: 100%;
             }
 
-            .checklist-item label {
-                display: flex;
-                flex-direction: column;
-                gap: 4px;
-            }
-            
-            .category-badge {
-                margin-left: 0;
-                align-self: flex-start;
-            }
-            
-            .location-detail {
-                order: 3;
-            }
-
             .reset-container button {
                 max-width: 100%;
             }
@@ -549,6 +549,37 @@
             padding: 20px;
             color: var(--text-muted);
             font-style: italic;
+        }
+
+        /* Gab AI credit badge */
+        .gab-credit {
+            display: block;
+            padding: 18px 12px 26px;
+            text-align: center;
+            font-family: Tahoma, Arial, sans-serif;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            color: var(--text-muted, #888);
+            background: var(--darker-bg, #0a0a0a);
+            border-top: 1px solid var(--border, #444);
+        }
+
+        .gab-credit a {
+            color: var(--accent, #cc0000);
+            text-decoration: none;
+            padding: 2px 6px;
+            border-radius: 3px;
+            transition: color.15s ease, text-shadow.15s ease;
+        }
+
+        .gab-credit a:hover,
+        .gab-credit a:focus-visible {
+            color: var(--accent-glow, #ff3333);
+            text-shadow: 0 0 8px var(--accent-glow, #ff3333);
+        }
+
+        @media (max-width: 600px) {
+            .gab-credit { font-size: 0.75rem; padding: 14px 10px 20px; }
         }
     </style>
 </head>
@@ -1308,7 +1339,9 @@
             const url = URL.createObjectURL(dataBlob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = `metroid-prime-checklist-${new Date().toISOString().split('T')[0]}.json`;
+            const now = new Date();
+            const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+            link.download = `metroid-prime-checklist-${date}.json`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -1439,4 +1472,7 @@
         }
     </script>
 </body>
+<footer class="gab-credit">
+    <a href="https://gab.ai" target="_blank" rel="noopener noreferrer">Made with Gab AI</a>
+</footer>
 </html>

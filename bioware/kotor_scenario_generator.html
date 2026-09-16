@@ -1,11 +1,23 @@
+<!--
+// Classic Old Games
+// Copyright (C) 2026 Jordan DiPasquale
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License version 3 as 
+// published by the Free Software Foundation.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KOTOR Scenario Generator</title>
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <style>
     /* ─── Fonts ─────────────────────────────────────────────────────────── */
     :root {
@@ -706,6 +718,34 @@
         min-width: 90px;
       }
     }
+
+    /* ─── Gab AI credit badge ────────────────────────────────────────────── */
+    .gab-credit {
+      margin: 14px 0 0;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-gold, #c9a84c55);
+      text-align: center;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .gab-credit a {
+      color: var(--gold, #c9a84c);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color.15s ease, border-color.15s ease, text-shadow.15s ease;
+    }
+
+    .gab-credit a:hover,
+    .gab-credit a:focus-visible {
+      color: var(--gold-light, #f0d080);
+      border-bottom-color: var(--gold-light, #f0d080);
+      text-shadow: 0 0 8px var(--border-gold, #c9a84c55);
+    }
+
+    @media (max-width: 600px) {
+      .gab-credit { font-size: 0.78rem; }
+    }
   </style>
 </head>
 <body>
@@ -783,7 +823,10 @@
     <a href="https://gamerschallenge.wordpress.com/2018/11/30/knights-of-the-old-republic-scenario-generator/" target="_blank">DarthMessias' Gamerschallenge Scenario Generator</a>
   </p>
   <p style="margin-top: 8px; opacity: 0.9;">
-    <a href="https://www.nexusmods.com/kotor/mods/1247" target="_blank">Originally written in Java by Jordan DiPasquale</a> — Ported to web using Gab AI
+    <a href="https://www.nexusmods.com/kotor/mods/1247" target="_blank">Originally written in Java by Jordan DiPasquale</a>
+  </p>
+  <p class="gab-credit">
+    <a href="https://gab.ai" target="_blank" rel="noopener noreferrer">Ported to web using Gab AI</a>
   </p>
 </footer>
 
@@ -867,7 +910,7 @@ document.addEventListener('DOMContentLoaded', () => {
           : "Kill both Uthar and Yuthura.",
 
     leviathanCrew: (r) =>
-      (["Save HK-47.", "Save Jolee Bindo.", "Save Juhani.", "Save T3-M4.", "Save Mission Vao.", "Save Canderous."])[r - 1],
+      (["Save the crew using HK-47.", "Save the crew using Jolee Bindo.", "Save the crew using Juhani.", "Save the crew using T3-M4.", "Save the crew using Mission Vao.", "Save the crew using Canderous."])[r - 1],
 
     helpTribe: (r) =>
       r <= 2 ? "Join The One." : "Join The Elders.",
