@@ -1,3 +1,16 @@
+<!--
+// Classic Old Games
+// Copyright (C) 2026 Jordan DiPasquale
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License version 3 as 
+// published by the Free Software Foundation.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+-->
 <!doctype html>
 <html lang="en">
     <head>
@@ -384,6 +397,13 @@
                     Targeting aug.
                 </p>
                 <p class="dim">*The game calls these “clips”; they are actually magazines.</p>
+                <p class="dim">
+                    Damage shown is the true effective value. According to the Deus Ex wiki, weapon-skill damage bonus
+                    is +0/+20%/+50%/+100% (untrained→master), but the in-game inventory incorrectly displays only half
+                    of it (+0/+10%/+25%/+50%). An advanced Pistol therefore really fires for 14 × 1.5 = 21, even though
+                    the inventory lists 17. Accuracy mods each add (100% − base accuracy)/10 points; each clip mod adds
+                    +1 round; each range mod adds +10% accurate range; each reload and recoil mod cuts that stat by 10%.
+                </p>
                 <div class="row" style="margin-bottom: 10px">
                     <label><input type="checkbox" id="onlyOwned" /> Show only carried weapons</label>
                 </div>
@@ -764,7 +784,6 @@
                     65,
                     "300/600",
                     ["Accuracy", "Clip", "Reload", "Range", "Recoil", "Laser", "Silencer"],
-                    ,
                     10.0,
                     1,
                     "7.62x51mm: 3 dmg, ROF 10/s. 20mm HE: 150 dmg, ROF 1/s, range 25.",
@@ -845,9 +864,9 @@
                 ["Wine", "Heals 2 HP; intoxicated for 5s. Stack limit: 10."],
                 ["Zyme Vial", "Causes delirium for 60s. Stack limit: 20."],
                 ["Cigarettes", "Decreases health by 10 HP. Stack limit: 20."],
-                ["Multitool", "Bypasses keypads and panels by 10% (25/40/75 with Electronics). Stack limit: 15."],
+                ["Multitool", "Bypasses keypads and panels by 10% (25/40/75 with Electronics). Stack limit: 20."],
                 ["Lockpick", "Opens locks by 10% (25/40/75 with Lockpicking). Stack limit: 20."],
-                ["Nanokey Ring", "Opens locks once the matching Nanokey has been found."],
+                ["Nanokey Ring", "Holds Nanokeys and allows them to be used on their respective doors."],
                 [
                     "Ballistic Armor",
                     "50% (62/75/87 with Environmental Training) resistance to Shot/Exploded for 25 (33/50/100)s.",
@@ -861,7 +880,7 @@
                 ["Fire Extinguisher", "Halon gas; blinds opponents and obscures laser grids."],
                 ["Augmentation Canister", "Installs a new augmentation at a medical bot."],
                 ["Augmentation Upgrade Canister", "Upgrades one installed augmentation."],
-                ["Ambrosia Vial", "Story item used during Mission 8."],
+                ["Ambrosia Vial", "Story item."],
             ];
             const KEY = "dxBuildPlanner.v1";
             function blank() {
@@ -1019,12 +1038,28 @@
                     m = (st.weapons[id] || {}).mods || {};
                 let dm =
                     1 + DMG[lv] + 0.1 * t + (MELEE_CS(sk) && id !== "pepper" && id !== "prod" ? 0.25 * csTech() : 0);
-                const a = Math.min(100, acc + ACC[lv] + 2.5 * t + 10 * (m.Accuracy || 0));
+                // Accuracy mods reduce the weapon's base internal accuracy by 10% of its
+                // *original* value, so in the percentage scale each mod adds
+                // (100% - base accuracy) / 10 points (per the Deus Ex Wiki, Accuracy (DX)).
+                const a = Math.min(100, acc + ACC[lv] + 2.5 * t + ((100 - acc) / 10) * (m.Accuracy || 0));
+                // Recoil mods reduce base recoil by 10% each; weapon skill and Targeting
+                // are additive absolute reductions.
                 const r = Math.max(0, rec - REC[lv] - 0.1 * t - rec * 0.1 * (m.Recoil || 0));
-                const c = clip ? Math.round(clip * (1 + 0.1 * (m.Clip || 0))) : 0;
+                // Each clip mod adds a flat +1 round (per the Pistol article).
+                const c = clip ? clip + (m.Clip || 0) : 0;
+                // Reload mods cut the main phase by 10% each; skill then Targeting factors
+                // are applied multiplicatively afterward.
                 const rl = rel ? Math.max(0, rel * (1 - 0.1 * (m.Reload || 0)) * (1 - DMG[lv] * 0.5 - 0.05 * t)) : 0;
                 const d = Math.round(dmg * dm * 10) / 10,
                     n = count || 1;
+                // Range mods raise the accurate range (first number) by 10% each.
+                const rangeBase = range.split("/")[0],
+                    rangeNum = parseFloat(rangeBase);
+                const rng =
+                    m.Range && !isNaN(rangeNum)
+                        ? range.replace(rangeBase, String(Math.round(rangeNum * (1 + 0.1 * m.Range)))) +
+                          ` (+${m.Range * 10}% acc. range)`
+                        : range;
                 return {
                     dmg: d,
                     count: n,
@@ -1033,7 +1068,7 @@
                     rec: r.toFixed(2),
                     clip: c,
                     rel: rl.toFixed(2),
-                    range: range + (m.Range ? ` (+${m.Range * 10}% acc. range)` : ""),
+                    range: rng,
                     rof: rof,
                     note: note || "",
                 };
