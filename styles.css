@@ -1,0 +1,301 @@
+/* Classic Old Games - Late 90s/Early 2000s Theme */
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: "Trebuchet MS", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 15px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.9);
+    border: 3px double #006666;
+    padding: 15px;
+    box-shadow: 0 0 10px #006666;
+}
+
+.header {
+    text-align: center;
+    padding: 15px;
+    background: linear-gradient(90deg, #0044aa, #880088);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 5px #880088;
+    animation: title-glow 3s ease-in-out infinite alternate;
+    font-family: "Impact", "Arial Black", "Trebuchet MS", sans-serif;
+}
+
+@keyframes title-glow {
+    from { text-shadow: 0 0 5px #880088, 0 0 10px #880088; }
+    to { text-shadow: 0 0 10px #006666, 0 0 15px #006666; }
+}
+
+h1 {
+    font-size: 42px;
+    margin: 0;
+    font-weight: bold;
+    font-family: "Impact", "Arial Black", "Trebuchet MS", sans-serif;
+}
+
+h2 {
+    font-size: 28px;
+    color: #008800;
+    text-shadow: 0 0 3px #008800;
+    border-bottom: 1px solid #880088;
+    padding-bottom: 8px;
+    font-family: "Impact", "Arial Black", "Trebuchet MS", sans-serif;
+}
+
+h3 {
+    font-size: 20px;
+    color: #888800;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+p {
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Search Box Styling */
+.search-container {
+    text-align: center;
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid #888800;
+    position: relative;
+    max-width: 100%;
+}
+
+.search-box-wrapper {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.search-box {
+    width: 280px;
+    max-width: 90vw;
+    padding: 12px 40px 12px 12px;
+    font-size: 16px;
+    background: #111;
+    color: #008800;
+    border: 1px solid #888800;
+    border-radius: 0;
+    font-family: "Courier New", Courier, monospace;
+    box-sizing: border-box;
+}
+
+.search-box:focus {
+    outline: none;
+    box-shadow: 0 0 5px #888800;
+}
+
+.search-box::placeholder {
+    color: #444;
+    font-family: "Courier New", Courier, monospace;
+}
+
+/* Game Grid Styling */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    margin: 15px 0;
+    justify-items: center;
+}
+
+.game-item {
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid #660066;
+    padding: 10px;
+    text-align: center;
+    transition: all 0.2s ease;
+    position: relative;
+    max-width: 30vw;
+    margin: 0 auto;
+}
+
+.game-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 10px #660066;
+    border-color: #006666;
+}
+
+.game-item img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #666600;
+    transition: transform 0.2s ease;
+}
+
+.game-item:hover img {
+    transform: scale(1.03);
+}
+
+.game-title {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #008800;
+    text-decoration: none;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-weight: bold;
+}
+
+.game-title:hover {
+    color: #888800;
+}
+
+/* Accordion Styling */
+.accordion {
+    margin: 15px 0;
+}
+
+.accordion-header {
+    background: linear-gradient(90deg, #003366, #660066);
+    padding: 12px;
+    cursor: pointer;
+    border: 1px solid #666600;
+    margin-bottom: 3px;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: "Impact", "Arial Black", "Trebuchet MS", sans-serif;
+}
+
+.accordion-content {
+    display: none;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid #004444;
+}
+
+.accordion-content.active {
+    display: block;
+}
+
+/* Link Styling */
+a:link {
+    color: #006666;
+    text-decoration: none;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+a:visited {
+    color: #660066;
+}
+
+a:hover {
+    color: #666600;
+    text-decoration: underline;
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 15px;
+    border-top: 1px solid #666600;
+    color: #008800;
+    font-size: 12px;
+    font-family: "Courier New", Courier, monospace;
+}
+
+/* Search Results */
+.search-results {
+    margin-top: 15px;
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid #008800;
+    padding: 15px;
+    display: none;
+    font-family: "Courier New", Courier, monospace;
+}
+
+.search-result-item {
+    padding: 8px;
+    border-bottom: 1px solid #660066;
+    cursor: pointer;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+.search-result-item:hover {
+    background: rgba(102, 0, 102, 0.1);
+}
+
+.search-result-item a {
+    color: #008800 !important;
+    text-decoration: none;
+}
+
+.search-result-item:hover a {
+    color: #666600 !important;
+}
+
+/* Scroll to top button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #006666;
+    color: white;
+    border: 1px solid #888800;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 14px;
+    display: none;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.scroll-to-top:hover {
+    background: #008800;
+    transform: scale(1.05);
+}
+
+/* Clear search button */
+.clear-search {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #660066;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 12px;
+    display: none;
+    border-radius: 2px;
+}
+
+.clear-search:hover {
+    background: #880088;
+}
+
+/* Media query for very small screens */
+@media (max-width: 428px) {
+    .games-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 10px;
+    }
+}
+
+@media (max-width: 420px) {
+    .search-box {
+        width: 250px;
+        padding: 10px 35px 10px 10px;
+        font-size: 14px;
+    }
+    
+    .clear-search {
+        right: 6px;
+        padding: 3px 6px;
+        font-size: 11px;
+    }
+}
