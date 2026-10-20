@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Star Wars: KOTOR II Mod Guide</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .guide-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .guide-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .guide-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #660066;
+        }
+        
+        .guide-section h1 {
+            color: #00ff00;
+            border-bottom: 2px solid #880088;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .guide-section h2 {
+            color: #888800;
+            margin: 20px 0 15px 0;
+        }
+        
+        .toc {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(102, 0, 102, 0.2);
+            border: 1px solid #880088;
+        }
+        
+        .toc a {
+            color: #006666;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        
+        .toc a:hover {
+            color: #888800;
+        }
+        
+        .warning {
+            background: rgba(136, 0, 0, 0.3);
+            border: 1px solid #ff0000;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+        
+        .guide-section img {
+            display: block;
+            margin: 15px auto;
+            max-width: 90%;
+            border: 1px solid #666600;
+        }
+        
+        .guide-section ol, .guide-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .guide-section li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div style="text-align: center; margin: 20px 0;">
+        <a href="../index.html">Home</a>
+    </div>
+
+    <div class="container guide-container">
+        <div class="guide-header">
+            <h1>Star Wars: KOTOR II Mod Guide</h1>
+            <p><em>Last updated 05/16/2026</em></p>
+        </div>
+
+        <div class="warning">
+            <p><strong>ATTENTION:</strong>
+                This guide involves my own personal methods for installing and using mods with KOTOR II.
+                Like all modding, you are responsible for doing your own research to determine the best methods for modding your game.
+                I provide no warranty and take no liability or responsibility for any issues that arise due to the contents of this guide.
+                Please note that this guide is written with the Steam release in mind, though it may also work with the GOG or CD-ROM releases.
+            </p>
+        </div>
+
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <a href="#guide">Modding Guide</a><br>
+            <a href="#conclusion">Conclusion</a>
+        </div>
+
+        <div class="guide-section">
+            <h1 id="guide">Modding Guide</h1>
+            <ol>
+                <li>After you perform a fresh install of the game, run it once to generate some necessary files.</li>
+                <li>Download and install <a href="https://deadlystream.com/files/file/578-tsl-restored-content-mod" target="_blank" rel="noopener noreferrer">The Sith Lords Restored Content Mod 1.8.6</a>.
+                    <ul>
+                        <li>Then download the <a href="http://deadlystream.com/files/file/296-unofficial-tslrcm-tweak-pack/" target="_blank" rel="noopener noreferrer">TSLRCM Tweak Pack 1.3</a> and run it several times, applying however many changes you desire. Note that for TSL Patcher mods like this one, you have to select you game’s install folder. Example: E:\Steam\SteamApps\common\Knights of the Old Republic II</li>
+                        <li>Finally, download and extract <a href="https://deadlystream.com/files/file/2426-silent-sion-restoration/" target="_blank" rel="noopener noreferrer">Silent Sion Restoration</a> into the override folder (example: E:\Steam\SteamApps\common\Knights of the Old Republic II\Override).</li>
+                    </ul></li>
+                <li>Download and extract <a href="https://deadlystream.com/files/file/2075-robes-with-shadows-for-tsl/" target="_blank" rel="noopener noreferrer">Robes with Shadows for TSL 1.3.0</a> into your override folder. Ignore the subfolders and just move the .mdl and .mdx files to your override folder.</li>
+                <li>Download and extract <a href="https://www.nexusmods.com/kotor2/mods/1060" target="_blank" rel="noopener noreferrer">Ultimate Character Overhaul -REDUX- (TPC version)</a> into your override folder.
+                    <ul>
+                        <li>There are several compatibility patches that you will need later so download them now.
+                            <ul>
+                                <li><a href="https://www.nexusmods.com/kotor2/mods/1060?tab=files&amp;file_id=1483" target="_blank" rel="noopener noreferrer">TSLRCM Patch</a></li>
+                                <li><a href="https://www.nexusmods.com/kotor2/mods/1060?tab=files&amp;file_id=1485" target="_blank" rel="noopener noreferrer">K2CP Patch</a></li>
+                                <li><a href="https://www.nexusmods.com/kotor2/mods/1060?tab=files&amp;file_id=1488" target="_blank" rel="noopener noreferrer">Fixed Hologram Models Patch</a></li>
+                            </ul>
+                        </li>
+                    </ul></li>
+                <li>Download and install the <a href="https://deadlystream.com/files/file/1280-kotor-2-community-patch/" target="_blank" rel="noopener noreferrer">KOTOR II Community Patch 1.6.2</a>. Note that installer warnings are okay but errors are not.</li>
+                <li>Download and extract <a href="https://www.nexusmods.com/kotor2/mods/1106" target="_blank" rel="noopener noreferrer">Ultimate High Resolution Texture Pack (TPC version)</a> into your override folder. This updates the textures for Peragus, Telos, Harbinger, and building interiors.</li>
+                <li>Download and install the remaining Ultimate texture pack mods. Make sure to get the TPC versions!
+                    <ul>
+                        <li><a href="https://www.nexusmods.com/kotor2/mods/1104" target="_blank" rel="noopener noreferrer">Ultimate Nar Shaddaa</a></li>
+                        <li><a href="https://www.nexusmods.com/kotor2/mods/1102" target="_blank" rel="noopener noreferrer">Ultimate Dantooine</a></li>
+                        <li><a href="https://www.nexusmods.com/kotor2/mods/1105" target="_blank" rel="noopener noreferrer">Ultimate Dxun</a></li>
+                        <li><a href="https://www.nexusmods.com/kotor2/mods/1103" target="_blank" rel="noopener noreferrer">Ultimate Onderon</a></li>
+                        <li><a href="https://www.nexusmods.com/kotor2/mods/1101" target="_blank" rel="noopener noreferrer">Ultimate Korriban</a></li>
+                        <li><a href="https://www.nexusmods.com/kotor2/mods/1100" target="_blank" rel="noopener noreferrer">Ultimate Malachor V</a></li>
+                    </ul></li>
+                <li>Download and install the V2 version of the <a href="https://deadlystream.com/files/file/1860-droid-special-weapons-fix-for-tsl-v10/" target="_blank" rel="noopener noreferrer">Droid Special Weapons Fix for TSL 2.0.7</a>.</li>
+                <li>Download and extract the following into your override folder.
+                    <ul>
+                        <li><a href="http://deadlystream.com/files/file/221-hi-res-beam-effects/" target="_blank" rel="noopener noreferrer">Hi-res Beam Effects 2.0.7</a></li>
+                        <li><a href="http://deadlystream.com/files/file/454-fire-and-ice-hd-whee/" target="_blank" rel="noopener noreferrer">HD Fire and Ice 2.1</a></li>
+                        <li><a href="https://deadlystream.com/files/file/2193-animated-energy-shields/" target="_blank" rel="noopener noreferrer">Animated Energy Shields</a></li>
+                        <li><a href="http://deadlystream.com/files/file/489-tsl-head-model-fixes/" target="_blank" rel="noopener noreferrer">TSL Head Model Fixes</a></li>
+                        <li><a href="https://deadlystream.com/files/file/283-new-texture-of-holocrons-in-the-telos-secret-academy/" target="_blank" rel="noopener noreferrer">New Texture of Holocrons in the Telos Secret Academy</a>
+                            <ul>
+                                <li>Choose either the animated or non-animated version.</li>
+                            </ul>
+                        </li>
+                        <li><a href="https://deadlystream.com/files/file/1770-hd-npc-portraits/" target="_blank" rel="noopener noreferrer">HD NPC Portraits</a></li>
+                        <li><a href="https://deadlystream.com/files/file/1769-hd-pc-portraits/" target="_blank" rel="noopener noreferrer">HD PC Portraits</a></li>
+                        <li><a href="http://deadlystream.com/files/file/321-improved-peragus-asteroid-fields/" target="_blank" rel="noopener noreferrer">Improved Peragus Asteroids</a></li>
+                        <li><a href="https://deadlystream.com/files/file/1925-terminal-texture/" target="_blank" rel="noopener noreferrer">Terminal Texture</a></li>
+                        <li><a href="https://deadlystream.com/files/file/2222-reptab-hd/" target="_blank" rel="noopener noreferrer">HD RepTab (Workbench)</a></li>
+                        <li><a href="https://deadlystream.com/files/file/949-tsl-backdrop-improvements/" target="_blank" rel="noopener noreferrer">TSL Backdrop Improvements 1.4</a>
+                            <ul>
+                                <li>Install only the files in the “To Override” folder. You will be installing a galaxy map mod later.</li>
+                            </ul>
+                        </li>
+                        <li><a href="https://deadlystream.com/files/file/1793-high-quality-skyboxes-ii/" target="_blank" rel="noopener noreferrer">HQ Skyboxes II TSL</a>
+                            <ul>
+                                <li>Get just the HQSkyboxesII_TSL.7z or HQSkyboxesII_TSL_1k.7z version. Note that this mod uses the TSL Patcher, not the override method!</li>
+                            </ul>
+                        </li>
+                        <li><a href="https://deadlystream.com/files/file/931-tsl-hd-cockpit-skyboxes/" target="_blank" rel="noopener noreferrer">TSL HD Cockpit Skyboxes 3.1</a>
+                            <ul>
+                                <li>High Resolution TPC preferred. Ignore the Nar Shaddaa Realistic Skybox folder.</li>
+                            </ul>
+                        </li>
+                        <li><a href="https://www.nexusmods.com/kotor2/mods/1161" target="_blank" rel="noopener noreferrer">FTL Hyperspace Loop</a></li>
+                        <li><a href="https://deadlystream.com/files/file/1361-hd-pazaak-cards/" target="_blank" rel="noopener noreferrer">HD Pazaak Cards</a>
+                            <ul>
+                                <li>Copy over all the .tga files in the main folder plus the files in the “green” folder.</li>
+                            </ul>
+                        </li>
+                    </ul></li>
+                <li>Download and install <a href="https://deadlystream.com/files/file/915-high-quality-blasters/" target="_blank" rel="noopener noreferrer">High Quality Blasters 1.1</a>.</li>
+                <li>Download and extract <a href="https://deadlystream.com/files/file/1536-tsl-ai-upscaled-icon-overhaul/" target="_blank" rel="noopener noreferrer">TSL AI Upscaled Icon Overhaul</a> into your override folder.</li>
+                <li>Download and install <a href="https://deadlystream.com/files/file/1434-visually-repair-hk-47/" target="_blank" rel="noopener noreferrer">Visually Repair HK-47 1.1</a>. Select the TSLRCM compatible option.</li>
+                <li>Download and extract each of the following parts for Replacement Loading Screens for KOTOR II into your override folder.
+                    <ul>
+                        <li><a href="https://deadlystream.com/files/file/1255-replacement-loading-screens-for-kotor2-original-pack-with-or-without-tslrcm-part-1/" target="_blank" rel="noopener noreferrer">Part 1</a></li>
+                        <li><a href="https://deadlystream.com/files/file/1256-replacement-loading-screens-for-kotor2-original-pack-with-or-without-tslrcm-part-2/" target="_blank" rel="noopener noreferrer">Part 2</a></li>
+                        <li><a href="https://deadlystream.com/files/file/1257-replacement-loading-screens-for-kotor2-original-pack-with-or-without-tslrcm-part-3/" target="_blank" rel="noopener noreferrer">Part 3</a></li>
+                    </ul></li>
+                <li>Download and install the <a href="https://deadlystream.com/files/file/1057-tsl-galaxy-map-fix-pack/" target="_blank" rel="noopener noreferrer">TSL Galaxy Map Fix Pack 1.0</a>. Install the vanilla/TSLRCM option.</li>
+                <li>Download and install <a href="https://deadlystream.com/files/file/1201-fixed-hologram-models-and-admiralty-redux-for-tslrcm/" target="_blank" rel="noopener noreferrer">Fixed Hologram Models and Admiralty Redux for TSLRCM 1.61</a>. Get just the main file, not either of the patches. Select only the base install option.</li>
+                <li>At this time, go ahead and extract the UCO patches you downloaded in step 4. Simply copy the files into your override folder and overwrite when asked.</li>
+                <li>Download and extract <a href="https://deadlystream.com/files/file/1138-tsl-main-menu-model-fix-for-widescreen/" target="_blank" rel="noopener noreferrer">TSL Main Menu Widescreen Fix 1.2</a>, making sure to copy the files to the appropriate locations. Copy files from the “FOR OVERRIDE FOLDER” into the override folder. Then copy files from the “FOR TSLRCM” folder into the override folder. Overwrite when prompted.</li>
+                <li>Download and extract <a href="https://www.nexusmods.com/kotor2/mods/1086" target="_blank" rel="noopener noreferrer">Upscaled Maps</a> to your override folder.</li>
+                <li>Download and extract <a href="https://deadlystream.com/files/file/332-widescreen-ui-fix-for-knights-of-the-old-republic-2-the-sith-lords/" target="_blank" rel="noopener noreferrer">Widescreen UI Fix for KOTOR II 4.1</a> and choose your monitor’s aspect ratio. Then copy the files to your override folder. Make sure to get the correct version for your game (Steam or GOG). Overwrite when prompted.</li>
+                <li>Download and extract <a href="https://www.nexusmods.com/kotor2/mods/1362" target="_blank" rel="noopener noreferrer">No Vertical Camera</a> into your override folder.</li>
+                <li>Download and extract <a href="https://deadlystream.com/files/file/2503-k2-cutscenes-rescaled/" target="_blank" rel="noopener noreferrer">K2 Cutscenes Rescaled 1.1.0</a> into your movies folder, overwriting when prompted. When downloading, choose whichever one matches your monitor’s resolution. You will also need to download the corresponding “_mods” archive. Copy into your movies folder and overwrite when prompted.</li>
+                <li>Copy the <strong>DelDuplicateTGA-TPC.bat</strong> script to your game install folder and run it to remove any duplicate TPC files.</li>
+                <li><strong>Done! Launch the game and test to make sure everything is working up to this point. You can stop here and play the game as is or continue to install other mods.</strong></li>
+            </ol>
+        </div>
+
+        <div class="guide-section">
+            <h1 id="conclusion">Conclusion</h1>
+            <p>
+                For additional mods beyond this guide, follow the mod build guides at the KOTOR Community Portal. Just note that the site pushes leftist identity politics:
+            </p>
+            <ul>
+                <li><a href="https://kotor.neocities.org/modding/mod_builds/k2/spoiler-free" target="_blank" rel="noopener noreferrer">Spoiler free mod build</a></li>
+                <li><a href="https://kotor.neocities.org/modding/mod_builds/k2/full" target="_blank" rel="noopener noreferrer">Full mod build</a></li>
+            </ul>
+            <p>
+                These comprehensive build guides provide additional options for expanding your modded KOTOR II experience.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <hr>
+        All assets copyright their respective owners.<br>
+        Last updated on 09/16/2026.<br>
+        <a href="../about.html">About</a> | <a href="../all_games.html">All Games</a><br>
+        <hr>
+    </footer>
+</body>
+</html>
